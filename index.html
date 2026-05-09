@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STD · 导航</title>
+<style>
+  :root {
+    --color-bg: #f7f8fa;
+    --color-surface: #ffffff;
+    --color-border: #e5e6eb;
+    --color-text-primary: #1d2129;
+    --color-text-secondary: #4e5969;
+    --color-text-tertiary: #86909c;
+    --color-primary: #165dff;
+    --color-primary-light: #e8f3ff;
+    --color-purple: #722ed1;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 16px rgba(22, 93, 255, 0.08);
+    --shadow-lg: 0 8px 32px rgba(22, 93, 255, 0.16);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #165dff 0%, #722ed1 100%);
+    color: white;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 15px;
+    opacity: 0.9;
+  }
+  .container {
+    max-width: 1080px;
+    margin: -24px auto 64px;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 32px 0 16px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '→';
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 18px;
+    color: var(--color-text-tertiary);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+  }
+  .card:hover::after {
+    transform: translateX(4px);
+    color: var(--color-primary);
+  }
+  .card-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 4px;
+    width: fit-content;
+  }
+  .card-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    padding-right: 28px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+  }
+  .footer {
+    text-align: center;
+    color: var(--color-text-tertiary);
+    font-size: 12px;
+    padding: 32px 0;
+  }
+  .footer a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+  .footer a:hover { color: var(--color-primary); }
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <h1>STD · 文档导航</h1>
+      <p>测试相关图谱 / 学习清单 / 工程参考的统一入口</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-title">页面列表</div>
+    <div class="grid">
+      <a class="card" href="测试工程师能力图谱.html">
+        <span class="card-tag">能力图谱</span>
+        <div class="card-title">测试工程师能力图谱与学习清单</div>
+        <div class="card-desc">系统梳理测试工程师所需的核心能力维度,配套可执行的学习路径与里程碑清单。</div>
+      </a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a href="https://github.com/fight-ing/std" target="_blank" rel="noopener">View on GitHub</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>测试工程师能力图谱与学习清单</title>
+<style>
+:root {
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f6f8;
+  --color-border: #e5e6eb;
+  --color-border-light: #f0f1f3;
+  --color-text-primary: #1d2129;
+  --color-text-secondary: #4e5969;
+  --color-text-tertiary: #86909c;
+  --color-primary: #165dff;
+  --color-primary-light: #e8f3ff;
+  --color-success: #00b42a;
+  --color-success-light: #e8ffea;
+  --color-warning: #ff7d00;
+  --color-warning-light: #fff7e8;
+  --color-danger: #f53f3f;
+  --color-danger-light: #ffece8;
+  --color-purple: #722ed1;
+  --color-purple-light: #f5e8ff;
+  --color-cyan: #14c9c9;
+  --color-cyan-light: #e8fffb;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --font-mono: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  font-size: 14px;
+  min-height: 100vh;
+}
+.header {
+  background: linear-gradient(135deg, #165dff 0%, #722ed1 100%);
+  color: white;
+  padding: 32px 40px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  right: -100px;
+  top: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header h1 { font-size: 26px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.3px; }
+.header .subtitle { font-size: 14px; opacity: 0.85; }
+.header .meta {
+  margin-top: 12px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; opacity: 0.75;
+}
+.header .meta span::before { content: '•'; margin-right: 6px; }
+.header .meta span:first-child::before { content: ''; margin-right: 0; }
+
+.progress-bar-wrapper {
+  background: var(--color-surface);
+  margin: -20px 40px 0;
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: flex; align-items: center; gap: 20px;
+  position: relative; z-index: 2;
+}
+.progress-bar-wrapper .label { font-size: 13px; color: var(--color-text-secondary); font-weight: 500; white-space: nowrap; }
+.progress-track {
+  flex: 1; height: 8px; background: var(--color-border-light);
+  border-radius: 4px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #165dff, #00b42a);
+  border-radius: 4px; transition: width 0.4s ease; width: 0%;
+}
+.progress-bar-wrapper .stats { font-size: 13px; color: var(--color-text-secondary); white-space: nowrap; }
+.progress-bar-wrapper .stats strong { color: var(--color-primary); font-weight: 600; }
+.btn-reset {
+  padding: 6px 12px; font-size: 12px; background: transparent;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  color: var(--color-text-tertiary); cursor: pointer; transition: all 0.2s;
+}
+.btn-reset:hover { border-color: var(--color-danger); color: var(--color-danger); }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 24px 40px 80px; }
+
+.nav-tabs {
+  display: flex; gap: 4px; margin: 24px 0 20px;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky; top: 0; background: var(--color-bg); z-index: 10; padding-top: 8px;
+}
+.nav-tab {
+  padding: 12px 20px; font-size: 14px; font-weight: 500;
+  color: var(--color-text-secondary); background: transparent; border: none;
+  cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.nav-tab:hover { color: var(--color-primary); }
+.nav-tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+.section { display: none; animation: fadeIn 0.3s ease; }
+.section.active { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-intro {
+  background: var(--color-surface); padding: 20px 24px;
+  border-radius: var(--radius-lg); margin-bottom: 24px;
+  border-left: 3px solid var(--color-primary);
+}
+.section-intro h2 { font-size: 18px; margin-bottom: 6px; }
+.section-intro p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+
+.tier-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+.tier-card {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: 20px; border-top: 3px solid; box-shadow: var(--shadow-sm);
+}
+.tier-card.tier-junior { border-top-color: var(--color-success); }
+.tier-card.tier-mid { border-top-color: var(--color-warning); }
+.tier-card.tier-senior { border-top-color: var(--color-purple); }
+.tier-card .tier-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.tier-card .tier-meta { font-size: 12px; color: var(--color-text-tertiary); margin-bottom: 12px; }
+.tier-card ul { list-style: none; font-size: 13px; color: var(--color-text-secondary); }
+.tier-card li { padding: 4px 0; position: relative; padding-left: 16px; }
+.tier-card li::before {
+  content: '✓'; position: absolute; left: 0; color: var(--color-success); font-weight: 600;
+}
+
+.domain-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px; margin-bottom: 24px;
+}
+.domain-card {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: 20px; border: 1px solid var(--color-border-light);
+  transition: all 0.2s; cursor: pointer;
+}
+.domain-card:hover {
+  box-shadow: var(--shadow-md); transform: translateY(-2px);
+  border-color: var(--color-primary-light);
+}
+.domain-card .domain-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.domain-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.domain-card .domain-name { font-size: 15px; font-weight: 600; flex: 1; }
+.domain-progress-mini { font-size: 11px; color: var(--color-text-tertiary); font-family: var(--font-mono); }
+.domain-card .domain-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 12px; }
+.domain-card .domain-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-chip {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  background: var(--color-surface-alt); color: var(--color-text-secondary);
+}
+.progress-mini-track {
+  height: 4px; background: var(--color-border-light);
+  border-radius: 2px; margin-top: 12px; overflow: hidden;
+}
+.progress-mini-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+
+.color-foundation { background: var(--color-primary-light); color: var(--color-primary); }
+.color-business { background: #e6fffb; color: #08979c; }
+.color-design { background: var(--color-cyan-light); color: var(--color-cyan); }
+.color-api { background: #fff1f0; color: #f5222d; }
+.color-auto { background: var(--color-success-light); color: var(--color-success); }
+.color-perf { background: var(--color-warning-light); color: var(--color-warning); }
+.color-sec { background: var(--color-danger-light); color: var(--color-danger); }
+.color-dev { background: var(--color-purple-light); color: var(--color-purple); }
+.color-ci { background: #f0f5ff; color: #2f54eb; }
+.color-data { background: #fff7e6; color: #d46b08; }
+.color-platform { background: #f0fff0; color: #389e0d; }
+.color-soft { background: #fff0f6; color: #c41d7f; }
+
+.fill-foundation { background: var(--color-primary); }
+.fill-business { background: #08979c; }
+.fill-design { background: var(--color-cyan); }
+.fill-api { background: #f5222d; }
+.fill-auto { background: var(--color-success); }
+.fill-perf { background: var(--color-warning); }
+.fill-sec { background: var(--color-danger); }
+.fill-dev { background: var(--color-purple); }
+.fill-ci { background: #2f54eb; }
+.fill-data { background: #d46b08; }
+.fill-platform { background: #389e0d; }
+.fill-soft { background: #c41d7f; }
+
+.filter-bar {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: 16px 20px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+}
+.filter-group { display: flex; align-items: center; gap: 8px; }
+.filter-label { font-size: 12px; color: var(--color-text-tertiary); font-weight: 500; }
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-chip {
+  padding: 4px 12px; font-size: 12px; border-radius: 14px;
+  background: var(--color-surface-alt); color: var(--color-text-secondary);
+  cursor: pointer; border: 1px solid transparent; transition: all 0.15s; user-select: none;
+}
+.filter-chip:hover { background: var(--color-primary-light); color: var(--color-primary); }
+.filter-chip.active { background: var(--color-primary); color: white; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 6px 12px;
+  border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+  font-size: 13px; outline: none; transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--color-primary); }
+
+.skill-domain {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow-sm);
+}
+.skill-domain-header {
+  padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: background 0.15s; user-select: none;
+}
+.skill-domain-header:hover { background: var(--color-surface-alt); }
+.skill-domain-title { flex: 1; font-size: 15px; font-weight: 600; }
+.skill-domain-meta { font-size: 12px; color: var(--color-text-tertiary); display: flex; align-items: center; gap: 12px; }
+.skill-count {
+  background: var(--color-surface-alt); padding: 2px 10px;
+  border-radius: 10px; font-family: var(--font-mono);
+}
+.toggle-icon { font-size: 12px; color: var(--color-text-tertiary); transition: transform 0.2s; }
+.skill-domain.expanded .toggle-icon { transform: rotate(90deg); }
+.skill-domain-body { display: none; border-top: 1px solid var(--color-border-light); }
+.skill-domain.expanded .skill-domain-body { display: block; }
+
+.skill-item { padding: 16px 20px; border-bottom: 1px solid var(--color-border-light); }
+.skill-item:last-child { border-bottom: none; }
+.skill-item-header {
+  display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px;
+}
+.skill-checkbox {
+  width: 18px; height: 18px; border: 1.5px solid var(--color-border);
+  border-radius: 4px; cursor: pointer; flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-surface); transition: all 0.15s;
+}
+.skill-checkbox:hover { border-color: var(--color-primary); }
+.skill-checkbox.checked { background: var(--color-success); border-color: var(--color-success); }
+.skill-checkbox.checked::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+.skill-item-main { flex: 1; }
+.skill-item-name {
+  font-size: 14px; font-weight: 600;
+  color: var(--color-text-primary); display: inline-block; margin-right: 8px;
+}
+.skill-item.completed .skill-item-name {
+  color: var(--color-text-tertiary); text-decoration: line-through;
+}
+.tier-badge {
+  font-size: 10px; font-weight: 600; padding: 1px 8px;
+  border-radius: 8px; letter-spacing: 0.3px; vertical-align: middle;
+}
+.tier-badge.junior { background: var(--color-success-light); color: var(--color-success); }
+.tier-badge.mid { background: var(--color-warning-light); color: var(--color-warning); }
+.tier-badge.senior { background: var(--color-purple-light); color: var(--color-purple); }
+
+.skill-item-info {
+  margin-top: 8px; display: grid;
+  grid-template-columns: 80px 1fr; gap: 6px 12px; font-size: 13px;
+}
+.info-label { color: var(--color-text-tertiary); font-size: 12px; font-weight: 500; }
+.info-content { color: var(--color-text-secondary); line-height: 1.7; }
+.knowledge-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.knowledge-tag {
+  font-size: 11px; padding: 1px 8px; border-radius: 3px;
+  background: var(--color-surface-alt); color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+}
+
+.resources {
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px dashed var(--color-border-light);
+}
+.resource-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.resource-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; padding: 3px 10px;
+  background: var(--color-primary-light); color: var(--color-primary);
+  border-radius: 12px; text-decoration: none; transition: all 0.15s;
+}
+.resource-link:hover { background: var(--color-primary); color: white; }
+.resource-link.en { background: #f0fdf4; color: var(--color-success); }
+.resource-link.en:hover { background: var(--color-success); color: white; }
+.resource-link.paid { background: var(--color-warning-light); color: var(--color-warning); }
+.resource-link.paid:hover { background: var(--color-warning); color: white; }
+
+.path-card {
+  background: var(--color-surface); border-radius: var(--radius-lg);
+  padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow-sm);
+}
+.path-card h3 {
+  font-size: 16px; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 10px;
+}
+.path-card h3 .stage-num {
+  background: var(--color-primary); color: white;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600;
+}
+.path-card .duration { font-size: 12px; color: var(--color-text-tertiary); margin-bottom: 16px; padding-left: 38px; }
+.path-stages { display: grid; gap: 8px; padding-left: 38px; }
+.path-stage-item {
+  padding: 10px 14px; background: var(--color-surface-alt);
+  border-radius: var(--radius-md); font-size: 13px; color: var(--color-text-secondary);
+  display: flex; align-items: center; gap: 8px;
+}
+.path-stage-item::before { content: '→'; color: var(--color-primary); font-weight: 600; }
+.path-goal {
+  margin-top: 12px; padding: 10px 14px;
+  background: var(--color-success-light); border-radius: var(--radius-md);
+  font-size: 13px; color: var(--color-success); margin-left: 38px;
+}
+
+@media (max-width: 900px) {
+  .header { padding: 24px 20px 20px; }
+  .progress-bar-wrapper { margin: -16px 20px 0; padding: 12px 16px; flex-wrap: wrap; gap: 12px; }
+  .container { padding: 16px 20px 60px; }
+  .tier-container { grid-template-columns: 1fr; }
+  .domain-grid { grid-template-columns: 1fr; }
+  .skill-item-info { grid-template-columns: 1fr; gap: 4px; }
+  .info-label { font-weight: 600; color: var(--color-text-secondary); }
+}
+@media print {
+  .nav-tabs, .filter-bar, .progress-bar-wrapper, .btn-reset { display: none !important; }
+  .section { display: block !important; }
+  .skill-domain-body { display: block !important; }
+  body { background: white; }
+}
+
+/* === 概述折叠展开样式 === */
+.skill-overview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s;
+  border: none;
+}
+.skill-overview-toggle:hover {
+  background: var(--color-primary);
+  color: white;
+}
+.skill-overview-toggle .arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+.skill-overview-toggle.open .arrow {
+  transform: rotate(90deg);
+}
+.skill-overview-content {
+  display: none;
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #f5f9ff 0%, #f5f7ff 100%);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  animation: slideDown 0.2s ease;
+}
+.skill-overview-content.open {
+  display: block;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.skill-summary {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+.skill-keypoints-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.skill-keypoint {
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  background: white;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+.skill-keypoint:last-child { margin-bottom: 0; }
+.skill-keypoint-title {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-right: 6px;
+}
+.skill-keypoint-detail {
+  color: var(--color-text-secondary);
+}
+
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>测试工程师能力图谱与学习清单</h1>
+  <p class="subtitle">从零基础到资深架构师的完整成长路径 · 中英文学习资源精选</p>
+  <div class="meta">
+    <span>覆盖 12 个能力域</span>
+    <span>80+ 项核心技能</span>
+    <span>200+ 学习资源</span>
+    <span>v1.0 · 2025</span>
+  </div>
+</header>
+
+<div class="progress-bar-wrapper">
+  <span class="label">📊 整体学习进度</span>
+  <div class="progress-track">
+    <div class="progress-fill" id="globalProgressFill"></div>
+  </div>
+  <span class="stats"><strong id="completedCount">0</strong> / <span id="totalCount">0</span> 项已掌握</span>
+  <button class="btn-reset" onclick="resetProgress()">重置进度</button>
+</div>
+
+<div class="container">
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-tab="map">🗺️ 能力图谱</button>
+    <button class="nav-tab" data-tab="checklist">📋 学习清单</button>
+    <button class="nav-tab" data-tab="path">🛤️ 学习路径</button>
+    <button class="nav-tab" data-tab="guide">💡 使用说明</button>
+  </nav>
+
+  <section class="section active" id="section-map">
+    <div class="section-intro">
+      <h2>能力图谱总览</h2>
+      <p>测试工程师的能力体系横跨 12 个领域,从基础理论到工程化平台建设。下方按"初级 → 中级 → 高级"三个阶梯展示每个领域的成长轨迹,点击卡片可跳转到对应的学习清单。</p>
+    </div>
+
+    <div class="tier-container">
+      <div class="tier-card tier-junior">
+        <div class="tier-title">🌱 初级 · 入门执行(0-2 年)</div>
+        <div class="tier-meta">目标:能独立完成功能测试,有基础工具能力</div>
+        <ul>
+          <li>掌握测试用例设计基本方法</li>
+          <li>会使用主流测试管理工具</li>
+          <li>能写简单 SQL、读懂代码</li>
+          <li>能用 Postman/Apifox 测接口</li>
+          <li>了解 Linux 基本命令</li>
+        </ul>
+      </div>
+      <div class="tier-card tier-mid">
+        <div class="tier-title">🌳 中级 · 模块负责(3-5 年)</div>
+        <div class="tier-meta">目标:独立负责一个业务域,有自动化能力</div>
+        <ul>
+          <li>能搭建接口/UI 自动化框架</li>
+          <li>独立完成性能测试方案</li>
+          <li>掌握至少一门编程语言</li>
+          <li>能做接口设计评审、SQL 优化</li>
+          <li>参与 CI/CD 流水线建设</li>
+        </ul>
+      </div>
+      <div class="tier-card tier-senior">
+        <div class="tier-title">🌲 高级 · 体系搭建(5 年+)</div>
+        <div class="tier-meta">目标:搭建测试体系、带团队、推动质量左移</div>
+        <ul>
+          <li>设计测试平台、统一测试基础设施</li>
+          <li>制定团队测试策略与质量度量</li>
+          <li>推动测试左移、混沌工程</li>
+          <li>跨团队协作、技术影响力</li>
+          <li>带教 Mentor、招聘面试</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin: 24px 0 12px; font-size: 16px;">12 个核心能力域</h3>
+    <div class="domain-grid" id="domainGrid"></div>
+  </section>
+
+  <section class="section" id="section-checklist">
+    <div class="section-intro">
+      <h2>学习清单(可勾选打卡)</h2>
+      <p>每一项都包含:能完成的工作 · 适用场景 · 需掌握的知识 · 推荐学习资源(中英文混合,优先免费)。勾选完成后会自动保存进度到本地浏览器。</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-group">
+        <span class="filter-label">阶梯</span>
+        <div class="filter-chips">
+          <span class="filter-chip active" data-filter="tier" data-value="all">全部</span>
+          <span class="filter-chip" data-filter="tier" data-value="junior">初级</span>
+          <span class="filter-chip" data-filter="tier" data-value="mid">中级</span>
+          <span class="filter-chip" data-filter="tier" data-value="senior">高级</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">状态</span>
+        <div class="filter-chips">
+          <span class="filter-chip active" data-filter="status" data-value="all">全部</span>
+          <span class="filter-chip" data-filter="status" data-value="todo">未掌握</span>
+          <span class="filter-chip" data-filter="status" data-value="done">已掌握</span>
+        </div>
+      </div>
+      <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索技能名称、关键词...">
+    </div>
+
+    <div id="checklistContainer"></div>
+  </section>
+
+  <section class="section" id="section-path">
+    <div class="section-intro">
+      <h2>学习路径推荐</h2>
+      <p>三段式渐进路径,每阶段建议投入时长基于"每周 8-10 小时学习"估算。实际进度因背景而异,有研发基础的人可以跳过第一阶段直接进入中级。</p>
+    </div>
+    <div id="pathContainer"></div>
+  </section>
+
+  <section class="section" id="section-guide">
+    <div class="section-intro">
+      <h2>使用说明</h2>
+      <p>这份能力图谱可以用于个人学习、团队带教、招聘评估等多个场景,以下是几种典型用法。</p>
+    </div>
+
+    <div class="path-card">
+      <h3><span class="stage-num">1</span>个人成长打卡</h3>
+      <div class="duration">适用于:测试工程师自我提升</div>
+      <div class="path-stages">
+        <div class="path-stage-item">先在「能力图谱」对照当前所处阶梯,找到弱项</div>
+        <div class="path-stage-item">在「学习清单」中筛选弱项相关的技能,勾选已掌握的</div>
+        <div class="path-stage-item">未掌握的技能按「学习路径」建议的顺序学习</div>
+        <div class="path-stage-item">页面会自动保存进度,定期回来更新打卡</div>
+      </div>
+    </div>
+
+    <div class="path-card">
+      <h3><span class="stage-num">2</span>团队带教 / 新人成长</h3>
+      <div class="duration">适用于:Tech Lead 带新人</div>
+      <div class="path-stages">
+        <div class="path-stage-item">把页面分享给新人,让 Ta 自评当前能力位置</div>
+        <div class="path-stage-item">制定 30/60/90 天计划,每月一个能力域为重点</div>
+        <div class="path-stage-item">每周 1v1 时同步学习清单的勾选进度</div>
+        <div class="path-stage-item">每月做一次实战验收(写一个自动化用例、做一次压测等)</div>
+      </div>
+    </div>
+
+    <div class="path-card">
+      <h3><span class="stage-num">3</span>招聘面试评估</h3>
+      <div class="duration">适用于:招聘官、技术面试官</div>
+      <div class="path-stages">
+        <div class="path-stage-item">按目标岗位级别(初/中/高),圈选必备和加分能力</div>
+        <div class="path-stage-item">面试时按能力域逐项探询,记录候选人覆盖度</div>
+        <div class="path-stage-item">最后按"能力域覆盖率 × 深度"打分,有据可依</div>
+      </div>
+    </div>
+
+    <div class="path-card" style="background: var(--color-warning-light); border-left: 3px solid var(--color-warning);">
+      <h3 style="color: var(--color-warning);">⚠️ 几点提醒</h3>
+      <div class="path-stages" style="padding-left: 0;">
+        <div class="path-stage-item" style="background: white;">不必追求 100% 完成 —— 测试是 T 字型能力,纵向深耕一两个领域比横向铺满更重要</div>
+        <div class="path-stage-item" style="background: white;">学习资源链接因版本更新可能失效,失效时建议用关键词搜索同等资源</div>
+        <div class="path-stage-item" style="background: white;">"已掌握"的标准是能独立完成相关工作,而不是听过、看过、做过 demo</div>
+        <div class="path-stage-item" style="background: white;">数据存在浏览器本地,清除浏览器缓存会丢失进度,重要数据可截图备份</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// ============ 数据定义 ============
+const DOMAINS = [
+  {
+    id: 'foundation',
+    name: '测试理论基础',
+    icon: '📚',
+    color: 'foundation',
+    desc: '测试方法论、用例设计技术、缺陷管理 —— 任何测试工程师的根基,决定测试覆盖率的上限。',
+    chips: ['等价类', '边界值', '判定表', '正交法', '探索性测试']
+  },
+  {
+    id: 'business',
+    name: '业务理解与领域知识',
+    icon: '🎯',
+    color: 'business',
+    desc: '能从业务视角发现 bug,识别隐性需求和系统耦合点,这是高级测试与初级测试最大的分水岭。',
+    chips: ['需求分析', '用户视角', '风险识别', '场景建模']
+  },
+  {
+    id: 'design',
+    name: '测试设计与策略',
+    icon: '🧩',
+    color: 'design',
+    desc: '测试金字塔、风险驱动测试、测试左移、回归策略 —— 决定测试投入产出比的核心。',
+    chips: ['测试金字塔', '风险评估', '测试左移', '准入准出']
+  },
+  {
+    id: 'api',
+    name: '接口测试',
+    icon: '🔌',
+    color: 'api',
+    desc: '测试工程师的主战场。HTTP/gRPC 协议、Mock、契约测试,大型项目里 60% 的自动化用例都在这层。',
+    chips: ['Postman', 'Pytest', 'Mock', '契约测试']
+  },
+  {
+    id: 'auto',
+    name: '自动化测试',
+    icon: '🤖',
+    color: 'auto',
+    desc: 'UI/接口/移动端三端自动化框架,选型、分层、可维护性,是中高级测试的核心能力。',
+    chips: ['Selenium', 'Playwright', 'Appium', 'POM']
+  },
+  {
+    id: 'perf',
+    name: '性能测试',
+    icon: '⚡',
+    color: 'perf',
+    desc: '从工具使用到性能模型设计、瓶颈定位,需要后端/中间件/数据库的体系化知识储备。',
+    chips: ['JMeter', 'Locust', 'k6', '全链路压测']
+  },
+  {
+    id: 'sec',
+    name: '安全测试',
+    icon: '🔒',
+    color: 'sec',
+    desc: 'OWASP Top 10、渗透测试基础、API 安全、数据脱敏 —— 涉及金融、用户隐私的系统必备。',
+    chips: ['OWASP', 'Burp Suite', 'SQL注入', 'XSS']
+  },
+  {
+    id: 'dev',
+    name: '编程开发能力',
+    icon: '💻',
+    color: 'dev',
+    desc: '至少一门编程语言达到能写工具/框架的水平,是从手工测试跃迁到测试开发的门槛。',
+    chips: ['Python', 'Java', 'Git', '设计模式']
+  },
+  {
+    id: 'ci',
+    name: 'CI/CD 与 DevOps',
+    icon: '🔄',
+    color: 'ci',
+    desc: '把测试嵌入到研发流水线,实现质量左移和持续反馈,是现代测试工程的标配。',
+    chips: ['Jenkins', 'GitLab CI', 'Docker', 'K8s']
+  },
+  {
+    id: 'data',
+    name: '数据库与数据测试',
+    icon: '💾',
+    color: 'data',
+    desc: 'SQL 是测试工程师的底线能力,ERP/电商等数据密集型系统更要会数据迁移、对账、大数据测试。',
+    chips: ['SQL', 'MySQL', 'Redis', '数据迁移']
+  },
+  {
+    id: 'platform',
+    name: '测试平台与工具建设',
+    icon: '🏗️',
+    color: 'platform',
+    desc: '工具化、平台化思维,把团队的最佳实践沉淀成可复用的产品,是 Lead 必备能力。',
+    chips: ['MeterSphere', '自研平台', 'Allure', '前端开发']
+  },
+  {
+    id: 'soft',
+    name: '软技能与团队',
+    icon: '🤝',
+    color: 'soft',
+    desc: '沟通、协作、带教、汇报 —— 越往上越重要,纯技术能力只能让你做到中级,软技能决定上限。',
+    chips: ['需求沟通', '冲突管理', '团队带教', '技术汇报']
+  }
+];
+
+// ============ 学习路径数据 ============
+const PATHS = [
+  {
+    stage: 1,
+    title: '入门起步阶段',
+    duration: '建议时长:3-6 个月',
+    stages: [
+      '软件测试基础理论 → 等价类/边界值/判定表/正交法',
+      '需求分析与用例设计 → 能写出结构化测试用例',
+      'Linux 基础命令 + Git 版本控制 → 适应研发协作环境',
+      'SQL 基础 → SELECT/JOIN/聚合函数,能查能比对',
+      'Postman/Apifox 接口测试 → 单接口调试、环境变量、断言',
+      '缺陷管理工具(Jira/禅道)→ 写一份合格的 bug 报告',
+      'HTTP 协议基础 → 状态码、Header、Cookie/Token'
+    ],
+    goal: '✅ 阶段目标:能独立承接一个小型项目的功能测试,有基础协作能力'
+  },
+  {
+    stage: 2,
+    title: '能力跃迁阶段',
+    duration: '建议时长:6-12 个月',
+    stages: [
+      'Python 编程 → 数据结构、面向对象、异常处理、装饰器',
+      'Pytest + Requests + Allure → 搭建接口自动化框架',
+      'Selenium/Playwright → 完成 Web UI 自动化覆盖核心流程',
+      'Appium 移动端自动化 → 一套基础的 APP 回归用例集',
+      'JMeter / Locust → 独立完成单接口与小场景压测',
+      'Docker 基础 → 容器启停、镜像、Compose',
+      'CI/CD 入门 → Jenkins/GitLab CI 接入自动化用例',
+      'SQL 进阶 → 索引原理、慢查询分析、事务隔离级别'
+    ],
+    goal: '✅ 阶段目标:能独立负责一个业务模块的全周期测试,产出自动化用例资产'
+  },
+  {
+    stage: 3,
+    title: '体系建设阶段',
+    duration: '建议时长:1-2 年',
+    stages: [
+      '测试架构设计 → 测试金字塔、分层比例、用例分级',
+      '性能模型设计 → 业务建模、压测策略、瓶颈定位、全链路压测',
+      '微服务测试 → 契约测试、Mock 平台、混沌工程',
+      '测试平台建设 → 用例平台、Mock 平台、数据平台、报告平台',
+      '质量度量体系 → 缺陷逃逸率、MTTR、质量大盘',
+      '团队管理与带教 → 招聘、绩效、新人 30/60/90 计划',
+      '跨团队影响力 → 推动测试左移、参与架构评审、对外分享'
+    ],
+    goal: '✅ 阶段目标:能搭建完整测试体系,带领团队持续提升质量,具备技术影响力'
+  }
+];
+// ============ 知识点概述数据 ============
+const OVERVIEWS = {
+'fd-01': {
+    summary: '等价类划分与边界值分析是黑盒测试中最经典的两种用例设计技术,核心思想是"用最少的用例覆盖最大的输入空间"。等价类把输入域划分为若干互不相交的子集,每类只取一个代表值;边界值则在等价类的边界点附近取值,因为大部分 bug 都藏在"刚好达到""差一点""超过一点"这些位置。两种方法搭配使用,能在用例数量和覆盖率之间找到最佳平衡。',
+    keyPoints: [
+      { title: '有效等价类 vs 无效等价类', detail: '有效类是符合需求规格的合法输入(如年龄 0-120),无效类是不符合的输入(负数、超过 120、非数字)。两者都要测,无效类往往更容易暴露问题。' },
+      { title: '边界值 7 点法', detail: '一个数值范围 [a,b] 要测 7 个点:min-1、min、min+1、normal、max-1、max、max+1。这 7 个点覆盖了离点和上点,能拦截 90% 以上的边界 bug。' },
+      { title: '常见边界场景', detail: '不仅是数字边界,还包括:字符串长度边界(0/1/最大-1/最大/最大+1)、集合边界(空集/单元素/最大容量)、时间边界(月初/月末/闰年/跨时区)、空值边界(null/空串/空格)。' },
+      { title: '与其他方法的关系', detail: '等价类决定"测哪些类",边界值决定"每类测哪个点"。两者是互补关系,不是二选一。判定表/场景法等其他方法是在更高层组合等价类。' }
+    ]
+  },
+  'fd-02': {
+    summary: '判定表是把多输入条件与多种输出动作之间的复杂逻辑,用矩阵化的表格清晰列出来的方法。核心价值是穷举所有"条件组合 × 动作"的可能性,避免遗漏隐性分支。在面对"满足 A 且 B 时执行 X、满足 A 但不 B 时执行 Y..."这种条件交叉的业务规则时,判定表能让你不漏掉任何一种组合。配合判定表化简,还能压缩冗余规则,得到精简的测试用例集。',
+    keyPoints: [
+      { title: '四要素结构', detail: '条件桩(列出所有输入条件)、动作桩(列出所有输出动作)、条件项(每个条件的取值组合,通常是 T/F)、动作项(在该条件组合下执行哪些动作)。' },
+      { title: '规则数量计算', detail: 'n 个条件最多产生 2^n 条规则。比如 3 个条件 = 8 条,5 个条件 = 32 条。条件多时规则会爆炸,这时要用判定表化简。' },
+      { title: '判定表化简', detail: '当某些条件的不同取值不影响输出时,把这些规则合并成"无关"(用 -- 表示)。化简后能大幅减少用例数,但要确保不遗漏有意义的组合。' },
+      { title: '典型应用场景', detail: '权限矩阵(角色 × 操作)、营销规则(满足条件叠加优惠)、ERP 审批流(金额/部门/类型决定审批人)、保险理赔判定。这类业务一旦有遗漏就是真金白银的损失。' }
+    ]
+  },
+  'fd-03': {
+    summary: '场景法把用户使用产品的完整旅程拆解成"基本流 + 备选流"的组合,关注业务流程的连贯性而非单点功能。状态转换测试则关注对象在不同状态间的迁移合法性 —— 哪些状态转换是允许的、哪些是禁止的、状态切换时的数据变化是否正确。两者一起,是测试长流程业务(订单/审批/客户生命周期)的核心方法,能发现脚本化测试覆盖不到的时序型 bug。',
+    keyPoints: [
+      { title: '基本流与备选流', detail: '基本流是用户完成目标的"理想路径"(下单→支付成功→收货);备选流是分支或异常路径(支付失败→重试、商品下架→取消)。每条备选流都对应一个或一组测试用例。' },
+      { title: '状态图与状态转换表', detail: '状态图用图形展示对象所有状态及合法转换;状态转换表是 [当前状态 × 事件 → 目标状态] 的二维表。两者互补,前者直观,后者完整。' },
+      { title: 'N-switch 覆盖', detail: '0-switch:覆盖所有单步状态转换;1-switch:覆盖所有连续两步转换;N-switch:连续 N+1 步。N 越大覆盖越深,用例越多。一般做到 0-switch 全覆盖、1-switch 关键路径覆盖即可。' },
+      { title: '识别非法转换', detail: '正向用例验证合法转换,反向用例要构造非法转换(如订单已完成又去支付),验证系统能否阻止非法状态变更并给出合理提示。' }
+    ]
+  },
+  'fd-04': {
+    summary: '探索性测试不预先编写完整用例,而是基于经验、直觉和实时观察边设计边执行,强调"测试设计与执行同步进行"。它不是"乱测",而是有方法的:依据测试章程(Charter)圈定范围、用启发式策略指导探索方向、记录发现的同时持续调整。在敏捷迭代、需求模糊、新功能首次验收等场景下,探索性测试能发现脚本化用例覆盖不到的深层问题,是高级测试工程师的标志能力之一。',
+    keyPoints: [
+      { title: 'Charter(测试章程)', detail: '一句话定义本次探索的目标范围,如"探索登录功能在弱网环境下的体验问题",时长 60-120 分钟。Charter 让探索有边界,避免漫无目的。' },
+      { title: 'SBTF 章程式探索', detail: 'Session-Based Test Management 把探索分成 60-90 分钟的 session,每个 session 聚焦一个 charter,结束后输出 session report。这种方式让探索性测试可量化、可追溯。' },
+      { title: '启发式测试策略', detail: '常用启发式包括:CRUD(增删改查全覆盖)、SFDIPOT(结构/功能/数据/交互/平台/操作/时间)、Tour-based(像导游一样走特定路线,如 Money Tour 关注金钱相关、Garbage Tour 输入垃圾数据)。' },
+      { title: '与脚本化测试的关系', detail: '探索性测试不替代脚本化测试,而是补充。脚本化保证基础覆盖,探索性发现意外问题。两者比例约 7:3,新功能/复杂场景偏探索,稳定回归偏脚本。' }
+    ]
+  },
+  'fd-05': {
+    summary: '缺陷管理不只是"提个 bug",而是涵盖发现、记录、跟踪、复现、修复、验证、关闭、复盘的完整流程。一份高质量的 bug 报告能让开发愿意修、不会扯皮、能精准定位;反之,模糊的报告会引发"无法复现""不是 bug"等推诿。缺陷数据还是质量度量的原材料,是缺陷逃逸率、模块热力图、责任人分布等高阶指标的源头。会写好 bug 报告,是测试工程师专业度最直观的体现。',
+    keyPoints: [
+      { title: 'Bug 报告五要素', detail: '标题(精炼描述)、环境(版本/账号/系统)、复现步骤(可重复的操作序列)、预期结果、实际结果。缺一不可,附图/日志/录屏更佳。' },
+      { title: '严重程度 vs 优先级', detail: '严重程度(Severity)看技术影响:崩溃 > 功能错误 > 体验问题 > 文案错误。优先级(Priority)看修复紧急度:阻塞发布 > 高 > 中 > 低。两者独立,可能"严重但不紧急"或"轻微但紧急"。' },
+      { title: 'Bug 生命周期', detail: 'New → Open → In Progress → Resolved → Verified → Closed。每个状态对应不同责任人,流转规则要团队约定清楚,避免在某个状态卡死。' },
+      { title: '一票否决项', detail: '资金类 / 数据丢失类 / 安全漏洞类 bug 默认提一级优先级。即使现象轻微,只要碰到这三类,必须立刻处理,不能延后。' }
+    ]
+  },
+  'bs-01': {
+    summary: 'PRD 解读不是"读完文档点头就行",而是要在阅读时主动识别歧义、推演异常路径、追问隐性需求。一个有经验的测试工程师能从同一份 PRD 中读出比新手多 2-3 倍的测试点,这种差距来自系统化的解读方法和提问能力。需求评审是质量左移最关键的入口 —— 在评审阶段拦截一个需求歧义,比上线后修复一个 bug 节省 100 倍成本。',
+    keyPoints: [
+      { title: '需求三层结构', detail: '业务背景层(为什么要做)、功能描述层(做什么)、交互细节层(怎么做)。三层都要看,只看交互细节会丢失业务逻辑;只看业务背景会漏掉边界。' },
+      { title: '识别需求歧义', detail: '常见歧义:"用户可以..."(谁?哪种用户?)、"系统应当..."(在什么前提下?)、"快速响应..."(多快算快?具体毫秒数?)、"批量..."(批量上限是多少?)。' },
+      { title: '可测性 checklist', detail: '每个需求都要回答:输入是什么?输出是什么?约束条件?异常处理?监控点?如何回滚?这些维度都要在评审中明确。' },
+      { title: '验收标准量化', detail: '把"性能要好"改成"P95 响应时间 ≤ 500ms";把"用户体验流畅"改成"核心操作路径 ≤ 3 步、加载动画 ≤ 1 秒"。可量化的需求才可验证。' }
+    ]
+  },
+  'bs-02': {
+    summary: '用户旅程是把使用流程画成时间轴,标注每个步骤的目标、操作、痛点、机会点。它从"用户视角"看产品,与从"功能视角"看产品形成互补。在 ERP/CRM 这类长流程业务中,用户旅程能帮你发现"单个功能都没问题,但串起来体验很差"的隐性问题。场景建模则是把抽象需求转化为具体的、可执行的测试场景集合。',
+    keyPoints: [
+      { title: 'Persona 角色法', detail: '为每个角色定义一个具体人物画像(姓名/职位/痛点/目标),测试时代入角色思考。比如 ERP 的"采购员张三",而不是泛泛的"用户"。' },
+      { title: '主流程 + 异常流程', detail: '主流程是用户达成目标的最短路径(70% 用户的高频操作),异常流程是分支(网络断开、操作超时、并发冲突等)。主流程必测、异常流程要按概率分级测。' },
+      { title: '触点与体验点', detail: '触点是用户与系统的每一次交互(打开页面、点击按钮、收到通知),每个触点都是测试机会。重点关注转换触点(支付/提交/确认)。' },
+      { title: '场景优先级排序', detail: '按"用户基数 × 使用频次 × 业务影响"打分,Top 20% 的场景必须自动化覆盖,Bottom 50% 可以靠手工抽查或不测。' }
+    ]
+  },
+'api-01': {
+    summary: 'HTTP 是 Web 应用的通信底层协议,是接口测试的认知基石。理解 HTTP 不是为了能背状态码,而是为了在出现 bug 时知道该看哪个环节、哪个字段、哪个层次。请求/响应的格式、状态码的含义、Header 的作用、鉴权的机制 —— 这些知识在你抓包、查日志、和后端撕逼时都是必备的"通用语"。不懂 HTTP 的测试,接口测试只能停留在"工具点点点"层面。',
+    keyPoints: [
+      { title: '请求方法的语义', detail: 'GET 查询(幂等无副作用)、POST 创建(非幂等)、PUT 全量替换(幂等)、PATCH 局部更新、DELETE 删除(幂等)。设计接口时方法用错会导致缓存、重试机制失效。' },
+      { title: '状态码分类与典型值', detail: '2xx 成功(200/201/204)、3xx 重定向(301/302/304)、4xx 客户端错误(400/401/403/404/409/422/429)、5xx 服务端错误(500/502/503/504)。看到 500 找后端,看到 4xx 找请求方。' },
+      { title: 'Header 关键字段', detail: 'Content-Type(数据格式)、Authorization(鉴权)、Cookie/Set-Cookie(会话)、Cache-Control(缓存策略)、X-Forwarded-For(代理链路)。排查问题时要看 Header,不能只看 Body。' },
+      { title: '常见鉴权机制', detail: 'Cookie/Session(传统 Web)、JWT Token(无状态)、OAuth2(第三方授权)、API Key(机器对机器)、签名(防篡改防重放)。每种机制的失效场景不同,要针对性测试。' }
+    ]
+  },
+  'api-02': {
+    summary: 'Postman/Apifox 是接口测试日常调试的主力工具,降低了"看懂接口文档→构造请求→验证响应"的门槛。除了基础的发送请求,工具还支持环境变量切换、断言脚本、用例集合、Mock 服务、文档生成等高级能力,让一个工具搞定调试到自动化的全流程。Apifox 在国内用得多,集成了文档+调试+Mock+自动化,Postman 在海外更主流。两者操作逻辑相似,会一个就能上手另一个。',
+    keyPoints: [
+      { title: 'Collection(集合)', detail: '把多个接口组织成树形结构,可批量执行、共享变量、统一鉴权。是接口资产沉淀的基本单元,一个集合 = 一个业务模块或一组关联接口。' },
+      { title: '环境变量与全局变量', detail: '用 {{baseUrl}} 这种占位符避免硬编码,切换 dev/test/prod 环境只需切换变量集。鉴权 token 可以放全局变量,所有接口共用。' },
+      { title: 'Pre-request 与 Tests 脚本', detail: 'Pre-request 在请求发送前执行(如生成签名、注入时间戳),Tests 在响应到达后执行(断言状态码、提取字段、保存到变量)。这两个 hook 让 Postman 从工具升级成轻量自动化框架。' },
+      { title: 'Runner 批量执行', detail: 'Collection Runner 可以批量跑整个集合,支持数据驱动(CSV/JSON)、迭代次数、延迟。配合 Newman 命令行还能集成到 CI/CD 流水线。' }
+    ]
+  },
+  'api-03': {
+    summary: 'JSON 是现代 Web API 的事实标准数据格式,JSON Path 则是从 JSON 中提取字段的查询语言(类似 SQL 之于数据库)。会读 JSON 是基础,会用 JSON Path 是接口测试自动化的关键 —— 没有它,你做断言时只能自己写一堆 if-else 来判断字段是否存在、值是否相等。XML 在传统系统(SOAP/政府/金融老系统)中仍然存在,XPath 是它的查询语言。掌握这套技能后,接口响应再复杂的嵌套结构都能精准提取。',
+    keyPoints: [
+      { title: 'JSON 基本类型', detail: '只有 6 种:string、number、boolean、null、array、object。没有日期类型(用字符串表示)、没有注释、key 必须是字符串且双引号包裹。' },
+      { title: 'JSONPath 语法', detail: '$ 根、. 子节点、[] 数组下标、* 通配、.. 递归下降、?() 过滤。例:$.data.users[?(@.age>18)].name 提取所有成年人姓名。' },
+      { title: 'JSON 与 JS 对象的区别', detail: 'JSON 是字符串(用 JSON.parse 解析),JS 对象是内存数据。JSON 中 key 必须双引号、不能有尾逗号、不能有函数 —— 这些在 JS 对象里都允许。' },
+      { title: 'YAML 与 JSON 互转', detail: 'YAML 用缩进而非括号,可读性更好,常用于配置文件(K8s/CI/CD)。两者数据结构等价,可互转。测试用例文件常用 YAML 格式管理,因为更易读。' }
+    ]
+  },
+  'db-01': {
+    summary: 'SQL 是测试工程师的"读写底线技能"。任何业务数据最终都落在数据库里,UI 上看到的只是数据的展示形式,要验证业务逻辑是否正确,必须能查库核对原始数据。SQL 在测试中的典型用途有三:数据校验(下单后库存是否正确扣减)、问题定位(为什么这个订单状态异常)、测试数据准备(批量造测试数据)。不会 SQL 的测试,只能停留在"看见的就是对的"层面,无法发现深层数据问题。',
+    keyPoints: [
+      { title: '基础查询四件套', detail: 'SELECT(选什么)、FROM(从哪取)、WHERE(过滤条件)、ORDER BY(排序)。再加 LIMIT 控制返回行数。99% 的临时查询用这五个关键字就够了。' },
+      { title: 'JOIN 的四种类型', detail: 'INNER JOIN(交集)、LEFT JOIN(左表全保留)、RIGHT JOIN(右表全保留)、FULL JOIN(并集)。校验"应该有但缺失的数据"时,LEFT JOIN + IS NULL 是经典套路。' },
+      { title: 'GROUP BY 与聚合函数', detail: 'COUNT/SUM/AVG/MAX/MIN 配合 GROUP BY 做分组统计,HAVING 过滤分组结果(WHERE 是过滤行,HAVING 是过滤组)。统计类报表测试少不了这套组合。' },
+      { title: '子查询 vs JOIN', detail: '同样的需求往往有多种 SQL 写法。子查询可读性好,JOIN 性能通常更优。复杂查询用 CTE(WITH 语法)拆分步骤,可读性大幅提升。' }
+    ]
+  },
+  'db-02': {
+    summary: '数据库客户端工具是 SQL 能力的承载工具。命令行的 mysql/psql 适合服务器上快速操作,GUI 客户端(DBeaver/Navicat/DataGrip)适合日常开发和测试场景 —— 表结构浏览、数据导入导出、SQL 编写联想、ER 图可视化、执行计划分析,这些都是 GUI 工具的强项。选一个用熟,效率提升立竿见影。',
+    keyPoints: [
+      { title: '工具选型对比', detail: 'DBeaver 完全免费、跨数据库、社区活跃,推荐首选;Navicat 商业付费、UI 更精致、国内用户多;DataGrip(JetBrains 系)和 IDE 风格统一、SQL 联想最强但收费。' },
+      { title: '连接配置与安全', detail: '连接信息(host/port/user/password)分环境保存,生产库的密码绝不写在文件里。SSH 隧道连内网库、SSL 加密连接是标配,跳板机访问要走团队规范。' },
+      { title: '导入导出', detail: '从 Excel/CSV 批量导入测试数据、把查询结果导出成 Excel 给业务方,这两个操作每天都用。注意编码(UTF-8)和数据类型映射(日期/数字)。' },
+      { title: 'ER 图与执行计划', detail: 'ER 图功能能可视化展示表关系,新人接手项目必看;执行计划(EXPLAIN)用来看一条 SQL 怎么走索引,慢查询排查必备。' }
+    ]
+  },
+  'dev-01': {
+    summary: 'Linux 命令行是测试工程师必备的"服务器交互语言"。即使不会 Linux 编程,也要能 ssh 上测试服务器查日志、看进程、传文件、查端口。在云原生时代,容器、K8s 都跑在 Linux 上,测试环境也基本都是 Linux。会 Linux 不仅能让你独立排查问题,还能让你和运维/开发对话时不掉链子。',
+    keyPoints: [
+      { title: '文件操作三件套', detail: 'ls(列目录)、cd(切目录)、pwd(看当前目录)是定位文件的基础;cp/mv/rm 是文件操作;cat/less/head/tail 是看文件,其中 tail -f 跟踪日志最常用。' },
+      { title: '查找与过滤', detail: 'find 按文件名/时间/大小查找文件;grep 在文件内容中搜索文本;awk/sed 做文本处理。组合用 find + grep + xargs 能解决 80% 的查找需求。' },
+      { title: '进程与端口', detail: 'ps -ef | grep xxx 查进程、kill -9 杀进程、top 看资源占用、netstat -tlnp / ss -tlnp 查端口监听、lsof 查文件占用。问题定位必备工具集。' },
+      { title: '文件传输', detail: 'scp 在两台机器间复制文件、rsync 增量同步(传大量文件用它)、curl/wget 下载、ssh 登录。本机和测试服务器之间传文件这是基本功。' }
+    ]
+  },
+  'dev-02': {
+    summary: 'Git 是现代代码协作的事实标准。即使你不写代码,作为测试也要会 Git,因为自动化用例要用 Git 管理、要参与 Code Review、要追溯哪次提交引入了 bug。Git 的核心概念(工作区/暂存区/本地仓库/远程仓库)和典型工作流(branch/merge/rebase)虽然抽象,但理解了之后,Git 就从"神秘的命令"变成了"可视化的版本控制系统"。',
+    keyPoints: [
+      { title: 'Git 三区与四态', detail: '工作区(workspace)→ 暂存区(index)→ 本地仓库(local repo)→ 远程仓库(remote)。四种文件状态:未跟踪、已修改、已暂存、已提交。理解这个心智模型,大部分 Git 操作就清晰了。' },
+      { title: '常用命令组合', detail: 'clone → checkout -b 分支 → 修改 → add → commit → push 是日常六连操作。pull = fetch + merge,会拉别人的代码,要养成 pull --rebase 的习惯避免 merge commit。' },
+      { title: '分支策略', detail: 'Git Flow(主分支 master/develop + 功能分支)、GitHub Flow(只有 main + feature)、Trunk-Based(主干开发 + 短分支)。小团队选 GitHub Flow,大团队用 Git Flow。' },
+      { title: 'merge vs rebase', detail: 'merge 保留分支历史,产生合并节点(diamond 形);rebase 把当前分支的提交"嫁接"到目标分支末尾,历史是直线的。共享分支永远不要 rebase,会改写历史搞炸队友。' }
+    ]
+  },
+  'dev-03': {
+    summary: 'Python 是测试工程师最该掌握的编程语言,没有之一。语法简洁、生态丰富、几乎所有主流测试框架(Pytest/Selenium/Locust/Appium)都有 Python 客户端。从写小脚本(批量重命名、数据清洗)开始,逐步过渡到框架级开发,Python 能伴随你整个职业生涯。入门阶段重点是把"语法 + 数据结构 + 文件 IO + 异常处理"这四块吃透,够你处理 80% 的日常自动化需求。',
+    keyPoints: [
+      { title: '四种核心数据结构', detail: 'list(有序可变)、tuple(有序不可变)、dict(键值对,Python 3.7+ 保持插入顺序)、set(无序去重)。选错数据结构会让代码又慢又丑。' },
+      { title: '函数与作用域', detail: '默认参数陷阱(用可变对象当默认值会共享)、关键字参数 *args/**kwargs、闭包、装饰器入门。理解作用域 LEGB(Local→Enclosing→Global→Builtin)避免变量覆盖问题。' },
+      { title: '文件 IO 与异常处理', detail: 'with open() 上下文管理器自动关闭文件;try/except/else/finally 处理异常;raise 主动抛错。这套组合是写脚本的基本功。' },
+      { title: '虚拟环境与包管理', detail: '每个项目用独立的 venv/virtualenv 避免依赖冲突;requirements.txt 记录依赖版本;pip install 装包。现代化方案推荐 uv 或 poetry。' }
+    ]
+  },
+  'ds-01': {
+    summary: '测试用例是测试工作的最小可交付单元,也是团队知识资产的核心载体。一份好用例能让新人接手时快速上手、回归时不漏关键点、被 review 时一眼看懂意图。规范化的用例编写不只是为了好看,更是为了让用例从"个人记忆"变成"团队资产"。规范包括四要素结构、统一命名、合理粒度、需求追溯,这些都是写过几百条用例后才能体会到的"经验智慧"。',
+    keyPoints: [
+      { title: '用例五要素', detail: '前置条件(在什么环境/状态下)、测试步骤(可执行的操作序列)、预期结果(应该看到什么)、实际结果(执行时填写)、备注(特殊说明)。前三个是核心。' },
+      { title: '用例粒度把控', detail: '太粗(一条用例测十个点)难定位问题、不利于自动化;太细(一个字段一条用例)用例膨胀难维护。一般以"一个独立的验证目标"为单位,5-15 步操作为佳。' },
+      { title: '用例评级', detail: 'P0(冒烟必跑)、P1(主要功能)、P2(次要功能)、P3(边缘场景)。回归时按级别筛选,版本紧急时只跑 P0+P1,版本充裕时跑全量。' },
+      { title: '用例与需求追溯', detail: '每条用例必须能追溯到具体需求条目(需求编号),否则容易出现"需求改了用例没改""需求漏测了"这种系统性问题。工具(Xray/禅道)能自动建立追溯关系。' }
+    ]
+  },
+'fd-mid-01': {
+    summary: '正交实验法和组合测试解决"多因素多水平组合爆炸"的问题。当你要测试浏览器(5 种) × 操作系统(3 种) × 网络环境(4 种) × 用户角色(4 种)时,全组合是 240 个用例,根本测不完。正交表/Pairwise 算法能用数学方法压缩到 20 个左右用例,同时保证任意两个因素的所有组合都被覆盖,实践证明这能拦截 70-80% 的组合 bug。这是一个用最少投入换最大覆盖的"性价比之王"。',
+    keyPoints: [
+      { title: '正交表 L(N, M^K)', detail: 'L 表示拉丁方,N 是行数(用例数)、M 是水平数(每个因素几种取值)、K 是因素数。比如 L9(3^4) 表示 9 行用例,4 个因素,每个因素 3 种取值,而全组合需要 81 种。' },
+      { title: 'Pairwise 算法', detail: '只保证"任意两个因素的所有水平组合"都至少出现一次,不保证三因素或更高阶组合。这是实践中性价比最高的折中,因为大部分 bug 都是两两交互引发的。' },
+      { title: '工具推荐', detail: 'Microsoft PICT(命令行,免费,功能强)、Allpairs(简单易用)、PICTMaster(Excel 插件)。PICT 还支持权重、约束、子模型等高级特性。' },
+      { title: '约束条件处理', detail: '现实场景常有约束(如"iOS 系统不能搭配 IE 浏览器"),纯数学组合会产生无效用例。要在工具中加约束条件,排除不可能的组合。' }
+    ]
+  },
+  'fd-mid-02': {
+    summary: '基于风险的测试(RBT)是从"覆盖驱动"升级到"风险驱动"的方法论。它承认一个事实:你永远没有时间测完所有东西。所以与其平均分配测试投入,不如把资源集中到"出问题概率高 × 出问题影响大"的模块上。RBT 让测试投入与业务价值对齐,是中高级测试工程师必备的策略思维 —— 不再是"按用例清单逐条执行"的体力劳动,而是"识别风险并优先处置"的智力工作。',
+    keyPoints: [
+      { title: '风险矩阵', detail: '横轴是发生概率(P)、纵轴是影响程度(I),每个模块在矩阵中定位。高 P 高 I 重点测、低 P 低 I 抽查或不测、其他根据时间灵活分配。' },
+      { title: '影响概率的因素', detail: '概率(P)受这些因素影响:模块复杂度(代码行数/圈复杂度)、变更频率(最近改动多少)、开发人员经验、单测覆盖率、过往 bug 密度。这些指标可以从代码仓库自动提取。' },
+      { title: '影响程度的维度', detail: '影响(I)看:用户基数(影响多少人)、业务损失(资金/客户/品牌)、合规后果(罚款/许可证)、可恢复性(能否回滚)。资金类问题永远是最高 I。' },
+      { title: '变更影响分析(CIA)', detail: '迭代时不需要全量回归,只回归"被改动代码影响到的功能"。工具上看代码 diff、调用链分析、模块依赖图,识别影响域。这是 RBT 在迭代中的具体落地。' }
+    ]
+  },
+  'bs-mid-01': {
+    summary: '行业领域知识是中级测试转向高级的关键分水岭。掌握技术工具的人很多,但真正懂行业业务的测试稀缺。在二手奢侈品行业,你要懂鉴定流程、估价逻辑、寄卖规则、退货政策;在金融行业,你要懂风控规则、合规要求、清结算流程;在 SaaS 行业,你要懂多租户、订阅计费、按量计费。这种领域知识不是看几篇文章能掌握的,必须深入业务一线、跟着销售/客服/运营泡几个月才能积累。',
+    keyPoints: [
+      { title: '业务流程深耕', detail: '跟着业务方走完 1-2 个完整流程,从客户进店到结算离开,记下每个环节的角色、动作、单据。这种"沉浸式学习"是最快的领域知识积累方式。' },
+      { title: '行业术语库', detail: '每个行业都有黑话(如二手奢侈品的"过包率""阴阳货""走 95 走 99")。建立一个团队术语 Wiki,新人入职一周必学,这是融入业务的入场券。' },
+      { title: '上下游供应链', detail: '不只看自己系统,要看上游(供应商/客户)和下游(财务/物流/合规),理解整个链条的数据流转。bug 往往出在链条的衔接点,只看自己系统永远找不到。' },
+      { title: '法规与合规', detail: '行业相关法律(电商法/广告法/数据安全法/出口管制),业务系统必须符合。不懂这些,测出来的"功能正确"可能是"合规违法"。' }
+    ]
+  },
+  'bs-mid-02': {
+    summary: '需求评审中的有效提问能力,是测试工程师专业度的最直观体现。同样一份 PRD,初级测试只能问"这个字段最长几位",中级测试能问"这个状态变更后,下游 5 个系统的数据要不要同步"。这种深度差距来自系统化的提问方法和对业务的洞察。一次高质量的需求评审,能在源头拦截 30-50% 的潜在 bug,远比上线后修复划算。',
+    keyPoints: [
+      { title: '5W1H 提问法', detail: 'Who(谁触发/谁影响)、What(具体做什么)、When(何时触发/何时生效)、Where(哪些场景适用)、Why(背后业务目的)、How(怎么做/怎么校验)。每个需求都过一遍,漏点立现。' },
+      { title: '异常路径罗列', detail: '正向路径产品都写了,异常路径靠测试问出来。常见异常:网络中断、并发冲突、超时、数据缺失、权限不足、依赖服务挂、用户中途取消。每条异常路径都对应一组测试用例。' },
+      { title: '边界场景识别', detail: '0 / 1 / 多 / 满 / 超的边界要追问:0 个怎么办?1 个怎么办?多个并发怎么办?达到上限怎么办?超过上限怎么办?这五个问题问下来,80% 的边界 bug 能在评审就识别出来。' },
+      { title: '验收标准量化', detail: '把"性能要好"改成 P95 RT ≤ 500ms;把"用户体验流畅"改成核心操作 ≤ 3 步、加载 ≤ 1s;把"准确率高"改成 ≥ 95%。可量化的需求才可验证、才能事后判定是否达标。' }
+    ]
+  },
+  'ds-mid-01': {
+    summary: '测试金字塔是 Mike Cohn 提出的经典模型,把自动化测试按"成本 × 价值"分成三层:底层单测多、中层接口测试中、顶层 UI 测试少,呈金字塔形。反过来"上重下轻"的"冰淇淋"形状是公认的反模式 —— 大量 UI 用例稳定性差、维护成本高、反馈慢。理解金字塔不只是知道"分层比例",更是理解为什么是这个比例 —— 这背后是测试 ROI 的科学。',
+    keyPoints: [
+      { title: '金字塔三层', detail: '单测(70%):开发写,执行毫秒级,定位精确;接口测试(20%):测试主战场,执行秒级,覆盖业务逻辑;UI/E2E(10%):覆盖核心用户路径,执行分钟级,稳定性最差。' },
+      { title: '冰淇淋反模式', detail: '常见于这种团队:UI 自动化堆得最多、接口少、单测几乎没有。表现是 CI 跑得慢、用例经常误报、bug 修了又出。需要重构金字塔比例。' },
+      { title: '反馈速度原则', detail: '越底层的测试反馈越快,bug 越早发现修复成本越低。一个 bug 在单测期被抓 vs 上线后被抓,修复成本差 100 倍。这是金字塔的本质价值。' },
+      { title: '不同业务的变形', detail: '前端项目可能更侧重 UI 测试(蜂巢形),数据密集型可能更侧重数据测试。金字塔不是教条,是给定团队/业务下找到自己的最佳比例。' }
+    ]
+  },
+  'ds-mid-02': {
+    summary: '冒烟测试和回归策略解决"如何在有限时间内保证质量"的实际问题。冒烟测试是发布前的"最后一道关卡",30 分钟内跑完,只测核心流程是否阻塞。回归测试是修了 bug/做了变更后,验证"新东西没坏老东西"。两者的核心都是用例选取的智慧 —— 选不全会漏 bug,选太多耗时间。会做用例分级和影响域分析,是中级测试的核心能力。',
+    keyPoints: [
+      { title: '冒烟用例选取', detail: '只选核心业务路径(P0)、关键链路集成点、近期高频出 bug 模块。一般 30-50 条用例,30 分钟内跑完。冒烟挂了直接打回,不进入下一阶段测试。' },
+      { title: '影响域分析', detail: '本次变更涉及哪些模块、哪些接口、哪些字段?调用链上下游谁会被影响?根据影响域选回归用例,而不是每次全量回归。工具:静态代码分析、调用链追踪、模块依赖图。' },
+      { title: '增量回归策略', detail: '不是"全量 vs 不回归"二选一。日常用增量回归(只回归影响域)、每周一次扩大范围、每月或大版本前做一次全量回归。这种节奏既保证质量又控制成本。' },
+      { title: '用例淘汰机制', detail: '回归用例越攒越多会成为负担。设定淘汰规则:连续 N 个版本未发现 bug 的用例 → 标记为低价值;反复误报的用例 → 重写或删除。每季度做一次用例集瘦身。' }
+    ]
+  },
+'api-mid-01': {
+    summary: 'Pytest + Requests + Allure 是 Python 接口自动化的"黄金组合"。Pytest 提供测试框架(夹具/参数化/插件),Requests 处理 HTTP 请求,Allure 生成报告。这三件套搭起来的接口自动化框架,既轻量又灵活,中小型项目几天就能跑起来,大型项目逐步扩展也不会失控。掌握这套组合是从"工具人"到"测开"的关键一步,简历上能写、面试能聊、工作能用。',
+    keyPoints: [
+      { title: 'Pytest 夹具(fixture)', detail: 'fixture 是 Pytest 最强大的特性,用于准备测试数据、清理资源。作用域分四级:function/class/module/session。共享数据放 conftest.py 里,自动被所有用例发现。' },
+      { title: '参数化(parametrize)', detail: '@pytest.mark.parametrize 装饰器实现数据驱动,一组数据生成多个用例。配合 ids 参数给每个用例起有意义的名字,失败时一眼看出是哪条数据。' },
+      { title: 'Requests Session', detail: '用 Session 对象保持 Cookie 和连接池,鉴权一次后所有请求共用 token。批量请求性能比每次新建 Session 高 5-10 倍。' },
+      { title: 'Allure 报告', detail: '@allure.feature/story/title 装饰器组织用例,生成的报告有趋势图、失败统计、步骤详情、截图附件。是国内最主流的测试报告工具,无脑接入即可。' }
+    ]
+  },
+  'api-mid-02': {
+    summary: 'Mock 服务是接口测试中"隔离不可控依赖"的关键工具。当被测系统依赖第三方 API(支付/短信/物流)时,直接调用要么花真金白银、要么受限流影响、要么无法构造异常场景(对方不会主动给你返回 500)。Mock 服务能精确模拟任何响应,包括成功/失败/超时/异常,让测试 100% 可控、可重复、可隔离。这是中级测试必备的工程化能力。',
+    keyPoints: [
+      { title: 'Mock vs Stub vs Fake', detail: 'Mock 验证调用行为(被调用了几次、参数对不对)、Stub 只返回预设响应、Fake 是简化版的真实实现。三者经常混用,但侧重点不同。接口测试中 Mock 用得最多。' },
+      { title: '动态 Mock 与状态机', detail: '简单 Mock 是"固定请求 → 固定响应",高级 Mock 能根据状态返回不同响应(如"第一次调用返回成功,第二次返回失败"),用于模拟真实接口的复杂行为。' },
+      { title: 'Mock 优先级', detail: '生产环境 → 联调环境 → Mock 环境的层级关系,要在测试框架里支持优雅切换。最佳实践是接口先走真实环境,挂掉时降级到 Mock,保持测试不受外部依赖影响。' },
+      { title: '工具选型', detail: 'Apifox 内置 Mock 适合中文团队;WireMock 是 Java 系老牌工具,可作为独立服务部署;Mountebank 多协议支持(HTTP/SMTP/TCP);MSW 适合前端 Mock。选一个用熟即可。' }
+    ]
+  },
+  'api-mid-03': {
+    summary: '契约测试(Contract Testing)是微服务架构下解决"上下游接口兼容性"的核心方法。传统集成测试需要把所有服务都拉起来,慢且不稳定;契约测试只验证"消费者期望的契约 vs 提供者实际的契约"是否匹配,在两端各自跑就能发现接口不兼容,速度快、隔离好。Pact 是这个领域的事实标准,理解它不只是用工具,更是理解微服务测试的本质思维。',
+    keyPoints: [
+      { title: 'Consumer-Driven Contract', detail: '由消费者定义契约(我期望调用这个接口、传这些参数、得到这种响应),提供者实现并验证契约。这种"消费者驱动"避免了提供者擅自改字段坑下游。' },
+      { title: 'Pact Broker', detail: '契约的存储和管理中心,记录"哪个版本的消费者依赖哪个版本的提供者"。CI 中可以根据 Broker 里的契约图谱,自动判断"这次发布是否会破坏下游"。' },
+      { title: 'Pact vs Spring Cloud Contract', detail: 'Pact 是消费者驱动,跨语言支持好;Spring Cloud Contract 是提供者驱动,Java 生态深度集成。两者思路不同,选型看团队技术栈。' },
+      { title: '契约 vs E2E', detail: '契约测试只验证接口结构和响应,不验证业务逻辑;E2E 验证完整业务流但成本高。两者互补:契约保证"接口不出大问题",E2E 保证"核心场景能跑通"。' }
+    ]
+  },
+  'api-mid-04': {
+    summary: '现代后端架构早已不是只有 HTTP REST,微服务内部用 gRPC、实时业务用 WebSocket、IoT 用 MQTT、消息系统用 Kafka/RabbitMQ。测试工程师如果只会测 HTTP,会发现自己被锁死在 Web 应用层。掌握至少 gRPC 和 WebSocket 这两个最常见的非 HTTP 协议,能让你在微服务/实时通信项目中具备测试能力,职业天花板大幅提升。',
+    keyPoints: [
+      { title: 'gRPC 与 Protobuf', detail: 'gRPC 用 Protocol Buffers 序列化(比 JSON 小 3-10 倍、快 5-10 倍)。.proto 文件定义服务接口,自动生成多语言客户端。测试时用 grpcurl 命令行或 BloomRPC GUI 工具。' },
+      { title: 'WebSocket 测试要点', detail: '不像 HTTP 是"请求-响应",WebSocket 是长连接双向通信。测试要关注连接建立/断线重连/消息顺序/并发连接数/消息丢失/心跳保活等场景。' },
+      { title: 'JMeter 多协议支持', detail: 'JMeter 有 gRPC 插件、WebSocket Sampler 插件,虽然原生支持的协议有限,但插件生态丰富。性能测试时不需要换工具,JMeter 足够用。' },
+      { title: '消息队列测试', detail: 'Kafka/RabbitMQ 测试要关注:消息是否正确投递、消费幂等性、顺序性、积压告警、死信队列。本质是异步流程测试,要等待+轮询验证最终一致性。' }
+    ]
+  },
+  'auto-mid-01': {
+    summary: 'Selenium 是 Web UI 自动化的"老牌霸主",已有 20 年历史。虽然有 Playwright/Cypress 等新秀挑战,但 Selenium 凭借跨浏览器支持广、社区生态丰富、企业级项目沉淀多,仍然是大量项目的首选。学好 Selenium 不只是会写脚本,更是理解 WebDriver 协议、元素定位策略、等待机制 —— 这些底层知识在用任何 Web 自动化工具时都通用。',
+    keyPoints: [
+      { title: 'WebDriver 协议', detail: 'Selenium 4 已升级到 W3C WebDriver 标准协议。理解协议本质是"测试脚本通过 HTTP 发指令给浏览器驱动",才能在出现"找不到元素""操作无效"时知道该看哪一层。' },
+      { title: '元素定位八种策略', detail: 'id、name、className、tagName、linkText、partialLinkText、css、xpath。优先级:id > css > xpath。xpath 强大但脆弱,改一改 DOM 就挂。' },
+      { title: '等待机制', detail: '隐式等待(全局生效但不灵活)、显式等待(WebDriverWait + ExpectedConditions,推荐)、强制等待(time.sleep,反模式但偶尔救急)。等待用对了,稳定性提升 10 倍。' },
+      { title: 'Page Object 模式', detail: '把页面元素和操作封装成对象类,用例只调用方法不直接操作元素。UI 改动时只改 Page 类,用例代码不动,大幅降低维护成本。' }
+    ]
+  },
+  'auto-mid-02': {
+    summary: 'Playwright 是 Microsoft 出品的现代 Web 自动化框架,可以理解为"为 SPA 时代而生的 Selenium 替代品"。最大亮点是"自动等待"机制 —— 你不用写一堆 wait 代码,Playwright 自动等到元素可交互再操作,稳定性提升一个量级。同时多语言支持(Python/JS/Java/.NET)、Trace Viewer 调试工具、并发隔离 BrowserContext,体验全面碾压老一代工具。新项目首选,老项目可以考虑迁移。',
+    keyPoints: [
+      { title: '自动等待', detail: 'Playwright 在每个操作前自动检查元素是否可见/可交互/启用,等待最长 30 秒。意味着你写的代码不再需要显式等待,代码量减少 30%+,稳定性大幅提升。' },
+      { title: 'Locator API', detail: 'Locator 是 Playwright 的核心对象,代表"元素的位置"而非"元素本身"。每次操作时重新定位,完美应对动态 DOM。比 Selenium 的 WebElement 模型更适合 SPA。' },
+      { title: 'Trace Viewer 调试', detail: '失败时自动录制时间线、DOM 快照、网络请求、控制台日志。在浏览器里打开 trace.zip 文件,能像看视频一样回放调试,bug 定位效率提升数倍。' },
+      { title: 'BrowserContext 隔离', detail: '每个 BrowserContext 是独立的浏览器环境(独立 Cookie/缓存/会话),并发跑用例时互不干扰。一个浏览器实例可创建多个 Context,资源消耗远低于多浏览器实例。' }
+    ]
+  },
+  'auto-mid-03': {
+    summary: 'Appium 是跨平台移动端自动化的事实标准,一套 API 可以同时驱动 Android(UiAutomator2)和 iOS(XCUITest)。难点不在脚本编写,而在环境搭建 —— Java/Node.js/Android SDK/Xcode/真机调试/各种证书,搭一遍能让人崩溃。但搭起来后,移动端回归从一周缩到一晚上,投入产出比还是相当高的。如果环境实在搞不定,可以用 Airtest(图像识别方式)作为补充。',
+    keyPoints: [
+      { title: 'Appium 架构', detail: '客户端(测试脚本) → Appium Server → 平台驱动(UiAutomator2/XCUITest)→ 设备。理解这个链路,出问题时知道每层该查什么(端口/驱动/设备连接/权限)。' },
+      { title: '元素定位策略', detail: 'accessibility id 最稳定推荐使用、id(原生 resource-id)次之、xpath 通用但脆弱、image 图像识别用于无规律 UI。Android 用 uiautomator 表达式定位复杂场景。' },
+      { title: '混合应用 webview', detail: '混合应用(原生壳 + H5)测试要在 Native Context 和 Webview Context 之间切换。switchTo().context() 是关键 API,不切换会找不到 H5 元素。' },
+      { title: 'Airtest 图像识别', detail: '原生定位失效时(如游戏、Canvas 绘制 UI)的兜底方案。截图当作元素定位依据,跨平台通用但稳定性受截图质量、屏幕分辨率影响。和 Appium 互补使用。' }
+    ]
+  },
+  'auto-mid-04': {
+    summary: 'Page Object 模式(POM)是 UI 自动化领域最重要的设计模式,没有之一。核心思想是把"页面元素和操作"封装到 Page 类里,用例只调用 Page 提供的高层方法,不直接操作元素。带来的收益:UI 改了只改 Page 不改用例;用例可读性大幅提升;新人接手成本降低。这个模式简单到一看就懂,但真正用好需要持续打磨,是 UI 自动化项目的"灵魂"。',
+    keyPoints: [
+      { title: 'BasePage 抽象', detail: '所有 Page 继承 BasePage,共用方法(等待、点击、输入、截图、滚动)放在基类。子类只关注本页面特有的元素和业务方法,代码大幅瘦身。' },
+      { title: '页面元素 vs 业务动作', detail: 'Page 类里既有元素定位(login_button = (By.ID, "login")),也有业务方法(login(username, password))。用例调用业务方法,而非直接操作元素。' },
+      { title: '链式调用', detail: '业务方法返回新的 Page 对象,支持链式 API:LoginPage.login().goToCart().checkout()。代码读起来像自然语言,可读性极佳。' },
+      { title: 'POM 的演进', detail: '从 POM 进一步抽象出 Component(组件)/Service(业务服务)/DataObject(数据对象)等更高级模式,适合大型项目。但小项目用 POM 就够了,不要过度设计。' }
+    ]
+  },
+  'auto-mid-05': {
+    summary: '小程序自动化是国内特色场景。微信生态封闭,Selenium/Playwright 都进不去,只能用专门工具。微信官方的 minium 框架是首选,基于微信开发者工具的自动化 API,能模拟点击、输入、断言。Airtest 也支持小程序(图像识别方式)。如果你们业务在微信生态(电商/SaaS/服务类),小程序自动化是必备能力,不会就只能纯手工。',
+    keyPoints: [
+      { title: 'minium 框架', detail: '微信官方出品,基于开发者工具的自动化协议。提供 Page、Element、Native 三大对象,API 风格类似 Appium。优势:官方维护、稳定性好;劣势:仅支持小程序、文档相对简略。' },
+      { title: '小程序 IDE 自动化', detail: 'minium 实际是通过开发者工具的"自动化"功能驱动小程序运行。所以测试机必须装开发者工具,真机调试模式打开。' },
+      { title: '测试号申请', detail: '正式小程序需要登录,自动化测试要用专门的"测试号"绕过授权。测试号需要在微信开发者后台申请,有数量限制和功能限制。' },
+      { title: '与 Airtest 配合', detail: 'minium 解决不了的场景(如某些动态生成的弹窗)用 Airtest 图像识别兜底。两者互补,大多数小程序场景能覆盖。' }
+    ]
+  },
+'perf-mid-01': {
+    summary: 'JMeter 是性能测试领域使用最广的开源工具,Apache 出品,免费、稳定、协议丰富。它的 GUI 操作直观,能录制脚本快速上手;脚本格式是 XML,易于版本控制和参数化。学好 JMeter 不只是会"点点点录制",更要理解线程组模型、断言原理、监听器选择 —— 这些底层知识在用任何性能工具(Locust/k6)时都通用。JMeter 也是面试考察性能测试的必问工具。',
+    keyPoints: [
+      { title: '线程组的三个核心参数', detail: '线程数(并发用户数)、Ramp-up 时间(多久加压到目标)、循环次数(每个用户跑几次)。三者组合决定整体压力曲线。Ramp-up 太短会瞬间打死服务,太长达不到目标 TPS。' },
+      { title: '断言、定时器、监听器', detail: '断言(响应是否正确)、定时器(请求间隔,模拟真实用户行为)、监听器(收集结果)。监听器中"察看结果树"调试用,跑压测时要关掉,只用聚合报告/Backend Listener,否则内存爆炸。' },
+      { title: 'CSV 数据驱动', detail: '用 CSV Data Set Config 实现参数化,每个并发用户拿不同测试数据(账号/订单号)。避免缓存命中导致的"假性能",更接近真实场景。' },
+      { title: '分布式压测', detail: '单机 JMeter 通常能模拟 500-1000 并发,再多就要分布式。一台 master + 多台 slave 部署,master 控制 slave 执行脚本。注意 master 自身性能也是瓶颈。' }
+    ]
+  },
+  'perf-mid-02': {
+    summary: 'Locust 和 k6 是新一代代码化压测工具,挑战 JMeter 的市场地位。核心理念是"压测脚本即代码":用 Python(Locust)或 JavaScript(k6)写脚本,而非 JMeter 的 XML 配置。代码化的好处:版本控制、code review、复用性、CI 集成、复杂逻辑表达。在研发团队拥抱"测试即代码"文化时,Locust/k6 比 JMeter 更受欢迎。但学习曲线略陡,需要一定的编程基础。',
+    keyPoints: [
+      { title: 'Locust 协程模型', detail: 'Locust 用 gevent 协程,单机能模拟数万并发,资源消耗远低于 JMeter 的线程模型。脚本是普通 Python 类,继承 HttpUser,定义 task 方法,门槛低。' },
+      { title: 'k6 VU 模型', detail: 'k6 用 Goja(JS 引擎)运行 JavaScript,基于 Go 协程模拟 VU(虚拟用户)。性能极强,被 Grafana 收购后整合监控生态非常完整。' },
+      { title: 'Web UI vs CLI', detail: 'Locust 自带 Web UI 实时监控并发数、TPS、RT,启停灵活;k6 主要是 CLI + Grafana 集成。CI 中跑无 UI 模式,本地调试用 UI。' },
+      { title: '云端压测平台', detail: 'Locust 有 BlazeMeter、k6 有 k6 Cloud,支持一键多区域并发压测,适合压测百万级 TPS。云端方案省去了自建分布式集群的复杂度。' }
+    ]
+  },
+  'perf-mid-03': {
+    summary: '会用工具只是性能测试的入门,真正的核心是"会读指标、能定位瓶颈"。一份压测报告里 TPS、RT、错误率、P95、P99 这些数字密密麻麻,要能从中看出系统在哪个并发量出现性能拐点、瓶颈在哪一层、需要优化哪些代码。这种解读能力来自系统化的指标体系认知和大量实战经验。同时配合 Grafana/Prometheus/APM 工具看实时监控,从"事后报告"升级到"事中观测"。',
+    keyPoints: [
+      { title: 'TPS vs QPS', detail: 'TPS 是每秒事务数(一个完整业务流程,如下单),QPS 是每秒查询数(单次请求)。一个 TPS 可能包含多次 QPS。汇报时用 TPS 更贴业务,优化时看 QPS 更细。' },
+      { title: 'RT 分位数', detail: '平均 RT 会被极值拉偏,要看 P95/P99 才反映真实体验。业务方常说的 SLA"99% 请求 < 500ms"就是 P99。注意 P99 性能优化是 P95 的数倍难。' },
+      { title: 'Little 定律', detail: 'L = λ × W,系统中并发数 = TPS × 平均 RT。这个公式用来快速验算压测数据合理性,也用来推算"目标 TPS 下需要多少并发"。' },
+      { title: 'APM 工具链', detail: 'SkyWalking(Apache 顶级,国内主流)、Pinpoint(韩国出品)、Zipkin(开源始祖)、Jaeger(CNCF)。提供分布式链路追踪,能看到一次请求经过哪些服务、每段耗时多少。' }
+    ]
+  },
+  'sec-mid-01': {
+    summary: 'OWASP Top 10 是全球公认的 Web 应用安全风险榜单,每 3-4 年更新一次。学习 Top 10 不是为了成为安全专家,而是让普通测试工程师具备"常见漏洞自检"能力,在开发自测和测试阶段就能发现明显的安全问题。一旦涉及用户登录、支付、敏感数据,Top 10 自检就是必走流程。学习方式:看 OWASP 官方文档 + 在 Juice Shop 等漏洞靶场实操,理论实践结合最快。',
+    keyPoints: [
+      { title: '注入类(A03:2021)', detail: 'SQL 注入、命令注入、LDAP 注入。本质是用户输入未经过滤就拼入查询/命令。验证方法:在输入框/参数里塞 \\\' OR 1=1-- 这类 payload 看是否触发异常。' },
+      { title: '失效的认证(A07:2021)', detail: '弱密码策略、默认密码未改、token 不过期、密码重置流程有漏洞。验证:试常见弱密码、token 过期后能否继续访问、暴力破解防护是否生效。' },
+      { title: '不安全的设计(A04:2021)', detail: '业务逻辑漏洞,如:订单金额前端可改、优惠券能反复使用、密码找回不验证身份。这类漏洞工具扫不出来,只能靠人工业务理解发现。' },
+      { title: '越权访问(IDOR)', detail: '通过修改 URL 参数访问别人的数据(如把 userId=123 改成 userId=124)。验证:横向越权(同级别用户互访)、垂直越权(普通用户访问管理员功能)。极常见且严重。' }
+    ]
+  },
+  'sec-mid-02': {
+    summary: 'Burp Suite 是 Web 安全测试的"瑞士军刀",由 PortSwigger 出品。它是个 HTTP 代理,把浏览器流量都拦截下来,你可以查看、修改、重放、扫描每个请求。对于测试工程师,Burp 不是用来做完整渗透测试(那是安全工程师的活),而是"自检常见漏洞"的高效工具。社区版免费但功能有限,专业版收费贵。配合 OWASP Web Security Academy 这个免费学习平台学,效果最好。',
+    keyPoints: [
+      { title: 'Proxy 拦截原理', detail: '设置浏览器代理到 Burp(默认 127.0.0.1:8080),所有请求都经过 Burp。要测试 HTTPS 必须把 Burp 的 CA 证书装到浏览器,否则会有证书警告。' },
+      { title: 'Repeater(重放)', detail: '抓到的请求发到 Repeater 就可以反复修改重发。这是测试越权、注入、参数篡改最常用的功能。简单粗暴,效率极高。' },
+      { title: 'Intruder(暴力)', detail: '在请求中标记"插入点",用字典批量替换发送。常用于:暴力破解密码、枚举用户 ID、SQL 注入字典攻击。社区版限速,专业版无限。' },
+      { title: 'Scanner(扫描)', detail: '专业版功能,自动扫描常见漏洞(注入、XSS、CSRF 等)。误报率有但能快速覆盖大部分浅层漏洞,作为安全测试的"地毯式扫描"使用。' }
+    ]
+  },
+  'dev-mid-01': {
+    summary: 'Python 进阶是从"会写脚本"到"能写框架"的跃迁。装饰器、生成器、上下文管理器、并发编程这几个特性,是 Python 与其他语言的差异化亮点,也是测试框架代码大量使用的特性。掌握它们后,你看 Pytest/Requests/Locust 的源码会豁然开朗,自己写工具/框架时也能写出 Pythonic 的优雅代码,而不是"用 Python 写 Java"。这是测开方向的必备能力。',
+    keyPoints: [
+      { title: '装饰器', detail: '@decorator 语法糖,本质是高阶函数。Pytest 的 @fixture、@parametrize、@mark.skip 都是装饰器。理解装饰器后,能自己写日志、计时、重试、权限校验等通用切面。' },
+      { title: '生成器与迭代器', detail: 'yield 关键字让函数变成生成器,惰性求值省内存。处理大文件、流式数据、无限序列时必备。Locust 内部大量使用生成器实现协程并发。' },
+      { title: '上下文管理器', detail: 'with 语句对应 __enter__/__exit__,自动管理资源(打开/关闭文件、连接/断开数据库、加锁/解锁)。@contextmanager 装饰器把普通函数变成上下文管理器,代码量大幅减少。' },
+      { title: 'asyncio 协程', detail: 'async/await 异步编程,适合 IO 密集型任务(网络请求、数据库)。aiohttp 配合 asyncio 写的爬虫/压测脚本,性能比线程池高一个量级。' }
+    ]
+  },
+  'dev-mid-02': {
+    summary: 'Java 不是必学,但建议测试工程师至少能"读懂"Java。原因:大量企业级后端用 Java(Spring/Spring Boot 是主流);看懂 Java 异常堆栈能更精准定位问题;能改 JMeter 的自定义函数和 Java 请求采样器;参与代码评审时不被开发"卡脖子"。学习目标不是成为 Java 工程师,而是"看懂 70%、能改 30%"。',
+    keyPoints: [
+      { title: '基本语法与面向对象', detail: '类、接口、继承、多态、泛型。Java 类型系统比 Python 严格得多,变量必须先声明类型。理解访问控制(public/private/protected)很重要。' },
+      { title: '集合框架', detail: 'List(ArrayList/LinkedList)、Set(HashSet/TreeSet)、Map(HashMap/TreeMap/ConcurrentHashMap)。日常 90% 数据操作离不开集合,看代码必须懂这些类的特性差异。' },
+      { title: 'Maven/Gradle 构建', detail: 'Maven 用 pom.xml(XML 配置),Gradle 用 build.gradle(DSL,更灵活)。会读 pom.xml 知道项目依赖什么、配置什么环境,是看 Java 项目的入门。' },
+      { title: 'JUnit 单元测试', detail: '@Test/@Before/@After/@BeforeClass 四件套是基础。看开发写的单测能学到他们关心哪些边界,反过来指导你写功能测试用例。' }
+    ]
+  },
+  'dev-mid-03': {
+    summary: '设计模式是面向对象编程的"经验沉淀",每个模式都是某类问题的"标准答案"。学设计模式不是为了应付面试题,而是让你写出可扩展、可维护、易理解的代码。测试框架代码本身大量使用设计模式 —— Page Object 是 Builder + Facade,fixture 是 Decorator,Mock 是 Proxy。理解模式能让你看懂别人的代码,自己写代码时也有思路可循。',
+    keyPoints: [
+      { title: '创建型 - 单例', detail: '保证一个类只有一个实例,全局访问。配置管理器、连接池、日志器常用。Python 中用模块级变量、Java 中用 enum 都是优雅实现。' },
+      { title: '结构型 - 装饰器/代理', detail: '装饰器在不改原对象的前提下增加功能(如加日志、加权限、加缓存);代理控制对原对象的访问(如 Mock 对象、远程调用)。两者是测试框架的常客。' },
+      { title: '行为型 - 策略模式', detail: '把可替换的算法封装成独立类,运行时切换。比如不同的鉴权策略(JWT/OAuth/AK-SK),用策略模式可以让用例代码不感知具体鉴权方式。' },
+      { title: 'SOLID 原则', detail: '单一职责、开闭原则、里氏替换、接口隔离、依赖倒置。这五条原则是设计模式背后的"道",理解了道,模式就只是"术"了。' }
+    ]
+  },
+  'ci-mid-01': {
+    summary: 'Jenkins 是 CI/CD 领域的"老兵",几乎所有传统行业的研发团队都用过。它的强项是插件生态(2000+ 插件)和企业级部署能力,弱项是 UI 老旧、配置复杂、需要专人维护。Jenkins Pipeline(Pipeline as Code)用 Groovy 脚本编排流水线,把"页面配置"升级成"代码版本管理",是现代 Jenkins 的标准用法。学 Jenkins 不只是会拖拉配置,要会写 Pipeline 脚本。',
+    keyPoints: [
+      { title: 'Pipeline 两种语法', detail: 'Declarative(声明式,推荐,有结构化语法约束)和 Scripted(脚本式,灵活但易乱)。新项目用 Declarative,看老项目要懂 Scripted。' },
+      { title: 'Jenkinsfile', detail: '把 Pipeline 脚本放到代码仓库根目录的 Jenkinsfile,跟代码一起版本管理。Jenkins 自动从仓库读取并执行。这是"配置即代码"的最佳实践。' },
+      { title: '凭证管理', detail: 'Jenkins 有内置的 Credentials 系统,把密码、token、SSH 密钥加密存储,Pipeline 里通过 ID 引用。绝不能把密码硬编码到 Jenkinsfile。' },
+      { title: '分布式 agent', detail: 'Master 不要直接跑任务,要配 agent(执行节点)。agent 可以是物理机、Docker 容器、K8s Pod。资源隔离、并发执行、按需弹性,这是企业级 Jenkins 的关键架构。' }
+    ]
+  },
+  'ci-mid-02': {
+    summary: 'GitLab CI 和 GitHub Actions 是云原生时代的 CI 工具,与代码托管平台深度集成,配置极简。一个 .gitlab-ci.yml 或 .github/workflows/xxx.yml 文件就能搭起完整流水线,不需要单独部署 Jenkins 服务器。新项目首选这两个,Jenkins 主要存在于历史项目和强定制需求场景。两者语法略有差异但理念一致,会一个就能快速上手另一个。',
+    keyPoints: [
+      { title: 'YAML 配置语法', detail: 'YAML 用缩进表达层级,比 XML/JSON 简洁。配置文件结构:job(任务)、stage(阶段)、step(步骤)、trigger(触发条件)。学半小时就能上手。' },
+      { title: 'Runner / Action 概念', detail: 'Runner 是任务执行节点,可以用官方共享 runner 或自己部署;Action 是 GitHub Actions 的"可复用任务包",比如"checkout 代码""上传文件",从 Marketplace 找。' },
+      { title: '缓存与产物', detail: 'cache 缓存依赖(node_modules、pip 包)加速构建;artifacts 保留产物(构建包、测试报告)给后续 job 或下载查看。用好这两个能大幅提升流水线效率。' },
+      { title: '矩阵构建', detail: '一次配置,多种组合(浏览器 × 操作系统 × Node 版本)并发跑。GitHub Actions 的 matrix strategy 是最常用功能,跨平台兼容性测试必备。' }
+    ]
+  },
+  'ci-mid-03': {
+    summary: 'Docker 解决了"环境一致性"这个困扰研发多年的问题。一句"在我电脑上能跑"的开发段子,Docker 让它彻底成为历史。对于测试,Docker 的价值在于:快速搭建测试环境(数据库/缓存/MQ 一键启动)、并发测试隔离(每个用例一个容器,互不干扰)、CI 节点标准化(避免环境漂移)。会基础的 docker run/build/compose 三件套,能解决 90% 的测试环境问题。',
+    keyPoints: [
+      { title: 'Image vs Container', detail: 'Image 是只读模板(类比类),Container 是 Image 的运行实例(类比对象)。一个 Image 可以创建多个 Container。Docker Hub 上有海量预制 Image,直接 pull 就能用。' },
+      { title: 'Dockerfile', detail: '描述如何构建 Image 的脚本文件,FROM(基础镜像)、RUN(执行命令)、COPY(复制文件)、CMD(启动命令)是核心指令。掌握 multi-stage build 能让镜像体积大幅缩小。' },
+      { title: 'volume 与 network', detail: 'volume 实现数据持久化(容器删了数据还在);network 实现容器间通信(自定义 bridge 网络让容器用名字互访)。这两个特性是搭建多服务测试环境的基础。' },
+      { title: 'docker-compose', detail: '一个 YAML 文件定义多个服务的关系(应用 + DB + Redis),docker-compose up 一键启动。中小型测试环境用 compose 足够,K8s 是更大规模的方案。' }
+    ]
+  },
+  'db-mid-01': {
+    summary: 'SQL 进阶不只是"会写更复杂的查询",更是"理解数据库底层"。窗口函数、CTE、执行计划、索引原理 —— 这些进阶知识让你从"能查到数据"升级到"能高效查到数据"。在数据量大的场景(百万行+),不懂索引的 SQL 可能慢 100 倍以上;不会读执行计划,你看到慢 SQL 也不知道怎么改。这些能力让你能参与开发的 SQL 评审、识别性能问题,跟开发对话能进入更深的层次。',
+    keyPoints: [
+      { title: '窗口函数', detail: 'ROW_NUMBER/RANK/DENSE_RANK 用于排名;LAG/LEAD 用于行间对比(如同比环比);SUM/AVG OVER() 用于累计汇总。报表类需求几乎离不开窗口函数,学会能让你少写 80% 的临时表。' },
+      { title: 'CTE / WITH 语法', detail: 'WITH t AS (SELECT ...) SELECT * FROM t 把复杂查询拆成命名步骤,可读性提升一个量级。还支持递归 CTE 处理树形结构(组织架构、菜单层级)。' },
+      { title: 'EXPLAIN 执行计划', detail: '看 SQL 怎么走的:全表扫描(type=ALL,慢)、索引扫描(type=range/ref,快)、覆盖索引(Extra=Using index,最快)。看不懂执行计划等于不会优化 SQL。' },
+      { title: 'B+Tree 索引原理', detail: '索引本质是 B+Tree 数据结构,叶子节点存数据指针。理解原理后,你才知道为什么"最左前缀原则""索引列不能用函数""LIKE %前导通配会走全表"。' }
+    ]
+  },
+'db-mid-02': {
+    summary: 'Redis 是缓存领域的事实标准,几乎所有互联网系统都用它。测试工程师不需要做 Redis 运维,但必须会用 redis-cli 排查缓存问题、能设计缓存相关的测试用例、理解缓存三大经典问题(穿透/击穿/雪崩)。这些能力在性能问题排查、缓存一致性验证、库存秒杀类业务测试中是刚需。NoSQL 视野(MongoDB/Elasticsearch)让你在数据测试时不局限于关系型数据库。',
+    keyPoints: [
+      { title: 'Redis 5 种数据结构', detail: 'String(普通缓存/计数器)、List(消息队列)、Hash(对象存储)、Set(去重)、ZSet(排行榜)。每种结构对应不同业务场景,用错会导致性能或功能问题。' },
+      { title: '过期与淘汰策略', detail: 'EXPIRE 设置过期时间,过期后被惰性删除或定期清理。内存满了走淘汰策略(LRU/LFU/random),配置错了会导致业务数据被无故删掉。' },
+      { title: '缓存三大问题', detail: '缓存穿透(查不存在的 key,请求都打到 DB)、缓存击穿(热点 key 过期瞬间大量请求穿透)、缓存雪崩(大量 key 同时过期)。每个问题都有对应的解决方案,要会构造测试场景。' },
+      { title: '缓存一致性测试', detail: 'DB 改了 Redis 没改,会读到脏数据。测试要构造:并发更新、网络异常、消息丢失等场景,验证 cache-aside / write-through / write-behind 这些一致性策略是否生效。' }
+    ]
+  },
+  'soft-mid-01': {
+    summary: '需求评审与跨团队沟通是测试工程师从中级走向高级的关键软技能。技术能力让你独立完成任务,沟通能力决定你能否撬动更大的资源、推动更难的事情。质量保障从来不只是"测试一个角色的事",需要产研测三方对齐 —— 这种对齐就是靠会议、文档、1v1 沟通磨出来的。这些能力没有捷径,只有刻意练习和反复反思。',
+    keyPoints: [
+      { title: '有效提问的能力', detail: '不要问"明白吗""有问题吗"(收到的都是无意义的"明白""没问题"),要问开放式问题:"如果用户在第三步取消订单,系统应该回退哪些状态?"对方答不上来,就是没想清楚的需求漏洞。' },
+      { title: '冲突管理', detail: '冲突不可避免,关键是处理方式。先听完对方的逻辑(让对方感到被理解)、然后陈述自己的事实和数据(不带情绪)、最后给出共赢方案。避免"对人不对事"。' },
+      { title: '会议主持基础', detail: '会前明确目标和议程、会中聚焦不跑题、会后输出 action item。一场需求评审会的产出标准是:每个未明确的点都有 owner 和 deadline。' },
+      { title: '一对一 1v1', detail: '和直接上级、产品经理、研发同事保持定期 1v1。1v1 不是工作汇报,是建立信任、对齐预期、表达诉求的机会。每次 1v1 后整理成 minutes 邮件确认,避免理解偏差。' }
+    ]
+  },
+  'soft-mid-02': {
+    summary: '测试报告是测试工作的"名片",也是向上汇报的核心载体。一份好的测试报告能让产品/开发/老板都看明白质量现状,不需要你口头解释。差的报告堆满数据但没结论,看完不知道"现在能不能发版"。中级测试要学会用"金字塔结构"写报告:结论先行 → 风险分级 → 数据支撑 → 行动建议,而不是按时间流水帐。',
+    keyPoints: [
+      { title: '金字塔结构', detail: '最顶层一句话结论(可以 / 有风险可以 / 不能发版),下一层 3 个支撑论点(关键模块测完了 / 性能达标 / 没有 P0 缺陷),再下层是具体数据。这种结构最方便老板看、最能传达决策信息。' },
+      { title: '数据可视化', detail: '柱状图看分布、饼图看占比、折线图看趋势。表格也要简洁,关键数字加粗。永远不要用密密麻麻的全表格,会被秒滑过。' },
+      { title: '风险表达', detail: '坏消息要说,但要带方案。不是"这个模块有 5 个 P1 bug",而是"模块 A 有 5 个 P1 bug,3 个已修复待验证、2 个评估为可绕过,建议 B 方案上线"。给老板做选择题,而不是问答题。' },
+      { title: '工具与模板', detail: '飞书文档/语雀/Notion 都支持模板复用,沉淀团队的标准报告模板,新人填空式输出,质量稳定可控。Markdown 写法配合截图,既好看又便于版本管理。' }
+    ]
+  },
+  'fd-sr-01': {
+    summary: '到了高级阶段,测试工作不再是"做一件事",而是"建立一个体系"。零散的最佳实践要沉淀成可复用的标准、模板、流程、Wiki —— 让团队不依赖某个人就能高质量产出。这种体系化建设是 Lead 区别于普通高级工程师的核心能力。它没有 ROI 立竿见影的效果,但 6-12 个月后会显现:新人入职即战力、人员流动不影响交付、跨项目复用大幅减少重复劳动。',
+    keyPoints: [
+      { title: '测试规范文档', detail: '至少包含:用例编写规范、bug 报告规范、自动化代码规范、命名规范、版本管理规范。每个规范配示例(好的 / 不好的对比),减少新人理解成本。' },
+      { title: '用例设计模板库', detail: '按业务场景分类:登录类、表单类、列表类、详情类、审批类。每类有标准用例集,新模块测试时基于模板"打骨架",再填充业务特性,效率提升 50%。' },
+      { title: '最佳实践沉淀', detail: '每个迭代复盘 1-2 个"踩过的坑或好的实践",写成短文进 Wiki。一年下来沉淀 50+ 篇,这就是团队的内功。新人按 Wiki 顺序学,半年顶老员工三年。' },
+      { title: 'Wiki 体系建设', detail: 'Confluence / 飞书知识库 / 语雀,选一个用透。结构:新人入职 / 业务知识 / 技术规范 / 最佳实践 / 故障案例 / 工具使用。每个区都有 owner 维护更新。' }
+    ]
+  },
+  'bs-sr-01': {
+    summary: '业务架构理解力是高级测试的"上限突破"能力。普通测试只看"自己负责的模块",高级测试要能看懂整个系统的架构图、识别跨系统的耦合风险、在架构评审阶段就发现问题 —— 而不是等开发改完代码后才反应过来"这里有 bug"。这种能力来自:不畏惧架构图、主动学习 DDD/微服务/分布式知识、参加架构评审会议、和架构师/资深开发深入交流。',
+    keyPoints: [
+      { title: 'C4 模型', detail: 'Simon Brown 提出的架构图描述方法,分四层:System Context(谁用你的系统)、Container(系统内有哪些应用/数据库)、Component(应用内有哪些模块)、Code(模块内的类图)。从粗到细,适合测试视角。' },
+      { title: 'DDD 战略设计', detail: 'Bounded Context(限界上下文)是 DDD 核心,不同业务域用不同模型。测试要识别 BC 边界,跨 BC 的接口往往是 bug 高发地。理解 DDD 让你不只是测功能,还能挑战架构设计。' },
+      { title: '系统拓扑图', detail: '看懂部署架构:多少应用、多少数据库、走哪些中间件、调用关系如何。一旦熟悉拓扑,出现性能问题或故障时,你能快速定位"在哪一段出错",而不是等开发告诉你。' },
+      { title: '主动参加架构评审', detail: '一开始可能听不懂,坚持几次就跟得上了。每次会上至少提一个问题(可测性、风险点、监控、回滚),建立"测试关心架构"的形象,长远能进入架构决策圈。' }
+    ]
+  },
+  'bs-sr-02': {
+    summary: '隐性需求是 PRD 没写但客观存在的需求,如合规性、可观测性、可降级、可回滚、性能 SLA、数据保留期。这些需求对业务正常运转至关重要,但产品经理常常想不到或写不全 —— 这就是高级测试发挥价值的地方。挖掘隐性需求并向上传达风险,是从"按文档测试"到"为业务负责"的关键升级。这种能力一旦展现,你在团队中的话语权会显著提升。',
+    keyPoints: [
+      { title: '常见隐性需求清单', detail: '合规(数据保留/隐私脱敏/审计日志)、可观测性(日志/指标/告警)、容错(降级/熔断/限流)、可恢复(回滚/数据修复)、性能(RT/TPS/容量)。每次评审前用这个 checklist 过一遍。' },
+      { title: '风险量化表达', detail: '不要说"可能有问题",要说"这个设计在 5000 QPS 下会让 DB 连接池打满,影响所有用户"。用具体数字 + 影响范围 + 概率三要素表达风险,决策者才能判断。' },
+      { title: 'STRIDE 威胁建模', detail: '微软提出的安全威胁分类:Spoofing(伪造)、Tampering(篡改)、Repudiation(抵赖)、Information disclosure(泄露)、Denial of service(拒绝服务)、Elevation of privilege(提权)。每个新功能用 STRIDE 过一遍,识别安全隐性需求。' },
+      { title: '影响评估表', detail: '把识别出的风险写进影响评估表(影响范围/发生概率/检测难度/修复成本/建议方案),正式提交给决策者(产品 leader / 架构师)。书面化提升被采纳的概率。' }
+    ]
+  },
+  'bs-sr-03': {
+    summary: '业务质量大盘是把"测试视角"和"业务视角"打通的桥梁。技术指标(缺陷数/通过率)是测试自己看的,业务指标(客诉/退款/异常单)才是老板和业务方看的。把两者关联起来,你能向上证明"测试投入对业务的具体价值",向下指导"哪个模块要优先改进"。这是从执行层走向战略层的关键产出 —— 老板看到大盘的那一刻,你就从"质量执行者"升级为"质量伙伴"。',
+    keyPoints: [
+      { title: '业务质量指标体系', detail: '客诉率(每万单的客诉数)、退款率、异常订单率、业务断崖率(某项指标突降)、关键流程成功率。每个业务都要定义自己的"健康度仪表盘"。' },
+      { title: '业务监控告警', detail: '不只技术告警,还要有业务告警:订单数突降 30% 立刻告警(可能是支付链路出问题)。业务告警比技术告警更早暴露问题,是质量保障的"先行指标"。' },
+      { title: '客诉数据反向追溯', detail: '把客服系统的客诉分类、按模块归因、找出每个客诉对应的代码缺陷或设计缺陷。这个反向链路一旦打通,客诉就成了改进质量的最直接驱动力。' },
+      { title: '大盘搭建工具', detail: '小团队用 Excel 即可起步,中型用 Grafana + Prometheus,大公司用专业 BI(Tableau/帆软)。重要的不是工具,是指标体系的合理性和数据获取的自动化。' }
+    ]
+  },
+'ds-sr-01': {
+    summary: '测试体系搭建是高级/Lead 的核心命题。从 0 到 1 设计测试策略不是写一份文档,而是建立一整套"目标 → 策略 → 落地 → 度量 → 改进"的闭环机制。包括:质量目标定义、测试分层、用例分级、自动化分层、准入准出标准、度量指标、改进机制。这套体系建好后,即使 Lead 离开,团队也能按章运转。这才是真正的"管理资产沉淀"。',
+    keyPoints: [
+      { title: '测试策略 4 象限', detail: 'Brian Marick 提出的敏捷测试象限:支撑团队 vs 评判产品 × 业务面向 vs 技术面向。四个象限对应四类测试活动,确保测试覆盖均衡(不只是功能/性能,还有可用性/探索性)。' },
+      { title: '准入准出标准', detail: '每个阶段(单测 → 集成 → 系统 → UAT → 上线)都要明确:进入条件(代码合并/冒烟通过)、退出条件(用例通过率 / P0 缺陷数 / 性能基线)。标准化让流程可控。' },
+      { title: '度量指标体系', detail: '北极星指标(线上 P0/P1 故障数)、过程指标(测试覆盖率/缺陷密度/MTTR)、效率指标(自动化覆盖/回归时长)。指标要分层,不能只看一个,也不能堆十几个。' },
+      { title: '质量门禁', detail: 'CI 中设置自动卡点:单测覆盖率 ≥ 60%、静态扫描无严重问题、自动化冒烟通过、性能不退化。卡不过不准合并,这才是质量左移的"硬约束"。' }
+    ]
+  },
+  'ds-sr-02': {
+    summary: '测试左移和右移是质量保障的"两翼"。左移把测试介入到需求、设计、代码评审阶段,问题在源头拦截;右移把测试延伸到生产环境,通过灰度、A/B、监控、SRE 完成质量闭环。两者结合,才是现代质量工程的完整画面 —— 从"上线前一道关卡"升级为"贯穿全生命周期的持续保障"。这是质量工程最前沿的实践,也是高级测试 Lead 必须推动的事。',
+    keyPoints: [
+      { title: '左移落地动作', detail: '需求评审参与(输出可测性 checklist)、设计评审参与(关注接口/异常/数据)、代码评审参与(关注测试覆盖)、推动开发写单测、CI 卡点。每一项都需要和开发产品对齐机制。' },
+      { title: '右移落地动作', detail: '灰度发布(小流量验证)、A/B 测试(功能开关)、生产监控(业务指标 + 技术指标)、SRE 故障演练、用户体验监控(RUM)。把"上线后的事"也纳入测试视野。' },
+      { title: '需求 INVEST 原则', detail: 'Independent(独立)、Negotiable(可协商)、Valuable(有价值)、Estimable(可估算)、Small(小)、Testable(可测试)。新需求按这个标准评审,不达标的打回重写,是左移的有效抓手。' },
+      { title: '可观测性建设', detail: 'Logging(日志)、Metrics(指标)、Tracing(链路)三位一体。生产环境每个关键操作都要可观测,出问题时能秒级定位。这是右移的基础设施。' }
+    ]
+  },
+  'ds-sr-03': {
+    summary: '混沌工程是 Netflix 在 2010 年提出的革命性测试理念:与其等故障发生后再修,不如主动注入故障验证系统的韧性。它的哲学不是"让系统不出故障",而是"接受故障一定会发生,确保系统优雅降级"。在金融、电商、SaaS 等高可用要求的行业,混沌工程从"前沿尝试"变成了"标准实践"。掌握这块能力,你就站在了测试领域的最前沿。',
+    keyPoints: [
+      { title: '混沌工程 5 原则', detail: '1. 建立稳态假设;2. 多样化真实事件(网络/磁盘/CPU/服务挂);3. 在生产环境运行(影响小流量);4. 持续运行;5. 最小化爆炸半径。这是 Principles of Chaos 官方原则。' },
+      { title: '故障注入工具', detail: 'ChaosBlade(阿里开源,中文文档好,功能丰富)、Chaos Mesh(CNCF 项目,K8s 原生)、Gremlin(商业 SaaS,功能最强)、Pumba(轻量级 Docker 故障注入)。' },
+      { title: '从演练到日常', detail: '初期做季度故障演练(全员参与,模拟生产环境),成熟后做"游戏日"(GameDay)定期演练,最终做到"自动化混沌"(每天自动注入小规模故障)。' },
+      { title: '爆炸半径控制', detail: '混沌工程不是"随便搞破坏",要严格控制影响范围:从测试环境 → 单实例 → 单服务 → 单机房 → 小流量,逐级放大。任何阶段发现问题立即终止,有完善的回滚预案。' }
+    ]
+  },
+  'ds-sr-04': {
+    summary: '质量度量是高级测试的"语言系统"。没有数据,你说"质量好转了"就是自吹自擂;有了数据,你能让老板看到"线上故障数从月均 5 起降到 1 起、自动化覆盖从 30% 提到 70%、回归时长从 5 天缩到 1 天"。但度量是双刃剑 —— 用错指标会引发"刷数据"的反向激励(Goodhart 定律)。会设计指标体系,是高级测试的核心硬实力。',
+    keyPoints: [
+      { title: 'DORA 四大指标', detail: 'Google DORA 团队提出的研发效能金标准:部署频率、变更前置时间、变更失败率、故障恢复时间。这四个指标不只是研发效率,也直接反映质量水平。' },
+      { title: 'Goodhart 定律', detail: '"当一个指标成为目标时,它就不再是好指标。"用例数当 KPI → 大量无效用例;bug 数当 KPI → 拆 bug 凑数;自动化覆盖率当 KPI → 写一堆没价值的脚本。设计指标时要警惕这种陷阱。' },
+      { title: '缺陷逃逸率', detail: '逃逸率 = 线上 bug 数 / (线上 bug + 测试期 bug)。这是衡量测试有效性的金牌指标。趋势下降说明测试更有效,趋势上升说明测试出问题了。' },
+      { title: 'A3 改进报告', detail: '丰田经典管理工具,一张 A3 纸描述完整改进项:背景 / 现状 / 目标 / 根因分析 / 对策 / 计划 / 跟踪。每个质量改进项都用 A3 落地,从"做了什么"升级到"做出了什么效果"。' }
+    ]
+  },
+  'api-sr-01': {
+    summary: '微服务测试架构远比单体应用复杂 —— 服务多、调用链长、上下游耦合、异步消息、最终一致性。简单的"测试用例对接接口"已经不够用,需要分层策略:单测保证函数对、契约测试保证接口对、集成测试保证关键路径对、混沌工程保证韧性对。这是分布式系统测试的"完整工具箱",也是中后台技术成熟公司测试的标准工作法。',
+    keyPoints: [
+      { title: '分层测试策略', detail: '单测(开发,服务内部)→ 契约测试(测试,服务间接口)→ 集成测试(测试,核心路径)→ E2E 测试(测试,旁路验证)→ 混沌测试(测试,韧性验证)。每层目标明确,投入合理。' },
+      { title: 'Service Mesh 测试', detail: '在 Istio/Linkerd 这种 Service Mesh 环境下,可以用 sidecar 注入故障(延迟/超时/错误码),不用改业务代码就能做混沌测试。是云原生测试的新利器。' },
+      { title: '分布式链路追踪', detail: '一个请求经过 10+ 个微服务,出问题怎么定位?靠 TraceID 串起来的链路追踪。SkyWalking/Jaeger/Zipkin 是常用工具。测试要会看链路,问题定位效率提升数倍。' },
+      { title: '大促保障专项', detail: '双 11 / 双 12 / 春节这种流量洪峰前,要做完整压测、容量规划、限流降级演练、应急预案演练。这是微服务测试的最高难度场景,也是最能体现 Lead 价值的舞台。' }
+    ]
+  },
+  'api-sr-02': {
+    summary: '智能化接口测试是当前的前沿方向。流量录制回放(GoReplay/TCPCopy)能把生产真实流量复制到测试环境,自动产生海量测试用例,远比人工编写覆盖广;AI 辅助生成用例能从需求文档/接口定义自动生成用例骨架;智能断言能学习历史响应模式,自动识别异常字段。这些技术让测试从"人写脚本"升级到"工具放大杠杆",效率有数量级的提升。',
+    keyPoints: [
+      { title: '流量录制工具', detail: 'GoReplay 监听网卡复制流量到测试环境(可调比例);TCPCopy 是滴滴/腾讯使用的成熟方案;Mirror 是阿里的方案。三者原理类似,选型看运维生态。' },
+      { title: '流量染色与隔离', detail: '回放流量要打上"染色标记",在测试环境走影子库/影子表,不污染真实数据。这套机制是全链路压测的核心,也是流量回放的必备能力。' },
+      { title: 'AI 辅助测试', detail: 'GitHub Copilot 帮你写测试代码、ChatGPT/Claude 根据 PRD 生成用例、Diffblue 等工具自动生成单测。要会用 AI,但不能依赖 AI —— 业务理解仍是测试的核心价值。' },
+      { title: '智能断言生成', detail: '通过机器学习历史响应模式,自动建立"什么是正常响应"的基线,新响应偏离基线时自动告警。这是降低断言编写成本的方向,适合接口数量爆炸的大型系统。' }
+    ]
+  },
+  'auto-sr-01': {
+    summary: '到了高级阶段,自动化测试不再是"会写脚本",而是"会设计架构"。一个能跑、稳定、可维护、可扩展的自动化体系,涉及:框架分层(数据层/对象层/业务层/用例层)、数据隔离(每个用例自己的数据)、并发执行(资源隔离不互相污染)、稳定性保障(flaky 治理)、报告聚合(从单一项目到多项目大盘)。这是测开能力的集大成体现,直接决定团队自动化的成败。',
+    keyPoints: [
+      { title: '框架分层架构', detail: '数据层(用例数据/配置)、对象层(Page/API 对象)、业务层(业务流程封装)、用例层(测试用例)、报告层(结果聚合)。分层清晰让多人协作不冲突、改一层不影响另一层。' },
+      { title: '数据隔离策略', detail: '每个用例创建独立测试数据(不共享,避免污染)、独立用户/账号(避免会话冲突)、独立测试环境上下文(test isolation)。并发跑用例时这些机制是稳定性保障的关键。' },
+      { title: 'Flaky 用例治理', detail: 'Flaky 是"时灵时不灵"的用例,是自动化的头号公敌。治理思路:识别(连续失败重试机制)→ 分类(等待问题/数据问题/竞态问题)→ 修复 → 监控(失败率持续追踪)。Google 有专门的 flaky 治理团队。' },
+      { title: '自愈机制', detail: '高级框架支持元素定位失败时的自愈(尝试备用定位)、网络错误自动重试、断言软失败(继续跑后续用例,最后汇总)。让自动化更接近"无人值守"的理想。' }
+    ]
+  },
+  'auto-sr-02': {
+    summary: 'BDD(行为驱动开发)和可视化测试是 UI 自动化的两个进阶方向。BDD 通过"Given-When-Then"自然语言描述用例,让产品/业务/测试三方共建用例,而不是测试一个人闭门造车。可视化回归测试则解决"DOM 没变但视觉变了"的难题(像素级对比),在品牌一致性、视觉敏感的业务中价值巨大。这两个能力让 UI 自动化从"功能验证工具"升级为"全方位质量守门员"。',
+    keyPoints: [
+      { title: 'Given-When-Then 三段式', detail: 'Given(前置条件)、When(操作)、Then(预期)。这种格式让非技术人员也能读懂用例,产品/客服都能参与。Cucumber 和 Behave 是主流 BDD 框架。' },
+      { title: 'BDD 的真正价值', detail: 'BDD 不是"换种方式写自动化",核心是"业务、开发、测试三方共建"。如果只是测试一个人写 .feature 文件,BDD 就退化成了高成本低收益的格式游戏。' },
+      { title: '视觉回归原理', detail: '截图对比像素差异,用图像比对算法识别变化。Applitools 用 AI 视觉算法,能区分"内容变化(预期)"和"样式变化(bug)";Percy 是更轻量的开源方案。' },
+      { title: 'Storybook 集成', detail: 'Storybook 是组件库展示工具,前端开发用得多。测试可以集成 Storybook + Visual Testing,在组件粒度做视觉回归,比页面级回归更稳定、更精确。' }
+    ]
+  },
+  'auto-sr-03': {
+    summary: 'Flaky(用例时通时不通)是自动化测试的最大敌人。一旦通过率从 99% 降到 90%,团队就开始不信任自动化结果 —— "失败了?跑一下再说,可能是 flaky"。这种心态一旦形成,自动化就彻底失去价值。系统化治理 Flaky 是高级测试的核心工程能力,目标是把通过率提到 99%+ 并保持。这需要工具、流程、文化三管齐下。',
+    keyPoints: [
+      { title: 'Flaky 分类', detail: '等待问题(没等好就操作)、数据问题(数据被别的用例污染)、竞态问题(异步操作时序乱)、环境问题(网络抖动 / 资源不足)、第三方依赖问题(被 mock 但 mock 不全)。' },
+      { title: '识别机制', detail: '同一用例最近 N 次执行的结果,有失败也有成功 = flaky。CI 中自动统计每条用例的"成功率",低于阈值打上 flaky 标签,触发治理流程。' },
+      { title: '隔离策略', detail: 'flaky 用例先标记隔离(不影响 CI 整体通过率),专人/专门时间集中修复。修不好的果断删除 —— 一个错误的用例比没用例更糟。' },
+      { title: 'Google 经验', detail: 'Google 测试团队有专门的 Flaky 治理项目,公开发表多篇论文。核心结论:flaky 是工程问题,要用工程方法解决;不要简单地用"重试"掩盖问题,那会让问题永久存在。' }
+    ]
+  },
+'perf-sr-01': {
+    summary: '从"会用 JMeter 跑压测"到"能设计性能模型 + 搭建全链路压测"是性能测试的最大跨越。性能模型不是堆并发数,而是基于真实业务行为(80% 浏览/15% 下单/5% 支付)设计压测脚本,确保压测结果有代表性。全链路压测则是在生产环境(影子库 + 流量染色)安全验证容量,这是阿里在双 11 大促中沉淀的最高水平实践。',
+    keyPoints: [
+      { title: '业务模型建模', detail: '从生产日志/埋点数据中分析:用户做了什么、各操作占比、平均时长、典型路径。压测脚本严格按这个模型来设计,而不是拍脑袋"我觉得用户会这样"。' },
+      { title: '影子库与影子表', detail: '生产数据库不能压测(会污染数据),搭建一套和生产同结构的"影子库"。压测流量带特殊标记,中间件路由到影子库。这是全链路压测的基础设施。' },
+      { title: '流量染色', detail: '请求 Header 加染色标记(如 X-Test-Tag: shadow),整个调用链路上的中间件、缓存、消息队列都要识别这个标记并隔离处理。任何一环漏识别都会污染生产数据。' },
+      { title: '压测预案', detail: '压测前要有完整预案:监控指标、告警阈值、紧急停止条件、回滚步骤、责任人。任何一项异常立即终止压测,不能让压测变成生产事故。' }
+    ]
+  },
+  'perf-sr-02': {
+    summary: '性能瓶颈定位是性能测试的"最高境界"。压出问题不难,难的是"为什么 TPS 上不去"——是 CPU?是 IO?是锁?是 GC?要从应用层 → 中间件 → 数据库 → OS → 网络逐层排查。这种端到端的诊断能力,要求你不只是测试,还要懂后端架构、JVM、数据库、操作系统。这是高级性能测试和初级的根本差距,也是市场最稀缺的人才。',
+    keyPoints: [
+      { title: 'JVM 调优三件套', detail: 'jstack(线程栈)、jmap(堆 dump)、jstat/JFR(实时监控)。看 GC 频率、Full GC 时长、堆内存使用、线程状态。Arthas 是阿里开源的 all-in-one 工具,把这些都集成了。' },
+      { title: '数据库瓶颈定位', detail: '慢查询日志 → EXPLAIN 看执行计划 → 索引优化;锁等待 → SHOW ENGINE INNODB STATUS 看锁链;连接池打满 → 调整连接数 / 优化长事务。' },
+      { title: 'Redis 慢日志', detail: 'SLOWLOG GET 看慢命令,常见问题:大 key(KEYS *)、O(N) 命令(SMEMBERS 大集合)、过期回收风暴。Redis 单线程,任何慢命令都会阻塞所有请求。' },
+      { title: 'Linux 性能工具集', detail: 'top/htop(整体)、vmstat(内存/CPU)、iostat(磁盘 IO)、netstat/ss(网络)、tcpdump(抓包)。Brendan Gregg 的火焰图是分析 CPU 热点的神器。' }
+    ]
+  },
+  'perf-sr-03': {
+    summary: '前端性能在 C 端业务里是用户体验的核心,Google 提出的 Core Web Vitals(LCP/FID/CLS)已成为业界标准,甚至直接影响 SEO 排名。测试前端性能不是"打开 Chrome DevTools 看下",而是用 Lighthouse 自动化测、用 WebPageTest 多区域真实测、把 Web Vitals 集成到 CI 做性能门禁。这块能力让你能服务前端团队,价值溢出。',
+    keyPoints: [
+      { title: 'LCP(最大内容绘制)', detail: 'Largest Contentful Paint,页面主要内容加载完成的时间,目标 ≤ 2.5s。常见优化:CDN/图片懒加载/服务端渲染/关键路径 CSS。' },
+      { title: 'FID 与 INP', detail: 'FID(First Input Delay)首次交互延迟,2024 年起被 INP(Interaction to Next Paint)替代,衡量整体交互响应。目标 INP ≤ 200ms。优化:减少长任务、Web Worker。' },
+      { title: 'CLS(累积布局偏移)', detail: 'Cumulative Layout Shift,页面元素意外移动的累积值,目标 ≤ 0.1。常见原因:图片未指定尺寸、动态插入广告、字体加载导致重排。' },
+      { title: 'Lighthouse 集成 CI', detail: 'Lighthouse CI 工具能在 PR 提交时跑性能测试,基线退化时阻塞合并。把性能保障从"发版前测一次"变成"每次提交都把关",真正的左移。' }
+    ]
+  },
+  'sec-sr-01': {
+    summary: '从"会自检 OWASP Top 10"到"能搭建安全测试体系"是安全测试的飞跃。体系化包含:开发阶段的 SAST(静态扫描)、运行阶段的 DAST(动态扫描)、依赖检查的 SCA(第三方组件扫描)、外部渗透测试管理、安全 SDL 流程嵌入。这套体系建好后,安全风险在每个研发环节都有拦截,而不是上线前临时抱佛脚。',
+    keyPoints: [
+      { title: '安全 SDL', detail: 'Microsoft Security Development Lifecycle,把安全活动嵌入到需求/设计/开发/测试/发布/运维每个阶段。每阶段都有安全检查清单,不只是"测试阶段做安全测试"。' },
+      { title: 'SAST/DAST/IAST/SCA', detail: 'SAST(静态扫描代码)、DAST(动态扫描运行中的应用)、IAST(混合,部署 agent 边运行边分析)、SCA(扫第三方组件 CVE)。四者覆盖不同阶段,完整体系都要有。' },
+      { title: '渗透测试管理', detail: '内部团队或外包专业渗透团队定期(季度/半年)做完整渗透。要会管理渗透项目:界定范围、风险等级、修复期限、闭环验证。' },
+      { title: '零信任架构', detail: '"永不信任,始终验证"的安全理念。每次访问都要重新认证、最小权限、动态调整。Google BeyondCorp 是开创者,国内大厂逐步落地。测试要理解这个架构,设计相应的验证场景。' }
+    ]
+  },
+  'sec-sr-02': {
+    summary: '数据安全与合规在出海业务、金融、医疗、SaaS 等行业是高压线。GDPR(欧盟)、CCPA(加州)、个人信息保护法(中国)都对数据收集、使用、传输、删除做了严格规定。测试要能识别业务中的合规风险点(数据收集是否过度?用户能否要求删除自己的数据?),并推动建立测试环境的数据脱敏机制 —— 你不能用真实用户数据来做测试。',
+    keyPoints: [
+      { title: '数据分级', detail: 'L1 公开数据(产品介绍)、L2 内部数据(销售数据)、L3 敏感数据(用户姓名/手机)、L4 高敏感(身份证/银行卡/医疗记录)。不同等级有不同处理策略。' },
+      { title: '脱敏算法', detail: '掩码(138****1234)、哈希(MD5,但要加盐)、加密(AES,可逆)、泛化(年龄 27 → 25-30 岁段)、合成数据(完全假数据但保留业务特征)。选择看脱敏后是否还要参与计算。' },
+      { title: 'GDPR 七大权利', detail: '知情权、访问权、更正权、删除权(被遗忘权)、限制处理权、数据可携权、反对权。每个权利都对应一组测试场景,产品要能支撑这些用户权利。' },
+      { title: '审计日志', detail: '所有敏感数据的访问/修改/导出都要有审计日志,且日志本身不可篡改(WORM 存储)、保留期符合法规要求(GDPR 要求至少保留 3 年)。' }
+    ]
+  },
+  'dev-sr-01': {
+    summary: '到了高级阶段,会写脚本不够用了,要能开发后端服务 —— 因为测试平台、Mock 服务、数据工厂这些工具的本质都是后端应用。FastAPI 是 Python 后端的现代之选(Pythonic + 高性能 + OpenAPI 自动生成),Spring Boot 是 Java 后端的事实标准。这块能力让测试可以独立设计和实现工具系统,而不是依赖外部研发团队。',
+    keyPoints: [
+      { title: 'FastAPI 核心特性', detail: '类型注解驱动(Pydantic 自动校验)、异步原生支持(async/await)、OpenAPI/Swagger 自动生成、性能比 Django 快 10 倍。是现代 Python 后端首选。' },
+      { title: 'ORM 与数据建模', detail: 'SQLAlchemy(Python)、Hibernate(Java)是主流 ORM。会建表、写 migration、处理事务、避免 N+1 查询。这些是后端开发的基本功。' },
+      { title: '异步任务 Celery', detail: 'Web 请求处理慢任务会卡死,需要异步化:用 Redis/RabbitMQ 当消息队列,Celery 作为 worker 消费任务。测试平台中常用于"异步执行测试任务"的场景。' },
+      { title: '微服务基础', detail: '如果项目复杂,会用到微服务拆分。基本概念:服务发现(Eureka/Nacos)、API 网关、配置中心、链路追踪。理解这些是为了能和后端架构师对话。' }
+    ]
+  },
+  'dev-sr-02': {
+    summary: '前端开发不是测试的核心技能,但具备"能写简单页面"的能力会大大扩展你的工具开发边界 —— 测试平台的前端、Mock 服务的管理界面、报告可视化展示、自动化用例编辑器,都需要前端代码。Vue 3 + TypeScript + Element Plus 是国内最主流的中后台技术栈,跟着 vue-vben-admin 这种开源模板学,能快速产出像样的工具界面。',
+    keyPoints: [
+      { title: 'Vue 3 Composition API', detail: 'setup() 函数 + ref/reactive 响应式 + computed/watch。比 Vue 2 的 Options API 更适合复杂逻辑组织,代码更易复用(可以抽 composables)。' },
+      { title: 'TypeScript 加持', detail: 'TS 不是负担,是辅助。类型注解能在编译期发现 80% 的低级错误,IDE 智能提示让开发效率翻倍。中后台项目几乎都用 TS。' },
+      { title: 'UI 组件库选型', detail: 'Vue 生态:Element Plus(中后台标准)、Ant Design Vue(字节系)、Naive UI(新秀)。React 生态:Ant Design、Material-UI。选一个用熟即可,组件理念都相似。' },
+      { title: 'ECharts 可视化', detail: '百度开源的图表库,Vue/React 都有封装。柱状图、折线图、饼图、热力图、桑基图,几乎所有图表都能画。测试报告/质量大盘强烈依赖。' }
+    ]
+  },
+  'ci-sr-01': {
+    summary: 'Kubernetes(K8s)是云原生时代的"操作系统",大型公司测试环境基本都跑在 K8s 上。会用 K8s 不只是会跑 kubectl,而是能设计:动态拉起测试环境、并行测试任务、资源隔离、按需扩缩容。这套能力让你能搞定大规模自动化、混沌工程、全链路压测等高阶场景。学习曲线陡,但学会后能极大放大测试杠杆。',
+    keyPoints: [
+      { title: 'K8s 核心对象', detail: 'Pod(最小调度单元)、Deployment(无状态应用部署)、StatefulSet(有状态应用)、Service(服务暴露)、Ingress(外部访问入口)、ConfigMap(配置)、Secret(敏感信息)。' },
+      { title: 'Helm 包管理', detail: 'K8s 资源 YAML 文件多了乱套,Helm 把多个 YAML 打包成 Chart,用模板化方式部署。一行 helm install 部署整套测试环境,这是大规模管理的标配。' },
+      { title: 'Argo Workflow', detail: 'K8s 原生的工作流引擎,可以用来编排复杂的测试任务(并行执行 + 依赖关系 + 重试 + 通知)。比 Jenkins Pipeline 更适合云原生场景。' },
+      { title: 'Killercoda 在线练习', detail: 'K8s 环境搭建复杂,推荐 Killercoda 这种在线交互平台,浏览器里就能跑真实的 K8s 集群,不用配本地环境。学习 K8s 最快的方式。' }
+    ]
+  },
+  'ci-sr-02': {
+    summary: 'DevOps 是研发文化的根本变革:打破"开发-运维-测试"的部门墙,所有人对最终产物负责。测试在 DevOps 文化中的角色也变了 —— 从"上线前的守门员"变成"全流程质量赋能者"。要理解 GitOps/IaC/可观测性这些 DevOps 核心实践,才能在云原生研发组织中找到自己的定位。',
+    keyPoints: [
+      { title: 'GitOps', detail: '所有部署配置都在 Git 仓库,改 Git 就改部署。Argo CD 等工具监听 Git 变化自动同步到 K8s。优点:可审计、可回滚、协作可控。' },
+      { title: 'IaC 基础设施即代码', detail: 'Terraform(多云)、Pulumi(用代码不是 DSL)、AWS CDK(亚马逊)。基础设施(VM/网络/数据库)用代码描述,而不是手动点页面。环境一致性的根本解决方案。' },
+      { title: '可观测性三件套', detail: 'Prometheus + Grafana(指标)、Loki + Grafana(日志)、Jaeger/Zipkin(链路)。新一代统一方案是 OpenTelemetry,业界正在向它收敛。' },
+      { title: 'CNCF Landscape', detail: 'CNCF(云原生计算基金会)项目全景图,几百个项目按类别归类:容器/编排/服务网格/可观测/数据库等。这张图是云原生技术全景的"地图"。' }
+    ]
+  },
+  'ci-sr-03': {
+    summary: '可观测性是 SRE 工程的基石,也是质量保障从"测试期"延伸到"生产期"的关键能力。Logging(日志)/Metrics(指标)/Tracing(链路)三位一体,缺一不可。测试要会用这些工具排查生产问题、参与故障复盘、推动可观测性建设 —— 因为很多 bug 其实在线上才暴露,没有可观测性等于"瞎子救火"。',
+    keyPoints: [
+      { title: '日志最佳实践', detail: '结构化日志(JSON 格式而非纯文本)、关键字段标准化(traceId/userId/orderId)、分级(DEBUG/INFO/WARN/ERROR)、避免敏感信息泄露。' },
+      { title: '指标分类', detail: 'RED 法则:Rate(请求量)、Errors(错误数)、Duration(响应时间);USE 法则:Utilization(利用率)、Saturation(饱和度)、Errors(错误)。前者关注业务,后者关注资源。' },
+      { title: 'OpenTelemetry', detail: 'CNCF 项目,统一可观测性数据标准。一套 SDK 同时产出日志/指标/链路数据,后端可对接任何兼容 OTLP 的产品(Jaeger/Prometheus/Datadog)。是未来方向。' },
+      { title: 'SLO 与 SLI', detail: 'SLI(Service Level Indicator)是可量化指标(成功率、RT P99),SLO(Service Level Objective)是目标值(99.9% 成功率)。SLO 给你定义"什么是足够好的质量"。' }
+    ]
+  },
+  'db-sr-01': {
+    summary: '大规模数据迁移是高级测试的硬骨头。ERP 重构、数据库换型、跨云迁移、合并并购系统打通,这些场景都涉及亿级数据的迁移,稍有差错就是真金白银的损失。测试不仅要验证迁移后数据一致,还要设计迁移方案本身:全量 + 增量、双写过渡、对账机制、回滚预案。这是测试工程师参与架构决策的高光时刻。',
+    keyPoints: [
+      { title: '迁移策略选择', detail: '一次性全量(简单但停服时间长)、双写过渡(零停机但数据一致性复杂)、灰度迁移(按租户/分库逐步迁,风险可控)。根据业务停机窗口和数据规模选择。' },
+      { title: '幂等与重试', detail: '迁移脚本必须幂等(执行 N 次结果一样),才能在中途失败时安全重试。常用做法:把目标库的主键作为唯一去重键、迁移前清理目标库、用 INSERT IGNORE 或 UPSERT。' },
+      { title: '数据对账', detail: '迁移后必须做完整对账:总条数 / 关键字段 sum / md5 / 样本抽样核对 / 业务一致性校验(总金额、库存总量)。对不上账的数据要单独处理,不能放过任何一条。' },
+      { title: '回滚预案', detail: '任何迁移都要有回滚预案:数据回滚脚本、双写回切、流量切换。预案不仅要写,还要在演练环境跑通,真正出问题时才不会手忙脚乱。' }
+    ]
+  },
+  'db-sr-02': {
+    summary: '大数据测试是数据密集型公司(电商/金融/广告/推荐)的硬需求。Hive/Spark 跑批任务跑了几个小时,产出的报表如果数据错了,可能影响公司核心决策。测试大数据不能用 SELECT * 看几条数据,要会:数据质量校验(DQC)、抽样核对、口径对比、回归测试。Great Expectations 这类专门的数据质量工具是这块能力的代表。',
+    keyPoints: [
+      { title: '数据质量五大维度', detail: '完整性(空值率)、准确性(取值是否正确)、一致性(跨表对得上)、及时性(任务是否按时跑完)、唯一性(主键/逻辑键不重复)。每个维度都有相应的校验规则。' },
+      { title: 'Great Expectations', detail: '开源的数据质量工具,用 Python 定义"期望"(列不能有 null、值在某个范围、分布符合某个模型),自动校验数据并产出文档化报告。' },
+      { title: 'ETL 测试要点', detail: 'Source 一致性(原始数据完整)、Transform 准确性(逻辑实现正确)、Target 完整性(目标表数据齐全)。每一步都要有检查点,中间出错容易定位。' },
+      { title: '调度框架测试', detail: 'Airflow / DolphinScheduler 这种工作流调度,测试关注:任务依赖是否对、失败重试机制、SLA 告警、补数据机制。这是数据流水线的"骨架"。' }
+    ]
+  },
+  'pf-sr-01': {
+    summary: '测试平台是高级测试 Lead 的"代表作"。一个团队规模 10 人以上、业务线多、自动化用例几千上万条时,Excel + Jenkins 的土法练钢已经管不过来,需要专业平台来沉淀:用例管理、自动化执行、Mock 服务、数据工厂、报告聚合。从开源(MeterSphere/HttpRunner)到自研,选型背后是 ROI 和团队能力的权衡。',
+    keyPoints: [
+      { title: '平台核心模块', detail: '用例管理(写、组织、版本)、计划调度(批量执行、定时)、Mock 服务、数据工厂、报告中心、多租户/权限。每个模块都是一个小系统,完整搞下来工作量不小。' },
+      { title: '架构分层', detail: '前端(Vue/React)→ 后端 API(FastAPI/Spring Boot)→ 调度引擎(Celery/Argo)→ 执行节点(Docker/K8s)→ 存储(MySQL + 对象存储)。这是企业级测试平台的标准架构。' },
+      { title: '开源 vs 自研', detail: '团队 < 20 人用开源(MeterSphere 是国内主流);20-100 人开源 + 二次开发;100+ 人有定制需求才考虑自研。自研要慎重,工作量超出大部分人的想象。' },
+      { title: '插件化设计', detail: '平台核心稳定,通过插件扩展能力(新协议支持、新报告格式、新调度策略)。这种设计让平台能持续演进,不会因为一个新需求就大改架构。' }
+    ]
+  },
+  'pf-sr-02': {
+    summary: '工具选型是 Lead 经常要做的决策,选错了浪费几个月、选对了团队效率翻倍。务实的选型不是"哪个最先进",而是"哪个最匹配团队现状"。要考虑:学习曲线、人员储备、维护成本、社区活跃度、企业级特性、未来发展。建立一个"Build vs Buy"决策框架,让选型有依据,而不是凭感觉拍脑袋。',
+    keyPoints: [
+      { title: 'ROI 计算框架', detail: '收益:节省的人天 × 平均人天成本 - 工具成本(license/学习/维护)。要算出可量化数字,凭感觉的决策很难推动落地。' },
+      { title: 'TCO 总拥有成本', detail: '不只看采购成本,还要算:学习成本、迁移成本、运维成本、扩展成本、退出成本(换工具时迁移老数据的代价)。开源工具采购成本为 0 但维护成本可能很高。' },
+      { title: 'Build/Buy 决策', detail: '核心差异化能力 → Build(自研)、通用基础能力 → Buy(采购或开源)。绝大部分测试需求都该 Buy,只有"开源覆盖不了 + 团队有研发能力 + 长期投入"才考虑 Build。' },
+      { title: '试点验证', detail: '大决策前先做小试点:选 1-2 个非核心项目跑 1-2 个月,验证工具是否真的好用、团队是否能接受。试点成功再大规模推广,失败止损成本可控。' }
+    ]
+  },
+  'pf-sr-03': {
+    summary: 'AI 在测试中的应用是 2024-2025 年最热的话题。LLM(GPT/Claude)能力的爆发,让"AI 辅助生成用例""智能问答""缺陷分析"从想象变成现实。测试 Lead 要主动探索:哪些场景 AI 能放大测试杠杆、哪些场景仍需人主导、如何把 AI 工具集成到日常工作流。这是当前能让团队效率"指数级提升"的方向,也是测试转型的关键机会。',
+    keyPoints: [
+      { title: 'Prompt Engineering', detail: '会写 Prompt 是用好 AI 的基础。技巧:明确角色(你是测试专家)、给足上下文(背景 / 文档 / 代码)、要求结构化输出(JSON/Markdown)、用 few-shot examples 示例引导。Anthropic 和 OpenAI 都有官方 prompt guide。' },
+      { title: 'AI 辅助用例生成', detail: '把 PRD/接口文档 + 用例设计原则丢给 LLM,让它生成用例骨架。生成效率比人工高 5-10 倍,但要人工审核质量。最佳模式是"AI 生成 + 人工 review",而不是放任 AI 直接交付。' },
+      { title: 'RAG 检索增强', detail: '把团队的测试文档、历史用例、bug 记录、Wiki 喂给向量数据库,搭建团队知识库。提问时 AI 先检索相关资料再回答,大幅减少"AI 胡说八道"。这是企业 AI 落地的主流方案。' },
+      { title: 'AI Agent', detail: 'AI Agent 能自主完成多步任务(看需求 → 写用例 → 跑测试 → 写报告)。当前还在早期,但 2025-2026 年会成熟。早探索 = 早占位。' }
+    ]
+  },
+  'pf-sr-04': {
+    summary: '开源贡献和技术影响力是测试 Lead 的"放大器"。一篇好文章能让百万人看到、一个开源项目能让你的能力被全行业认可、一次大会演讲能直接打开招聘渠道。这些影响力不只是个人品牌,更直接反哺团队 —— 吸引高级人才、推动跨部门合作、提升老板对你的认知。投入 10% 时间做这些事,长期收益远超本职工作。',
+    keyPoints: [
+      { title: '从给开源项目提 PR 入门', detail: '挑你天天用的工具(Pytest/Locust/Selenium),从修文档错别字、修小 bug 开始。第一个 PR 被合并后,后续越来越容易。GitHub 上的 contribution 记录是最硬核的简历加分项。' },
+      { title: '技术写作', detail: '把工作中的实战经验沉淀成文章。坚持每月 1-2 篇,1 年后你就是 TesterHome 的活跃作者了。掘金、知乎、个人博客都是好平台,选一两个深耕。' },
+      { title: '会议演讲', detail: 'TopTeam / TID / MTSC / GIAC 等技术大会都欢迎实战经验分享。从公司内部分享 → 行业 Meetup → 大会演讲,逐级递进。每次演讲都是一次能力的全面打磨。' },
+      { title: '社区运营', detail: 'TesterHome 是国内最活跃的测试社区,持续分享、回答问题,会被社区关注。后续招聘、项目合作、行业资源都会主动找上门。' }
+    ]
+  },
+  'sf-sr-01': {
+    summary: '团队管理是从"高级工程师"到"Lead"的本质跨越。一个高级测试自己能搞定 100% 的工作,但带 5 人团队时,自己只能贡献 20%,团队产出 80% 来自其他成员 —— 你要会招人、带人、放权、绩效管理,让别人产出更多。这种能力没有捷径,只有刻意练习 + 反思 + 学习管理类经典书籍。',
+    keyPoints: [
+      { title: '招聘画像', detail: '招聘前明确"什么样的人 + 什么样的能力 + 什么样的潜力"。画像不清晰会面试很多人都觉得不合适。最关键问题:这个人 3 个月后能做什么?6 个月后呢?' },
+      { title: '30/60/90 天计划', detail: '新人入职第一天给一份 30/60/90 计划:第一个月熟悉(业务/团队/工具)、第二个月独立完成小任务、第三个月负责一个完整模块。计划具体到每周的目标。' },
+      { title: '绩效管理', detail: '不要等到年终才反馈,日常 1v1 持续给反馈(好的肯定 + 差的指出)。年终评估只是"日常反馈的总结",不应该有意外。差评要让人服气,需要平时积累事实证据。' },
+      { title: '一对一 1v1', detail: '每周 30-60 分钟的 1v1,固定时间。议题:Ta 关心的事(优先)、你关心的事、长期发展。不是工作汇报,是建立信任和深度沟通的渠道。' }
+    ]
+  },
+  'sf-sr-02': {
+    summary: '跨团队协作能力决定 Lead 能搞多大的事。在 5 人团队你靠技术权威,在 50 人组织你靠影响力 —— 因为大部分人不归你管。"推动开发补单测""把测试纳入 KPI""说服老板加测试人头",这些事都需要跨团队影响力。这种能力来自:同理心 + 数据 + 双赢思维 + 长期信用积累,而不是职权或强势。',
+    keyPoints: [
+      { title: '利益相关方分析', detail: '推动一件事前,先列出所有相关方:谁是决策者、谁是支持者、谁是反对者、谁是中立者。理解每个人的诉求,设计针对性沟通策略,而不是"一份方案丢给所有人"。' },
+      { title: '横向影响力的核心', detail: '没有职权时,影响力来自:专业可靠(承诺都做到)、对他人有价值(帮过别人忙)、双赢思维(不是零和博弈)、人格魅力(尊重 + 真诚)。每条都要持续积累。' },
+      { title: '说服技巧', detail: '不要直接抛结论,先建立共识:"我们都希望线上少出 bug 对吧?" → "数据显示 60% bug 来自配置错误" → "所以建议加配置审核环节"。让对方自己得出结论,而不是被你说服。' },
+      { title: '推动变革的策略', detail: '从小处开始(一个小项目 / 一个小团队)→ 拿到效果(数据证明价值)→ 让早期支持者帮你传播 → 逐步扩大。直接全公司推广 = 找死。' }
+    ]
+  },
+  'sf-sr-03': {
+    summary: '汇报和向上管理是高级 Lead 的关键工作。你做了 100 件事,但老板只看到你说出来的那 1 件,不会汇报 = 价值流失。同时,有效的向上沟通能帮你争取资源、对齐预期、规避风险。这不是政治,是工作必需的能力。金字塔原理是这块能力的基础理论,要反复读、反复练。',
+    keyPoints: [
+      { title: '金字塔原理', detail: '结论先行(SCQA:背景/冲突/问题/答案)→ 上下层因果关联 → 横向论据互斥穷尽(MECE)。这种结构化表达让汇报清晰有力,不会让老板一脸懵。' },
+      { title: '价值翻译', detail: '把"测试做了什么"翻译成"为业务带来什么":"自动化覆盖率从 30% 提到 70%" → "回归时间从 5 天缩到 1 天,每月节省 X 人天,等于 Y 万元成本"。永远从老板视角说话。' },
+      { title: '可视化表达', detail: '老板时间宝贵,一张图胜过千言万语。柱状图看趋势、漏斗图看转化、热力图看分布。Excel/Keynote 这些"老工具"用好了,比任何花哨的 BI 都管用。' },
+      { title: '故事化表达', detail: '人天生爱听故事,数据 + 案例 + 情感的组合最有说服力。"上季度我们遇到了一个挑战(故事开始),我们做了 ABC 应对(行动),最终结果是 XYZ(数据),这件事让我们学到了 Z(收获)。"' }
+    ]
+  },
+  'sf-sr-04': {
+    summary: '面试与人才识别是 Lead 最高杠杆的能力。招对一个人,团队产出翻倍;招错一个人,半年内噩梦不断。结构化面试 + 行为面试 + 案例题是科学的方法,凭"感觉"招聘是高风险博弈。Lead 要培养自己的"识人系统",并把方法传授给团队的其他面试官,提升整体招聘质量。',
+    keyPoints: [
+      { title: 'STAR 行为面试法', detail: 'Situation(情境)、Task(任务)、Action(行动)、Result(结果)。让候选人讲具体经历而不是空谈理念。问"你之前怎么治理 flaky 用例的?"比"flaky 用例怎么治理?"更能识别真实能力。' },
+      { title: '案例题设计', detail: '现场给一个简化的业务场景(20 行 PRD),让候选人 10 分钟内说出测试策略。这种压力测试能暴露真实水平,理论派和实战派 5 分钟就能分出来。' },
+      { title: '红旗信号识别', detail: '简历项目说不清楚(造假风险)、一直在跳槽(稳定性差)、说前公司全是负面(同理心差)、面试中答不上 SQL/编程基础题(底线能力)、对工作的描述都是"我们团队"(贡献模糊)。' },
+      { title: '招聘漏斗优化', detail: '简历筛选通过率 / 一面通过率 / 终面通过率 / 入职率,每环节优化 10% 整体提升 50%+。每场面试结束打分 + 写评语,事后复盘哪些指标判断错了,持续校准识人系统。' }
+    ]
+  }
+};
+
+
+// ============ 技能数据 - 初级 ============
+const SKILLS_JUNIOR = [
+  // ===== 测试理论基础 =====
+  {
+    id: 'fd-01', domain: 'foundation', tier: 'junior',
+    name: '等价类划分与边界值分析',
+    capable: '把无限输入域压缩成有限的等价类代表值,并用边界值定位最易出 bug 的位置;能针对任何输入字段输出最少且最有效的用例集。',
+    scenario: '表单输入校验、接口参数测试、数值范围校验、字符串长度校验。',
+    knowledge: ['等价类划分', '有效/无效等价类', '边界值7点法', '上点/离点'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'ISTQB Foundation Syllabus', url: 'https://www.istqb.org/certifications/certified-tester-foundation-level/' },
+      { type: '维基', lang: 'en', name: 'Equivalence Partitioning - Wikipedia', url: 'https://en.wikipedia.org/wiki/Equivalence_partitioning' },
+      { type: '维基', lang: 'en', name: 'Boundary Value Analysis - Wikipedia', url: 'https://en.wikipedia.org/wiki/Boundary-value_analysis' },
+      { type: '工具', lang: 'en', name: 'Microsoft PICT 组合测试', url: 'https://github.com/microsoft/pict' }
+    ]
+  },
+  {
+    id: 'fd-02', domain: 'foundation', tier: 'junior',
+    name: '判定表 / 因果图',
+    capable: '把多条件输入与结果之间的逻辑用矩阵化表达,确保所有条件组合都被覆盖,避免遗漏隐性分支。',
+    scenario: '权限矩阵、审批流条件分支、营销规则、保险/理赔判定、ERP 状态流转。',
+    knowledge: ['判定表4要素', '条件桩/动作桩', '判定表化简', '因果图基本符号'],
+    resources: [
+      { type: '维基', lang: 'en', name: 'Decision Table - Wikipedia', url: 'https://en.wikipedia.org/wiki/Decision_table' },
+      { type: '官方', lang: 'en', name: 'ISTQB Foundation Syllabus', url: 'https://www.istqb.org/certifications/certified-tester-foundation-level/' }
+    ]
+  },
+  {
+    id: 'fd-03', domain: 'foundation', tier: 'junior',
+    name: '场景法与状态转换测试',
+    capable: '通过用户旅程串联多步骤业务场景,识别状态机的合法/非法跳转,覆盖时序型 bug。',
+    scenario: '电商下单流程、订单状态机、审批流、客户生命周期、支付链路。',
+    knowledge: ['基本流/备选流', '状态图', '状态转换表', 'N-switch 覆盖'],
+    resources: [
+      { type: '维基', lang: 'en', name: 'State Transition Testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/State_transition_table' },
+      { type: '官方', lang: 'en', name: 'ISTQB Foundation Syllabus', url: 'https://www.istqb.org/certifications/certified-tester-foundation-level/' }
+    ]
+  },
+  {
+    id: 'fd-04', domain: 'foundation', tier: 'junior',
+    name: '探索性测试(ET)',
+    capable: '在没有完整文档时,基于经验和直觉边设计边执行,发现脚本化测试覆盖不到的深层 bug。',
+    scenario: 'UI 体验测试、敏捷迭代中的快速验证、需求模糊场景、新人上手不熟悉系统时。',
+    knowledge: ['SBTF 章程式探索', 'CRUD 思路', '启发式测试策略', 'Tour-based ET'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Satisfice - James Bach 探索测试主页', url: 'https://www.satisfice.com/' },
+      { type: '维基', lang: 'en', name: 'Exploratory Testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/Exploratory_testing' },
+      { type: '书籍', lang: 'zh', name: '《探索式软件测试》豆瓣', url: 'https://book.douban.com/subject/4862878/' }
+    ]
+  },
+  {
+    id: 'fd-05', domain: 'foundation', tier: 'junior',
+    name: '缺陷管理与 Bug 报告',
+    capable: '能写一份开发愿意修、不会扯皮的 bug 报告:复现步骤清晰、严重程度分级合理、附图附日志。',
+    scenario: '日常迭代中的缺陷流转,配合 Jira/禅道/TAPD 等工具完成全生命周期管理。',
+    knowledge: ['Bug 五要素', '严重程度 vs 优先级', '复现步骤标准化', 'Bug 生命周期'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Atlassian Jira', url: 'https://www.atlassian.com/software/jira' },
+      { type: '官方', lang: 'zh', name: '禅道项目管理', url: 'https://www.zentao.net/' }
+    ]
+  },
+
+  // ===== 业务理解 =====
+  {
+    id: 'bs-01', domain: 'business', tier: 'junior',
+    name: '需求文档(PRD)解读',
+    capable: '从 PRD 中提取测试点、识别需求歧义、问出 PRD 没写的隐性问题,把模糊需求转成可验证的测试用例。',
+    scenario: '每次需求评审、用例设计前置阶段、和产品经理对齐验收标准。',
+    knowledge: ['PRD 结构', '业务流程图', '验收标准定义', '需求评审 checklist'],
+    resources: [
+      { type: '工具', lang: 'zh', name: 'Axure RP 官方', url: 'https://www.axure.com/' },
+      { type: '工具', lang: 'zh', name: 'Figma 协作设计', url: 'https://www.figma.com/' }
+    ]
+  },
+  {
+    id: 'bs-02', domain: 'business', tier: 'junior',
+    name: '用户旅程与场景建模',
+    capable: '从用户视角拆解使用流程,识别"主流程 + 异常流程 + 边界场景"的完整测试覆盖。',
+    scenario: '复杂业务系统(ERP/CRM)、多角色协同的功能、长流程业务(订单全周期)。',
+    knowledge: ['用户旅程图', '业务建模', '正向/异常路径', 'Persona 角色法'],
+    resources: [
+      { type: '工具', lang: 'zh', name: 'Miro 在线白板', url: 'https://miro.com/' },
+      { type: '维基', lang: 'en', name: 'Customer Journey Map - Wikipedia', url: 'https://en.wikipedia.org/wiki/Customer_experience' }
+    ]
+  },
+
+  // ===== 接口测试 =====
+  {
+    id: 'api-01', domain: 'api', tier: 'junior',
+    name: 'HTTP 协议基础',
+    capable: '看懂请求/响应结构、理解状态码含义、能处理 Cookie/Session/Token 鉴权,这是接口测试的认知底座。',
+    scenario: '接口调试、问题定位、查日志、和后端开发对接。',
+    knowledge: ['HTTP/HTTPS', '请求方法 GET/POST/PUT/DELETE', '状态码分类', 'Header/Body/Cookie', 'JWT/OAuth2'],
+    resources: [
+      { type: '文档', lang: 'zh', name: 'MDN HTTP 教程(中文)', url: 'https://developer.mozilla.org/zh-CN/docs/Web/HTTP' },
+      { type: '文档', lang: 'en', name: 'MDN HTTP 教程(英文)', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP' },
+      { type: '书籍', lang: 'zh', name: '《图解 HTTP》豆瓣', url: 'https://book.douban.com/subject/25863515/' }
+    ]
+  },
+  {
+    id: 'api-02', domain: 'api', tier: 'junior',
+    name: 'Postman / Apifox 接口调试',
+    capable: '独立完成接口的发送、断言、参数化、环境切换、用例集合管理,是日常接口测试主力工具。',
+    scenario: '前后端联调、接口冒烟测试、轻量级回归、接口文档管理。',
+    knowledge: ['Collection 集合', '环境变量', 'Pre-request Script', 'Tests 断言', 'Mock Server'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Apifox 官方文档', url: 'https://apifox.com/' },
+      { type: '官方', lang: 'en', name: 'Postman Learning Center', url: 'https://learning.postman.com/' },
+      { type: '练习', lang: 'en', name: 'Postman Echo - 测试 API', url: 'https://postman-echo.com/' }
+    ]
+  },
+  {
+    id: 'api-03', domain: 'api', tier: 'junior',
+    name: 'JSON / XML 数据格式',
+    capable: '能读写 JSON、XML 数据结构,会用 JSONPath / XPath 提取字段,这是断言和数据驱动的基础。',
+    scenario: '接口响应解析、用例参数化、自动化数据提取、配置文件读写。',
+    knowledge: ['JSON 语法', 'JSONPath 表达式', 'XML/XPath', 'YAML 基础'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'JSON 官方', url: 'https://www.json.org/' },
+      { type: '工具', lang: 'en', name: 'JSONPath Online Evaluator', url: 'https://jsonpath.com/' },
+      { type: '维基', lang: 'en', name: 'JSON - Wikipedia', url: 'https://en.wikipedia.org/wiki/JSON' }
+    ]
+  },
+
+  // ===== 数据库 =====
+  {
+    id: 'db-01', domain: 'data', tier: 'junior',
+    name: 'SQL 基础查询',
+    capable: '独立编写 SELECT、JOIN、GROUP BY、子查询语句,能查库验证业务数据正确性。',
+    scenario: '数据正确性核查、生产问题定位、对账验证、数据迁移前后对比。',
+    knowledge: ['SELECT/WHERE/ORDER BY', 'JOIN 类型', 'GROUP BY/聚合函数', '子查询', 'UNION'],
+    resources: [
+      { type: '在线练习', lang: 'en', name: 'SQLZoo 互动教程', url: 'https://sqlzoo.net/' },
+      { type: '在线练习', lang: 'en', name: 'LeetCode 数据库题库', url: 'https://leetcode.com/problemset/database/' },
+      { type: '官方', lang: 'en', name: 'MySQL 官方文档', url: 'https://dev.mysql.com/doc/' },
+      { type: '在线练习', lang: 'zh', name: '牛客网 SQL 题库', url: 'https://www.nowcoder.com/' }
+    ]
+  },
+  {
+    id: 'db-02', domain: 'data', tier: 'junior',
+    name: '数据库客户端工具',
+    capable: '熟练使用 Navicat / DBeaver / DataGrip 连接数据库、查看表结构、执行 SQL、导出数据。',
+    scenario: '日常数据查询、表结构核对、测试数据准备、问题排查。',
+    knowledge: ['连接配置', '查询窗口', '导入/导出', 'ER 图', '执行计划查看'],
+    resources: [
+      { type: '工具', lang: 'en', name: 'DBeaver 社区版(免费)', url: 'https://dbeaver.io/' },
+      { type: '工具', lang: 'zh', name: 'Navicat 官方', url: 'https://www.navicat.com/' },
+      { type: '工具', lang: 'en', name: 'JetBrains DataGrip', url: 'https://www.jetbrains.com/datagrip/' }
+    ]
+  },
+
+  // ===== 编程 =====
+  {
+    id: 'dev-01', domain: 'dev', tier: 'junior',
+    name: 'Linux 基础命令',
+    capable: '在测试服务器上查日志、定位进程、压缩打包、传输文件,这是接口/性能测试必备的环境能力。',
+    scenario: '查应用日志定位 bug、监控服务进程、上传测试数据到测试机、CI 节点排查。',
+    knowledge: ['ls/cd/mkdir/rm', 'grep/find/awk/sed', 'tail -f 日志查看', 'ps/kill/top', 'scp/ssh/curl'],
+    resources: [
+      { type: '在线练习', lang: 'en', name: 'Linux Journey 互动教程', url: 'https://linuxjourney.com/' },
+      { type: '官方', lang: 'zh', name: 'Linux 命令大全 - 菜鸟教程', url: 'https://www.runoob.com/linux/linux-command-manual.html' }
+    ]
+  },
+  {
+    id: 'dev-02', domain: 'dev', tier: 'junior',
+    name: 'Git 版本控制',
+    capable: '能独立完成 clone/commit/push/pull/branch/merge 操作,处理简单冲突,跟上研发协作节奏。',
+    scenario: '测试代码版本管理、自动化用例提交、参与 PR Review、CI 触发。',
+    knowledge: ['Git 三区(工作区/暂存区/本地仓库)', '常用命令', '分支策略', '冲突解决', 'rebase vs merge'],
+    resources: [
+      { type: '互动教程', lang: 'zh', name: 'Learn Git Branching(中文)', url: 'https://learngitbranching.js.org/?locale=zh_CN' },
+      { type: '官方', lang: 'zh', name: 'Pro Git 中文版', url: 'https://git-scm.com/book/zh/v2' },
+      { type: '速查', lang: 'en', name: 'GitHub Git Cheat Sheet', url: 'https://education.github.com/git-cheat-sheet-education.pdf' }
+    ]
+  },
+  {
+    id: 'dev-03', domain: 'dev', tier: 'junior',
+    name: 'Python 入门',
+    capable: '掌握变量、流程控制、函数、类、文件操作、异常处理,能写小脚本处理日常任务。',
+    scenario: '数据处理、批量操作、简单自动化、爬虫、ETL。',
+    knowledge: ['基础语法', '数据结构(list/dict/tuple/set)', '函数与面向对象', '文件 IO', '异常处理', 'pip/虚拟环境'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Python 官方中文教程', url: 'https://docs.python.org/zh-cn/3/tutorial/' },
+      { type: '互动教程', lang: 'zh', name: '廖雪峰 Python 教程', url: 'https://liaoxuefeng.com/' },
+      { type: '免费课程', lang: 'en', name: 'Automate the Boring Stuff with Python', url: 'https://automatetheboringstuff.com/' },
+      { type: '在线练习', lang: 'zh', name: 'LeetCode 中文', url: 'https://leetcode.cn/' }
+    ]
+  },
+
+  // ===== 设计基础 =====
+  {
+    id: 'ds-01', domain: 'design', tier: 'junior',
+    name: '测试用例编写规范',
+    capable: '按照公司模板写出可执行、可评审、可追溯的测试用例,具备前置/步骤/预期/优先级 4 要素。',
+    scenario: '每个迭代必备工作,沉淀团队测试资产,支撑新人快速上手和回归。',
+    knowledge: ['用例结构', '用例粒度', '用例评级', '用例与需求追溯'],
+    resources: [
+      { type: '官方', lang: 'zh', name: '禅道用例管理', url: 'https://www.zentao.net/' },
+      { type: '官方', lang: 'en', name: 'TestRail - 测试管理工具', url: 'https://www.testrail.com/' }
+    ]
+  }
+];
+// ============ 技能数据 - 中级 ============
+const SKILLS_MID = [
+  // ===== 测试理论 =====
+  {
+    id: 'fd-mid-01', domain: 'foundation', tier: 'mid',
+    name: '正交实验法与组合测试',
+    capable: '面对多因素多水平的输入组合,用正交表/Pairwise 算法压缩用例数量,在覆盖度和成本之间找平衡。',
+    scenario: '兼容性测试矩阵(浏览器×OS×版本)、配置项组合测试、营销活动多维度规则。',
+    knowledge: ['正交表 L(N,M^K)', 'Pairwise 算法', '组合爆炸问题', 'PICT/Allpairs 工具'],
+    resources: [
+      { type: '工具', lang: 'en', name: 'Microsoft PICT', url: 'https://github.com/microsoft/pict' },
+      { type: '维基', lang: 'en', name: 'All-pairs testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/All-pairs_testing' }
+    ]
+  },
+  {
+    id: 'fd-mid-02', domain: 'foundation', tier: 'mid',
+    name: '基于风险的测试(RBT)',
+    capable: '不再"平均用力",根据模块复杂度×用户影响×变更频率排序测试投入,把有限资源放在高风险区域。',
+    scenario: '迭代时间紧、回归用例多、发布前优先级排序、缺陷修复回归范围决策。',
+    knowledge: ['风险矩阵', 'Probability × Impact', '变更影响分析', '回归用例分级'],
+    resources: [
+      { type: '维基', lang: 'en', name: 'Risk-based testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/Risk-based_testing' },
+      { type: '官方', lang: 'en', name: 'ISTQB Advanced Test Manager', url: 'https://www.istqb.org/' }
+    ]
+  },
+
+  // ===== 业务深度 =====
+  {
+    id: 'bs-mid-01', domain: 'business', tier: 'mid',
+    name: '行业领域知识(垂直业务)',
+    capable: '深入理解所在行业的业务规则(如电商交易/金融风控/二手奢侈品/SaaS),能预判业务风险点。',
+    scenario: '复杂业务系统,业务规则即测试用例的源头,行业知识决定了测试深度。',
+    knowledge: ['行业 SOP', '财务/合规/法规', '行业术语', '上下游供应链'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《领域驱动设计》豆瓣', url: 'https://book.douban.com/subject/26819666/' },
+      { type: '官方', lang: 'en', name: 'DDD Community', url: 'https://www.domainlanguage.com/ddd/' }
+    ]
+  },
+  {
+    id: 'bs-mid-02', domain: 'business', tier: 'mid',
+    name: '需求评审中的有效提问',
+    capable: '在需求评审会上能问到关键问题,识别需求歧义、隐性依赖、未覆盖的异常场景。',
+    scenario: '产研协同的核心环节,质量左移最重要的抓手,问题在需求阶段拦截远比上线后修复成本低 100 倍。',
+    knowledge: ['5W1H 提问法', '异常路径罗列', '边界场景识别', '验收标准量化'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《关键对话》豆瓣', url: 'https://book.douban.com/subject/26694634/' }
+    ]
+  },
+
+  // ===== 测试设计与策略 =====
+  {
+    id: 'ds-mid-01', domain: 'design', tier: 'mid',
+    name: '测试金字塔与分层策略',
+    capable: '理解单测/接口/UI 三层比例,推动开发补单测,把测试投入合理分配,提升回归速度。',
+    scenario: '团队测试体系建设、自动化策略制定、回归时间优化。',
+    knowledge: ['测试金字塔', '冰淇淋反模式', '70/20/10 原则', '测试反馈循环'],
+    resources: [
+      { type: '文章', lang: 'en', name: 'The Practical Test Pyramid - Martin Fowler', url: 'https://martinfowler.com/articles/practical-test-pyramid.html' },
+      { type: '维基', lang: 'en', name: 'Test Pyramid - Wikipedia', url: 'https://en.wikipedia.org/wiki/Software_testing' }
+    ]
+  },
+  {
+    id: 'ds-mid-02', domain: 'design', tier: 'mid',
+    name: '冒烟测试与回归策略',
+    capable: '设计冒烟用例集(< 30 分钟跑完核心流程)、设计影响域回归策略,而非每次都全量回归。',
+    scenario: '每日构建后冒烟、发版前快速验证、变更代码影响范围回归。',
+    knowledge: ['冒烟用例选取', '影响域分析', '增量回归', '回归用例淘汰机制'],
+    resources: [
+      { type: '维基', lang: 'en', name: 'Smoke Testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/Smoke_testing_(software)' },
+      { type: '维基', lang: 'en', name: 'Regression Testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/Regression_testing' }
+    ]
+  },
+
+  // ===== 接口测试 =====
+  {
+    id: 'api-mid-01', domain: 'api', tier: 'mid',
+    name: 'Pytest + Requests 接口自动化',
+    capable: '搭建可维护的接口自动化框架,实现数据驱动、依赖管理、并发执行、报告输出。',
+    scenario: '中大型项目接口回归、CI 集成、夜间定时跑、多环境切换。',
+    knowledge: ['Pytest 装置/夹具(fixture)', '参数化', 'conftest.py', 'Requests Session', 'Allure 报告'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Pytest 官方文档', url: 'https://docs.pytest.org/' },
+      { type: '官方', lang: 'en', name: 'Requests 库官方', url: 'https://requests.readthedocs.io/' },
+      { type: '官方', lang: 'en', name: 'Allure Framework', url: 'https://allurereport.org/' },
+      { type: 'GitHub', lang: 'zh', name: 'HttpRunner 开源框架', url: 'https://github.com/httprunner/httprunner' }
+    ]
+  },
+  {
+    id: 'api-mid-02', domain: 'api', tier: 'mid',
+    name: 'Mock 服务搭建',
+    capable: '搭建 Mock 服务隔离第三方依赖、支付回调、短信验证码等不可控接口,保证测试可重复执行。',
+    scenario: '第三方依赖未就绪、依赖服务限流、模拟特殊响应(超时/异常)、契约测试。',
+    knowledge: ['Mock vs Stub', 'WireMock/Mountebank', 'Apifox Mock', 'Mock 优先级'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'WireMock 官方', url: 'https://wiremock.org/' },
+      { type: '官方', lang: 'en', name: 'Mountebank', url: 'http://www.mbtest.org' },
+      { type: '官方', lang: 'zh', name: 'Apifox Mock 文档', url: 'https://apifox.com/' }
+    ]
+  },
+  {
+    id: 'api-mid-03', domain: 'api', tier: 'mid',
+    name: 'API 契约测试(Pact)',
+    capable: '为微服务上下游定义契约,自动校验消费者-提供者接口兼容性,避免接口变更带来的集成事故。',
+    scenario: '微服务架构、跨团队协作、接口频繁迭代、避免提供方擅自改字段导致下游崩溃。',
+    knowledge: ['Consumer-Driven Contract', 'Pact Broker', 'Spring Cloud Contract', '契约 vs E2E'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Pact 官方文档', url: 'https://docs.pact.io/' },
+      { type: '文章', lang: 'en', name: 'Microservices Testing - Martin Fowler', url: 'https://martinfowler.com/articles/microservice-testing/' }
+    ]
+  },
+  {
+    id: 'api-mid-04', domain: 'api', tier: 'mid',
+    name: 'gRPC / WebSocket 测试',
+    capable: '能测试非 HTTP 协议接口,适应微服务/实时通信场景,扩展接口测试覆盖范围。',
+    scenario: '微服务内部调用、实时聊天/推送、IoT 设备通信、长连接业务。',
+    knowledge: ['gRPC/Protobuf', 'grpcurl 工具', 'WebSocket 协议', 'JMeter WebSocket 插件'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'gRPC 官方文档', url: 'https://grpc.io/docs/' },
+      { type: '工具', lang: 'en', name: 'grpcurl 命令行工具', url: 'https://github.com/fullstorydev/grpcurl' },
+      { type: '工具', lang: 'en', name: 'BloomRPC GUI 客户端', url: 'https://github.com/bloomrpc/bloomrpc' }
+    ]
+  },
+
+  // ===== 自动化测试 =====
+  {
+    id: 'auto-mid-01', domain: 'auto', tier: 'mid',
+    name: 'Selenium Web 自动化',
+    capable: '用 Selenium WebDriver 编写跨浏览器 Web 自动化用例,处理弹窗/iframe/动态等待等常见场景。',
+    scenario: '跨浏览器兼容性测试、Web 端回归测试、对历史项目的自动化改造。',
+    knowledge: ['WebDriver 协议', 'XPath/CSS 定位', '显式等待', 'Page Object 模式', 'Grid 分布式'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Selenium 中文文档', url: 'https://www.selenium.dev/zh-cn/documentation/' },
+      { type: '官方', lang: 'en', name: 'Selenium 官方文档', url: 'https://www.selenium.dev/documentation/' },
+      { type: '免费课程', lang: 'en', name: 'Test Automation University', url: 'https://testautomationu.applitools.com/' }
+    ]
+  },
+  {
+    id: 'auto-mid-02', domain: 'auto', tier: 'mid',
+    name: 'Playwright 现代 Web 自动化',
+    capable: '使用 Playwright 编写更稳定、更快的 SPA 自动化用例,自动等待、并发执行、视频录制开箱即用。',
+    scenario: '现代单页应用(Vue/React)测试、需要稳定性和速度的项目、多浏览器一致性验证。',
+    knowledge: ['自动等待机制', 'Locator API', 'Trace Viewer', 'BrowserContext 隔离', 'Codegen 录制'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Playwright 官方文档', url: 'https://playwright.dev/' },
+      { type: '官方', lang: 'en', name: 'Playwright Python 文档', url: 'https://playwright.dev/python/' },
+      { type: '官方', lang: 'en', name: 'Playwright Java 文档', url: 'https://playwright.dev/java/' }
+    ]
+  },
+  {
+    id: 'auto-mid-03', domain: 'auto', tier: 'mid',
+    name: 'Appium 移动端自动化',
+    capable: '搭建 iOS/Android 自动化环境,编写跨平台 APP 自动化用例,处理原生/H5/混合应用。',
+    scenario: 'APP 回归测试、机型兼容性测试、关键业务流自动化巡检。',
+    knowledge: ['Appium 架构', 'UiAutomator2/XCUITest', '元素定位策略', '混合应用 webview', 'WDA 配置'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Appium 官方文档', url: 'https://appium.io/' },
+      { type: 'GitHub', lang: 'en', name: 'Appium Python Client(官方)', url: 'https://github.com/appium/python-client' },
+      { type: '官方', lang: 'zh', name: 'Airtest 网易开源', url: 'http://airtest.netease.com/' }
+    ]
+  },
+  {
+    id: 'auto-mid-04', domain: 'auto', tier: 'mid',
+    name: 'Page Object 设计模式',
+    capable: '把页面元素和操作封装成对象,降低用例与 UI 的耦合,提升自动化用例的可维护性。',
+    scenario: '所有 UI 自动化项目的基础架构模式、应对 UI 频繁变更、多人协作开发用例。',
+    knowledge: ['POM 模式', 'BasePage 抽象', 'Page Factory', '关键字驱动', 'BDD'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Page Object - Selenium 官方', url: 'https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/' },
+      { type: '维基', lang: 'en', name: 'Page Object - Wikipedia', url: 'https://en.wikipedia.org/wiki/Page_object_model' }
+    ]
+  },
+  {
+    id: 'auto-mid-05', domain: 'auto', tier: 'mid',
+    name: '小程序自动化测试',
+    capable: '掌握 minium / Airtest / 自动化 IDE 等工具完成微信小程序自动化,补齐三端测试拼图。',
+    scenario: '微信生态产品、小程序为主入口的业务、需要持续回归的小程序项目。',
+    knowledge: ['minium 框架', '小程序 IDE 自动化', 'Airtest 图像识别', '自动化测试号'],
+    resources: [
+      { type: '官方', lang: 'zh', name: '微信小程序自动化文档', url: 'https://developers.weixin.qq.com/miniprogram/dev/devtools/auto.html' },
+      { type: '官方', lang: 'zh', name: 'minium 测试框架', url: 'https://minitest.weixin.qq.com/' }
+    ]
+  },
+
+  // ===== 性能测试 =====
+  {
+    id: 'perf-mid-01', domain: 'perf', tier: 'mid',
+    name: 'JMeter 性能测试',
+    capable: '使用 JMeter 录制/编写脚本、设计线程组、断言、监听器,完成单接口和小场景压测。',
+    scenario: '日常接口压测、版本发布前性能回归、寻找性能基线、慢接口排查。',
+    knowledge: ['线程组', '断言/监听器/定时器', 'CSV 数据驱动', '分布式压测', 'Backend Listener'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Apache JMeter 官方文档', url: 'https://jmeter.apache.org/usermanual/' },
+      { type: '官方', lang: 'en', name: 'JMeter 官方主页', url: 'https://jmeter.apache.org/' }
+    ]
+  },
+  {
+    id: 'perf-mid-02', domain: 'perf', tier: 'mid',
+    name: 'Locust / k6 现代压测工具',
+    capable: '用 Python(Locust)或 JS(k6)编写压测脚本,代码即脚本,易于版本控制和 CI 集成。',
+    scenario: '研发团队拥抱代码化压测、CI 集成性能门禁、复杂业务场景压测。',
+    knowledge: ['Locust 协程模型', 'k6 VU 模型', 'Web UI 监控', '云端压测'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Locust 官方文档', url: 'https://docs.locust.io/' },
+      { type: '官方', lang: 'en', name: 'k6 Grafana 官方', url: 'https://grafana.com/docs/k6/latest/' },
+      { type: 'GitHub', lang: 'en', name: 'Locust GitHub 仓库', url: 'https://github.com/locustio/locust' }
+    ]
+  },
+  {
+    id: 'perf-mid-03', domain: 'perf', tier: 'mid',
+    name: '性能指标解读与监控',
+    capable: '理解 TPS/QPS/RT/P95/P99/吞吐量含义,会用 Grafana/Prometheus 看监控、分析性能拐点。',
+    scenario: '压测报告分析、容量规划、瓶颈定位、性能 SLA 制定。',
+    knowledge: ['TPS vs QPS', 'RT 分位数', 'Little 定律', 'JVM 监控', 'APM 工具(SkyWalking/Pinpoint)'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Grafana 官方文档', url: 'https://grafana.com/docs/grafana/latest/' },
+      { type: '官方', lang: 'en', name: 'Prometheus 官方文档', url: 'https://prometheus.io/docs/' },
+      { type: '官方', lang: 'en', name: 'Apache SkyWalking', url: 'https://skywalking.apache.org/' }
+    ]
+  },
+
+  // ===== 安全测试 =====
+  {
+    id: 'sec-mid-01', domain: 'sec', tier: 'mid',
+    name: 'OWASP Top 10 风险',
+    capable: '识别注入、XSS、CSRF、越权访问等 Web 安全风险,并能在测试中主动构造用例验证。',
+    scenario: '涉及用户登录、支付、数据修改的所有系统都要做 OWASP 自查;合规审计前置。',
+    knowledge: ['SQL 注入', 'XSS', 'CSRF', 'IDOR 越权', 'SSRF', '认证授权缺陷'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'OWASP Top 10', url: 'https://owasp.org/www-project-top-ten/' },
+      { type: '官方', lang: 'en', name: 'OWASP Juice Shop 漏洞靶场', url: 'https://owasp.org/www-project-juice-shop/' },
+      { type: '官方', lang: 'en', name: 'OWASP 主页', url: 'https://owasp.org/' }
+    ]
+  },
+  {
+    id: 'sec-mid-02', domain: 'sec', tier: 'mid',
+    name: 'Burp Suite 渗透测试基础',
+    capable: '使用 Burp Suite 拦截/修改/重放请求,扫描常见漏洞,做半自动化的安全验证。',
+    scenario: '上线前安全自查、配合渗透测试团队、API 安全验证、漏洞验证复现。',
+    knowledge: ['Proxy 拦截', 'Repeater/Intruder', 'Scanner', 'Decoder/Comparer'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'PortSwigger Web Security Academy(免费)', url: 'https://portswigger.net/web-security' },
+      { type: '官方', lang: 'en', name: 'Burp Suite 官方', url: 'https://portswigger.net/burp' }
+    ]
+  },
+
+  // ===== 编程开发 =====
+  {
+    id: 'dev-mid-01', domain: 'dev', tier: 'mid',
+    name: 'Python 进阶',
+    capable: '掌握装饰器、生成器、上下文管理器、并发编程,能开发框架级代码,而不只是脚本。',
+    scenario: '编写测试框架、二次开发开源工具、性能压测脚本、数据处理工具。',
+    knowledge: ['装饰器', '生成器/迭代器', '上下文管理器', '多线程/协程 asyncio', '元类/反射'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Python 官方中文文档', url: 'https://docs.python.org/zh-cn/3/' },
+      { type: '在线', lang: 'en', name: 'Real Python 教程', url: 'https://realpython.com/' },
+      { type: '书籍', lang: 'zh', name: '《流畅的 Python》豆瓣', url: 'https://book.douban.com/subject/27028517/' }
+    ]
+  },
+  {
+    id: 'dev-mid-02', domain: 'dev', tier: 'mid',
+    name: 'Java 基础',
+    capable: '能读懂后端 Java 代码,定位代码层 bug,与开发协作更顺畅;能写简单的 JUnit 单测。',
+    scenario: '后端 Java 项目测试、参与代码评审、看异常堆栈定位问题、写 JMeter 自定义函数。',
+    knowledge: ['基础语法', '面向对象', '集合/泛型', 'Maven/Gradle', '异常处理', 'JUnit'],
+    resources: [
+      { type: '互动教程', lang: 'zh', name: '廖雪峰 Java 教程', url: 'https://liaoxuefeng.com/' },
+      { type: '免费课程', lang: 'en', name: 'Java MOOC - Helsinki 大学', url: 'https://java-programming.mooc.fi/' },
+      { type: '官方', lang: 'en', name: 'JUnit 5 官方', url: 'https://junit.org/junit5/' }
+    ]
+  },
+  {
+    id: 'dev-mid-03', domain: 'dev', tier: 'mid',
+    name: '设计模式入门',
+    capable: '理解常用设计模式(单例/工厂/策略/装饰器/观察者),写出可扩展、可维护的测试框架代码。',
+    scenario: '测试框架架构设计、自动化用例公共组件抽象、平台化项目代码组织。',
+    knowledge: ['创建型/结构型/行为型', '单例/工厂/装饰器', 'SOLID 原则'],
+    resources: [
+      { type: '在线', lang: 'zh', name: 'Refactoring.Guru 中文', url: 'https://refactoringguru.cn/design-patterns' },
+      { type: '在线', lang: 'en', name: 'Refactoring.Guru 英文', url: 'https://refactoring.guru/design-patterns' },
+      { type: '书籍', lang: 'zh', name: '《Head First 设计模式》', url: 'https://book.douban.com/subject/2243615/' }
+    ]
+  },
+
+  // ===== CI/CD =====
+  {
+    id: 'ci-mid-01', domain: 'ci', tier: 'mid',
+    name: 'Jenkins 流水线',
+    capable: '搭建 Jenkins 任务,通过 Pipeline 脚本编排自动化用例的拉取、构建、执行、报告流程。',
+    scenario: '自动化用例每日定时执行、提交代码触发冒烟、夜间全量回归、多环境调度。',
+    knowledge: ['Pipeline 脚本(declarative/scripted)', '凭证管理', '插件生态', '分布式 agent'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Jenkins 中文文档', url: 'https://www.jenkins.io/zh/doc/' },
+      { type: '官方', lang: 'en', name: 'Jenkins 官方', url: 'https://www.jenkins.io/' }
+    ]
+  },
+  {
+    id: 'ci-mid-02', domain: 'ci', tier: 'mid',
+    name: 'GitLab CI / GitHub Actions',
+    capable: '使用云原生 CI 工具配置流水线,把测试嵌入到代码提交即触发的研发协作链路。',
+    scenario: '现代研发团队的标准配置、开源项目协作、SaaS 产品多分支策略。',
+    knowledge: ['.gitlab-ci.yml', '.github/workflows', 'Runner/Action 概念', '缓存/产物'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'GitLab CI/CD 官方文档', url: 'https://docs.gitlab.com/ee/ci/' },
+      { type: '官方', lang: 'en', name: 'GitHub Actions 文档', url: 'https://docs.github.com/en/actions' }
+    ]
+  },
+  {
+    id: 'ci-mid-03', domain: 'ci', tier: 'mid',
+    name: 'Docker 容器化',
+    capable: '使用 Docker 启动测试环境、运行测试容器、用 Compose 编排多服务,解决环境一致性问题。',
+    scenario: '测试环境快速搭建、并行测试隔离、依赖服务容器化、CI 节点标准化。',
+    knowledge: ['Dockerfile', 'image/container 区分', 'volume/network', 'docker-compose'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Docker 官方教程', url: 'https://docs.docker.com/get-started/' },
+      { type: '官方', lang: 'en', name: 'Docker 官方文档', url: 'https://docs.docker.com/' },
+      { type: '中文', lang: 'zh', name: 'Docker — 从入门到实践', url: 'https://yeasy.gitbook.io/docker_practice/' }
+    ]
+  },
+
+  // ===== 数据库进阶 =====
+  {
+    id: 'db-mid-01', domain: 'data', tier: 'mid',
+    name: 'SQL 进阶与索引',
+    capable: '能写复杂连接查询、窗口函数、CTE,看懂执行计划(EXPLAIN),能识别慢 SQL 并提优化建议。',
+    scenario: '数据校验复杂场景、性能问题定位、看开发的 SQL 是否合理、生产慢查询分析。',
+    knowledge: ['窗口函数(rank/row_number/lag)', 'CTE/WITH', '执行计划 EXPLAIN', 'B+Tree 索引', '最左前缀原则'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'MySQL 官方文档', url: 'https://dev.mysql.com/doc/' },
+      { type: '在线练习', lang: 'en', name: 'HackerRank SQL 题库', url: 'https://www.hackerrank.com/domains/sql' },
+      { type: '书籍', lang: 'zh', name: '《高性能 MySQL》豆瓣', url: 'https://book.douban.com/subject/23008813/' }
+    ]
+  },
+  {
+    id: 'db-mid-02', domain: 'data', tier: 'mid',
+    name: 'Redis 与 NoSQL 测试',
+    capable: '能用 redis-cli 排查缓存问题,理解缓存穿透/击穿/雪崩等场景,具备 NoSQL 数据校验能力。',
+    scenario: '缓存一致性测试、缓存性能压测、缓存失效场景验证、热点数据测试。',
+    knowledge: ['Redis 5 种数据结构', '过期策略', '缓存三大问题', 'MongoDB 基础'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Redis 官方文档', url: 'https://redis.io/docs/' },
+      { type: '官方', lang: 'en', name: 'MongoDB 官方文档', url: 'https://www.mongodb.com/docs/' }
+    ]
+  },
+
+  // ===== 软技能 =====
+  {
+    id: 'soft-mid-01', domain: 'soft', tier: 'mid',
+    name: '需求评审与跨团队沟通',
+    capable: '能在需求评审、技术评审中代表测试视角发声,推动需求变更和接口契约的对齐。',
+    scenario: '迭代启动、需求变更、跨团队接口对接、上线前对齐验收标准。',
+    knowledge: ['有效提问', '冲突管理', '会议主持基础', '一对一 1v1'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《关键对话》豆瓣', url: 'https://book.douban.com/subject/26694634/' },
+      { type: '书籍', lang: 'zh', name: '《非暴力沟通》豆瓣', url: 'https://book.douban.com/subject/3533221/' }
+    ]
+  },
+  {
+    id: 'soft-mid-02', domain: 'soft', tier: 'mid',
+    name: '测试报告与文档输出',
+    capable: '能写一份让产品/开发/老板都看得懂的测试报告,数据可视化、风险分级、行动建议明确。',
+    scenario: '迭代结束总结、上线前质量汇报、专项测试报告、业务方对齐。',
+    knowledge: ['报告结构', '数据可视化', '风险表达', 'Markdown/飞书文档'],
+    resources: [
+      { type: '工具', lang: 'zh', name: '飞书文档', url: 'https://www.feishu.cn/' },
+      { type: '工具', lang: 'zh', name: '语雀知识库', url: 'https://www.yuque.com/' }
+    ]
+  }
+];
+// ============ 技能数据 - 高级 ============
+const SKILLS_SENIOR = [
+  // ===== 测试理论高阶 =====
+  {
+    id: 'fd-sr-01', domain: 'foundation', tier: 'senior',
+    name: '测试方法论体系化',
+    capable: '建立团队的测试方法论体系,把零散的实践沉淀成可复用的标准、模板、最佳实践。',
+    scenario: '团队规模 10+ 测试时必备、新人快速上手、知识传承、跨项目复用。',
+    knowledge: ['测试规范制定', '用例设计模板', '最佳实践库', '内部 Wiki 体系'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《Google 软件测试之道》豆瓣', url: 'https://book.douban.com/subject/25742200/' },
+      { type: '书籍', lang: 'zh', name: '《精益软件度量》豆瓣', url: 'https://book.douban.com/subject/24727450/' }
+    ]
+  },
+
+  // ===== 业务领导力 =====
+  {
+    id: 'bs-sr-01', domain: 'business', tier: 'senior',
+    name: '业务架构理解与风险预判',
+    capable: '看懂上下游业务架构图,提前预判跨系统耦合带来的风险,在架构评审阶段就把质量问题扼杀。',
+    scenario: '大型分布式系统、多业务线协同、组织级架构变更、技术决策评审。',
+    knowledge: ['DDD 领域驱动设计', '业务架构图阅读', 'C4 模型', '系统拓扑'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'C4 Model 架构图', url: 'https://c4model.com/' },
+      { type: '书籍', lang: 'zh', name: '《领域驱动设计精粹》豆瓣', url: 'https://book.douban.com/subject/30242791/' }
+    ]
+  },
+  {
+    id: 'bs-sr-02', domain: 'business', tier: 'senior',
+    name: '隐性需求挖掘与风险沟通',
+    capable: '能识别 PRD 之外的隐性需求(合规、数据安全、可观测性),并向决策层有效表达风险与权衡。',
+    scenario: '合规驱动业务(支付/金融)、政策变化场景、新业务孵化期、跨地区版本。',
+    knowledge: ['合规要求', '风险量化表达', 'STRIDE 威胁建模', '影响评估'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'OWASP Threat Modeling', url: 'https://owasp.org/www-community/Threat_Modeling' },
+      { type: '官方', lang: 'en', name: 'STRIDE - Microsoft', url: 'https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats' }
+    ]
+  },
+  {
+    id: 'bs-sr-03', domain: 'business', tier: 'senior',
+    name: '业务质量大盘建设',
+    capable: '搭建业务级质量大盘(线上事故/客诉/业务异常),把测试视角和业务视角打通,成为业务伙伴。',
+    scenario: '需要向业务高层汇报质量、跨技术与业务对齐、客诉驱动的质量改进。',
+    knowledge: ['质量指标体系', '业务监控', '客诉数据分析', '业务大盘搭建'],
+    resources: [
+      { type: '工程博客', lang: 'zh', name: '美团技术团队', url: 'https://tech.meituan.com/' },
+      { type: '工程博客', lang: 'zh', name: '阿里云开发者社区', url: 'https://developer.aliyun.com/' }
+    ]
+  },
+
+  // ===== 测试设计与策略 =====
+  {
+    id: 'ds-sr-01', domain: 'design', tier: 'senior',
+    name: '测试体系搭建与质量策略',
+    capable: '从 0 到 1 设计团队测试体系:测试策略、用例分级、自动化分层、准入准出、度量指标 —— 一整套方法论。',
+    scenario: '加入新团队、推动质量转型、组建测试团队、跨业务线统一标准。',
+    knowledge: ['测试策略 4 象限', '准入准出标准', '度量指标体系', '质量门禁'],
+    resources: [
+      { type: '书籍', lang: 'en', name: 'Agile Testing - Lisa Crispin', url: 'https://lisacrispin.com/' },
+      { type: '工程博客', lang: 'zh', name: 'ThoughtWorks 洞见', url: 'https://insights.thoughtworks.cn/' }
+    ]
+  },
+  {
+    id: 'ds-sr-02', domain: 'design', tier: 'senior',
+    name: '测试左移与右移实践',
+    capable: '推动测试介入到需求/设计/代码评审阶段,同时通过线上灰度/A/B/监控完成测试右移闭环。',
+    scenario: '研发提质提效、缺陷前置拦截、生产质量可观测、SRE 文化建设。',
+    knowledge: ['Shift-Left/Right', '需求 INVEST', '代码评审', '灰度发布', '可观测性'],
+    resources: [
+      { type: '文章', lang: 'en', name: 'Shift Left Testing - Wikipedia', url: 'https://en.wikipedia.org/wiki/Shift-left_testing' },
+      { type: '工程博客', lang: 'zh', name: 'ThoughtWorks 洞见', url: 'https://insights.thoughtworks.cn/' }
+    ]
+  },
+  {
+    id: 'ds-sr-03', domain: 'design', tier: 'senior',
+    name: '混沌工程与故障演练',
+    capable: '主动注入故障(网络延迟/服务挂掉/磁盘满),验证系统在异常下的韧性,从"防止故障"升级到"接受故障并优雅降级"。',
+    scenario: '高可用系统、SRE 团队、强一致性业务(金融/支付)、可用性 99.99%+ 要求。',
+    knowledge: ['Chaos Engineering 5 原则', 'ChaosBlade/Chaos Mesh', '故障注入', '生产演练'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Principles of Chaos Engineering', url: 'https://principlesofchaos.org/' },
+      { type: '官方', lang: 'en', name: 'Chaos Mesh - CNCF', url: 'https://chaos-mesh.org/' },
+      { type: 'GitHub', lang: 'zh', name: 'ChaosBlade 阿里开源', url: 'https://github.com/chaosblade-io/chaosblade' },
+      { type: '免费书', lang: 'en', name: 'Google SRE Book', url: 'https://sre.google/sre-book/table-of-contents/' }
+    ]
+  },
+  {
+    id: 'ds-sr-04', domain: 'design', tier: 'senior',
+    name: '质量度量与数据驱动',
+    capable: '建立科学的质量度量体系,避免 Goodhart 陷阱(指标变目标就失效),用数据驱动改进而非拍脑袋。',
+    scenario: '向上汇报、季度复盘、改进方向决策、组织级质量提升项目。',
+    knowledge: ['缺陷逃逸率', 'MTTR', 'DORA 指标', 'Goodhart 定律', 'A3 改进报告'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'DORA - DevOps Research', url: 'https://dora.dev/' },
+      { type: '免费书', lang: 'en', name: 'Google SRE Book', url: 'https://sre.google/sre-book/table-of-contents/' }
+    ]
+  },
+
+  // ===== 接口测试高阶 =====
+  {
+    id: 'api-sr-01', domain: 'api', tier: 'senior',
+    name: '微服务测试架构',
+    capable: '为分布式系统设计测试策略:服务内单测、服务间契约、端到端旁路、混沌注入、链路追踪验证。',
+    scenario: '微服务架构、Service Mesh 环境、跨团队接口治理、双 11 等大促保障。',
+    knowledge: ['服务编排', '契约测试体系', 'Service Mesh 测试', '分布式链路追踪'],
+    resources: [
+      { type: '文章', lang: 'en', name: 'Microservice Testing - Martin Fowler', url: 'https://martinfowler.com/articles/microservice-testing/' },
+      { type: '官方', lang: 'en', name: 'Pact 契约测试', url: 'https://docs.pact.io/' }
+    ]
+  },
+  {
+    id: 'api-sr-02', domain: 'api', tier: 'senior',
+    name: '智能化接口测试',
+    capable: '探索 AI 辅助生成用例、流量录制回放、智能断言生成等先进实践,用工具放大测试杠杆。',
+    scenario: '降低用例编写成本、提升覆盖率、复杂场景测试自动化、新一代测试工程实践。',
+    knowledge: ['流量录制 GoReplay', 'TCPCopy 平台', '智能断言', 'AI 辅助测试'],
+    resources: [
+      { type: 'GitHub', lang: 'en', name: 'GoReplay - 流量录制', url: 'https://github.com/buger/goreplay' },
+      { type: 'GitHub', lang: 'en', name: 'tcpcopy - 流量复制', url: 'https://github.com/session-replay-tools/tcpcopy' }
+    ]
+  },
+
+  // ===== 自动化高阶 =====
+  {
+    id: 'auto-sr-01', domain: 'auto', tier: 'senior',
+    name: '自动化测试架构设计',
+    capable: '设计企业级自动化测试架构:数据隔离、并发执行、报告聚合、稳定性保障 —— 让自动化真正能跑能用。',
+    scenario: '团队级自动化体系、多项目共用框架、CI 集成稳定性、跨团队复用。',
+    knowledge: ['框架分层', '数据隔离策略', '并发与隔离', 'flaky 用例治理', '自愈机制'],
+    resources: [
+      { type: '文章', lang: 'en', name: 'The Practical Test Pyramid - Martin Fowler', url: 'https://martinfowler.com/articles/practical-test-pyramid.html' },
+      { type: '工程博客', lang: 'en', name: 'Google Testing Blog', url: 'https://testing.googleblog.com/' }
+    ]
+  },
+  {
+    id: 'auto-sr-02', domain: 'auto', tier: 'senior',
+    name: 'BDD 与可视化测试',
+    capable: '推动 BDD(Cucumber/Behave)对齐业务、用例可读性提升;引入视觉回归(Applitools/Percy)解决 UI 一致性问题。',
+    scenario: '需要业务方共建用例、UI 强一致性要求(品牌/金融)、跨设备视觉验证。',
+    knowledge: ['BDD 三剑客 Given-When-Then', 'Cucumber/Behave', '视觉回归测试', 'Storybook 集成'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Cucumber - BDD 工具', url: 'https://cucumber.io/' },
+      { type: '官方', lang: 'en', name: 'Applitools 视觉测试', url: 'https://applitools.com/' },
+      { type: '官方', lang: 'en', name: 'Percy 视觉回归', url: 'https://percy.io/' }
+    ]
+  },
+  {
+    id: 'auto-sr-03', domain: 'auto', tier: 'senior',
+    name: '稳定性治理(Flaky 用例)',
+    capable: '系统化治理 flaky 用例,把自动化通过率从 80% 提到 99%+,让自动化真正成为发布门禁。',
+    scenario: '自动化用例规模大、CI 误报多、团队对自动化失去信任时的拯救项目。',
+    knowledge: ['Flaky 分类', '重试策略', '隔离机制', '稳定性指标', '环境隔离'],
+    resources: [
+      { type: '工程博客', lang: 'en', name: 'Google Testing Blog', url: 'https://testing.googleblog.com/' },
+      { type: '官方', lang: 'en', name: 'Pytest Rerunfailures 插件', url: 'https://github.com/pytest-dev/pytest-rerunfailures' }
+    ]
+  },
+
+  // ===== 性能高阶 =====
+  {
+    id: 'perf-sr-01', domain: 'perf', tier: 'senior',
+    name: '性能模型设计与全链路压测',
+    capable: '从业务模型出发设计压测方案,搭建全链路压测能力(影子库/影子链路),在生产环境安全地验证容量。',
+    scenario: '大促保障、新业务上线前压测、容量规划、双 11 双 12 类业务。',
+    knowledge: ['业务建模', '影子库/影子表', '流量染色', '压测预案', '全链路压测平台'],
+    resources: [
+      { type: '工程博客', lang: 'zh', name: '阿里云开发者社区', url: 'https://developer.aliyun.com/' },
+      { type: '工程博客', lang: 'zh', name: '美团技术团队', url: 'https://tech.meituan.com/' }
+    ]
+  },
+  {
+    id: 'perf-sr-02', domain: 'perf', tier: 'senior',
+    name: '性能瓶颈定位与调优',
+    capable: '具备从应用→中间件→数据库→OS→网络的端到端排查能力,能给出针对性优化建议。',
+    scenario: '生产性能问题排查、压测瓶颈分析、慢请求治理、JVM 调优。',
+    knowledge: ['JVM GC', 'jstack/jmap/JFR', '数据库锁/慢 SQL', 'Redis Slowlog', 'Linux 性能工具'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Arthas 阿里诊断工具', url: 'https://arthas.aliyun.com/' },
+      { type: '官方', lang: 'en', name: 'Brendan Gregg - 性能分析', url: 'https://www.brendangregg.com/' },
+      { type: '书籍', lang: 'zh', name: '《Java 性能权威指南》豆瓣', url: 'https://book.douban.com/subject/26740520/' }
+    ]
+  },
+  {
+    id: 'perf-sr-03', domain: 'perf', tier: 'senior',
+    name: '前端性能与 Core Web Vitals',
+    capable: '能用 Lighthouse、WebPageTest 测前端性能,理解 LCP/FID/CLS 三大指标,给前端优化建议。',
+    scenario: 'C 端 Web 产品、SEO 关注、移动 H5、用户体验驱动的项目。',
+    knowledge: ['LCP/FID/CLS', 'Lighthouse 报告', 'Resource Loading', 'Bundle 分析'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'web.dev - Web Vitals', url: 'https://web.dev/explore/learn-core-web-vitals' },
+      { type: '工具', lang: 'en', name: 'WebPageTest', url: 'https://www.webpagetest.org/' },
+      { type: '官方', lang: 'en', name: 'Lighthouse - Chrome', url: 'https://developer.chrome.com/docs/lighthouse/overview' }
+    ]
+  },
+
+  // ===== 安全高阶 =====
+  {
+    id: 'sec-sr-01', domain: 'sec', tier: 'senior',
+    name: '安全测试体系建设',
+    capable: '推动安全 SDL 流程,将安全自检、SAST/DAST/SCA 工具、外部渗透测试整合成完整安全防护链路。',
+    scenario: '上市前合规、金融/支付/医疗等敏感行业、安全事件复盘、零信任架构推动。',
+    knowledge: ['安全 SDL', 'SAST/DAST/IAST/SCA', '渗透测试管理', '威胁建模', '零信任'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Microsoft SDL', url: 'https://www.microsoft.com/en-us/securityengineering/sdl' },
+      { type: '官方', lang: 'en', name: 'OWASP ZAP - 开源 DAST', url: 'https://www.zaproxy.org/' },
+      { type: '官方', lang: 'en', name: 'OWASP SAMM 安全成熟度', url: 'https://owaspsamm.org/' }
+    ]
+  },
+  {
+    id: 'sec-sr-02', domain: 'sec', tier: 'senior',
+    name: '数据安全与合规',
+    capable: '理解 GDPR/网安法/个保法等合规要求,推动测试环境数据脱敏、生产数据安全管控。',
+    scenario: '出海业务、医疗/金融数据、合规审计、生产数据使用治理。',
+    knowledge: ['数据分级', '脱敏算法', 'GDPR/个保法', '审计日志', '密钥管理'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'GDPR 官方信息', url: 'https://gdpr.eu/' },
+      { type: '工具', lang: 'en', name: 'HashiCorp Vault', url: 'https://www.vaultproject.io/' }
+    ]
+  },
+
+  // ===== 编程高阶 =====
+  {
+    id: 'dev-sr-01', domain: 'dev', tier: 'senior',
+    name: '后端框架开发能力',
+    capable: '能用 FastAPI/Spring Boot 开发后端服务,具备完整的工程化能力(API 设计/数据建模/异步任务)。',
+    scenario: '测试平台后端、Mock 平台、自研工具、配合开发做技术评审。',
+    knowledge: ['FastAPI/Django', 'SQLAlchemy ORM', 'Celery 异步任务', '微服务架构'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'FastAPI 中文文档', url: 'https://fastapi.tiangolo.com/zh/' },
+      { type: '官方', lang: 'en', name: 'Spring Boot 官方', url: 'https://spring.io/projects/spring-boot' },
+      { type: '官方', lang: 'en', name: 'Django 官方文档', url: 'https://www.djangoproject.com/' }
+    ]
+  },
+  {
+    id: 'dev-sr-02', domain: 'dev', tier: 'senior',
+    name: '前端开发能力',
+    capable: '能用 Vue/React 开发简单的工具界面,看懂前端代码,与前端工程师对接更顺畅。',
+    scenario: '测试平台前端开发、Mock UI、报告可视化、自动化用例编辑器。',
+    knowledge: ['Vue 3 / React', 'TypeScript', 'Element Plus / Ant Design', 'ECharts'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Vue 3 官方文档', url: 'https://cn.vuejs.org/' },
+      { type: '官方', lang: 'zh', name: 'React 中文文档', url: 'https://zh-hans.react.dev/' },
+      { type: '官方', lang: 'zh', name: 'TypeScript 中文', url: 'https://www.typescriptlang.org/zh/' }
+    ]
+  },
+
+  // ===== CI/CD 高阶 =====
+  {
+    id: 'ci-sr-01', domain: 'ci', tier: 'senior',
+    name: 'Kubernetes 测试环境',
+    capable: '在 K8s 集群上动态拉起测试环境、并行执行测试任务、做资源隔离,支撑大规模自动化执行。',
+    scenario: '云原生架构、并发自动化、按需测试环境、混沌工程实施。',
+    knowledge: ['K8s 基础', 'Pod/Service/Ingress', 'Helm', 'Argo Workflow'],
+    resources: [
+      { type: '官方', lang: 'zh', name: 'Kubernetes 中文文档', url: 'https://kubernetes.io/zh-cn/docs/home/' },
+      { type: '互动', lang: 'en', name: 'Killercoda K8s 实验环境', url: 'https://killercoda.com/' },
+      { type: '官方', lang: 'en', name: 'Helm 官方文档', url: 'https://helm.sh/docs/' }
+    ]
+  },
+  {
+    id: 'ci-sr-02', domain: 'ci', tier: 'senior',
+    name: 'DevOps 文化与工具链',
+    capable: '理解 DevOps 全链路工具(GitOps/IaC/可观测性),推动测试与运维深度融合。',
+    scenario: 'SRE 团队、DevOps 转型、技术中台建设、跨职能协同。',
+    knowledge: ['GitOps', 'Terraform IaC', 'Prometheus + Grafana', 'ELK/SLS'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'CNCF Landscape 全景图', url: 'https://landscape.cncf.io/' },
+      { type: '官方', lang: 'en', name: 'Terraform 官方', url: 'https://www.terraform.io/' },
+      { type: '书籍', lang: 'zh', name: '《DevOps 实践指南》豆瓣', url: 'https://book.douban.com/subject/30186150/' }
+    ]
+  },
+  {
+    id: 'ci-sr-03', domain: 'ci', tier: 'senior',
+    name: '可观测性与生产质量',
+    capable: '推动 logging/metrics/tracing 三位一体的可观测性建设,把质量保障从测试期延伸到生产。',
+    scenario: 'SRE 文化、生产事故复盘、SLO 制定、用户体验监控。',
+    knowledge: ['日志/指标/链路', 'OpenTelemetry', 'SLO/SLI/SLA', '用户体验监控'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'OpenTelemetry 文档', url: 'https://opentelemetry.io/' },
+      { type: '免费书', lang: 'en', name: 'Google SRE Book', url: 'https://sre.google/sre-book/table-of-contents/' }
+    ]
+  },
+
+  // ===== 数据高阶 =====
+  {
+    id: 'db-sr-01', domain: 'data', tier: 'senior',
+    name: '数据迁移与对账测试',
+    capable: '设计大规模数据迁移测试方案:数据全景摸底、迁移幂等性、双写对账、回滚演练。',
+    scenario: 'ERP 重构、数据库换型、跨云迁移、历史数据归档、合并并购系统打通。',
+    knowledge: ['迁移策略', '双写机制', '数据对账', '幂等设计', '回滚预案'],
+    resources: [
+      { type: '工程博客', lang: 'zh', name: '阿里云开发者社区', url: 'https://developer.aliyun.com/' },
+      { type: '官方', lang: 'en', name: 'AWS Database Migration Service', url: 'https://aws.amazon.com/dms/' }
+    ]
+  },
+  {
+    id: 'db-sr-02', domain: 'data', tier: 'senior',
+    name: '大数据测试能力',
+    capable: '能测大数据 ETL 任务、Hive/Spark 作业、数据仓库,验证数据准确性与一致性。',
+    scenario: '数仓建设、报表系统、数据中台、推荐/风控特征验证。',
+    knowledge: ['Hive/Spark/Flink', '数据质量(DQC)', 'ETL 测试', 'Airflow 调度'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Apache Spark', url: 'https://spark.apache.org/' },
+      { type: '官方', lang: 'en', name: 'Apache Hive', url: 'https://hive.apache.org/' },
+      { type: '工具', lang: 'en', name: 'Great Expectations 数据质量', url: 'https://greatexpectations.io/' },
+      { type: '官方', lang: 'en', name: 'Apache DolphinScheduler', url: 'https://dolphinscheduler.apache.org/' }
+    ]
+  },
+
+  // ===== 平台建设 =====
+  {
+    id: 'pf-sr-01', domain: 'platform', tier: 'senior',
+    name: '测试平台架构设计',
+    capable: '从 0 设计企业级测试平台:用例管理、自动化执行、Mock、数据、报告 —— 解决团队的最大痛点。',
+    scenario: '团队规模 30+、有重复劳动需要工具化、跨业务线统一测试基础设施。',
+    knowledge: ['架构分层', '前后端分离', '插件化', '多租户', 'API 设计'],
+    resources: [
+      { type: 'GitHub', lang: 'zh', name: 'MeterSphere 开源测试平台', url: 'https://github.com/metersphere/metersphere' },
+      { type: 'GitHub', lang: 'zh', name: 'HttpRunner 框架', url: 'https://github.com/httprunner/httprunner' },
+      { type: '官方', lang: 'zh', name: 'TestOps 平台对比', url: 'https://www.metersphere.com/' }
+    ]
+  },
+  {
+    id: 'pf-sr-02', domain: 'platform', tier: 'senior',
+    name: '工具选型与 ROI 评估',
+    capable: '在自研、采购、开源之间做出务实选择,评估 ROI、风险、长期维护成本。',
+    scenario: '工具选型决策、技术栈评估、降本增效、汇报投入产出。',
+    knowledge: ['ROI 计算', '总拥有成本(TCO)', 'Build/Buy 决策'],
+    resources: [
+      { type: '文章', lang: 'en', name: 'Martin Fowler 文章库', url: 'https://martinfowler.com/articles/' }
+    ]
+  },
+  {
+    id: 'pf-sr-03', domain: 'platform', tier: 'senior',
+    name: 'AI 在测试中的应用',
+    capable: '探索 LLM 辅助用例生成、智能问答、缺陷分析等场景,把 AI 工具变成团队效率倍增器。',
+    scenario: '前沿测试实践、AI 时代测试转型、降低重复劳动、知识检索。',
+    knowledge: ['Prompt Engineering', 'AI 辅助用例生成', 'RAG 检索增强', 'AI Agent'],
+    resources: [
+      { type: '官方', lang: 'en', name: 'Anthropic Prompt Engineering', url: 'https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview' },
+      { type: '官方', lang: 'en', name: 'OpenAI API 文档', url: 'https://platform.openai.com/docs' },
+      { type: '工具', lang: 'en', name: 'GitHub Copilot', url: 'https://github.com/features/copilot' }
+    ]
+  },
+  {
+    id: 'pf-sr-04', domain: 'platform', tier: 'senior',
+    name: '开源贡献与技术影响力',
+    capable: '通过开源贡献、技术博客、行业分享建立个人/团队的技术影响力,反哺招聘和品牌。',
+    scenario: '团队招聘、技术品牌、行业大会、招聘吸引力建设。',
+    knowledge: ['Issue/PR 协作', '技术写作', '会议演讲', '社区运营'],
+    resources: [
+      { type: '社区', lang: 'zh', name: 'TesterHome 测试社区', url: 'https://testerhome.com/' },
+      { type: 'GitHub', lang: 'en', name: 'Pytest GitHub - 入门贡献', url: 'https://github.com/pytest-dev/pytest' }
+    ]
+  },
+
+  // ===== 软技能高阶 =====
+  {
+    id: 'sf-sr-01', domain: 'soft', tier: 'senior',
+    name: '团队管理与梯队建设',
+    capable: '能招人、带人、放权、绩效管理,设计有梯度的团队结构,让初/中/高各级别测试都能成长。',
+    scenario: '团队 5 人以上、组织扩张期、新业务孵化、老员工瓶颈期。',
+    knowledge: ['招聘画像', '30/60/90 计划', '绩效管理', '一对一 1v1'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《人件》豆瓣', url: 'https://book.douban.com/subject/30176151/' },
+      { type: '书籍', lang: 'zh', name: '《卓有成效的管理者》豆瓣', url: 'https://book.douban.com/subject/1322025/' }
+    ]
+  },
+  {
+    id: 'sf-sr-02', domain: 'soft', tier: 'senior',
+    name: '跨团队协作与影响力',
+    capable: '推动跨产研团队的质量改进项目,在没有直接管辖权的情况下用影响力驱动改变。',
+    scenario: '组织级质量改进、跨业务线统一标准、推动开发补单测、引入 SRE 文化。',
+    knowledge: ['利益相关方分析', '横向影响力', '说服技巧', '推动变革'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《横向领导力》豆瓣', url: 'https://book.douban.com/subject/24703538/' },
+      { type: '书籍', lang: 'zh', name: '《影响力》豆瓣', url: 'https://book.douban.com/subject/1786387/' }
+    ]
+  },
+  {
+    id: 'sf-sr-03', domain: 'soft', tier: 'senior',
+    name: '汇报与向上管理',
+    capable: '能用业务/老板听得懂的语言汇报技术成果,把"测试做了什么"转换成"为业务带来什么价值"。',
+    scenario: '季度/半年汇报、述职、跨级沟通、争取资源。',
+    knowledge: ['金字塔原理', '价值翻译', '可视化表达', '故事化表达'],
+    resources: [
+      { type: '书籍', lang: 'zh', name: '《金字塔原理》豆瓣', url: 'https://book.douban.com/subject/4869678/' }
+    ]
+  },
+  {
+    id: 'sf-sr-04', domain: 'soft', tier: 'senior',
+    name: '面试与人才识别',
+    capable: '能设计有效的面试流程,通过结构化提问识别候选人能力深度,降低误招率。',
+    scenario: '团队招聘、面试官培训、人才画像设计、招聘流程优化。',
+    knowledge: ['STAR 面试法', '行为面试', '案例题设计', '红旗信号识别'],
+    resources: [
+      { type: '书籍', lang: 'en', name: 'Who - 招对人方法论', url: 'https://www.whothebook.com/' }
+    ]
+  }
+];
+
+// 合并所有技能
+const ALL_SKILLS = [...SKILLS_JUNIOR, ...SKILLS_MID, ...SKILLS_SENIOR];
+
+</script>
+<script>
+// ============ 应用逻辑 ============
+const STORAGE_KEY = 'qa_skill_progress_v1';
+
+// 初始化进度数据
+let progressData = {};
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) progressData = JSON.parse(saved);
+} catch (e) { progressData = {}; }
+
+// 保存进度
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progressData));
+  } catch (e) { console.warn('Storage failed', e); }
+}
+
+// 重置进度
+function resetProgress() {
+  if (!confirm('确认要重置全部学习进度吗?此操作不可撤销。')) return;
+  progressData = {};
+  saveProgress();
+  document.querySelectorAll('.skill-checkbox').forEach(cb => cb.classList.remove('checked'));
+  document.querySelectorAll('.skill-item').forEach(item => item.classList.remove('completed'));
+  updateStats();
+}
+
+// ============ 渲染:能力图谱卡片 ============
+function renderDomainGrid() {
+  const container = document.getElementById('domainGrid');
+  const html = DOMAINS.map(d => {
+    const skills = ALL_SKILLS.filter(s => s.domain === d.id);
+    const completed = skills.filter(s => progressData[s.id]).length;
+    const total = skills.length;
+    const pct = total === 0 ? 0 : Math.round(completed / total * 100);
+    return `
+      <div class="domain-card" onclick="jumpToDomain('${d.id}')">
+        <div class="domain-header">
+          <div class="domain-icon color-${d.color}">${d.icon}</div>
+          <div class="domain-name">${d.name}</div>
+          <div class="domain-progress-mini">${completed}/${total}</div>
+        </div>
+        <div class="domain-desc">${d.desc}</div>
+        <div class="domain-skills">
+          ${d.chips.map(c => `<span class="skill-chip">${c}</span>`).join('')}
+        </div>
+        <div class="progress-mini-track">
+          <div class="progress-mini-fill fill-${d.color}" style="width: ${pct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  container.innerHTML = html;
+}
+
+// 跳转到清单中的对应能力域
+function jumpToDomain(domainId) {
+  switchTab('checklist');
+  setTimeout(() => {
+    const domainEl = document.querySelector(`.skill-domain[data-domain="${domainId}"]`);
+    if (domainEl) {
+      if (!domainEl.classList.contains('expanded')) {
+        domainEl.classList.add('expanded');
+      }
+      domainEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      domainEl.style.outline = '2px solid var(--color-primary)';
+      setTimeout(() => { domainEl.style.outline = ''; }, 1500);
+    }
+  }, 200);
+}
+
+// ============ 渲染:学习清单 ============
+function renderChecklist() {
+  const container = document.getElementById('checklistContainer');
+  const html = DOMAINS.map(d => {
+    const skills = ALL_SKILLS.filter(s => s.domain === d.id);
+    const completed = skills.filter(s => progressData[s.id]).length;
+    const total = skills.length;
+    return `
+      <div class="skill-domain" data-domain="${d.id}">
+        <div class="skill-domain-header" onclick="toggleDomain(this)">
+          <div class="domain-icon color-${d.color}" style="width:32px;height:32px;font-size:16px;">${d.icon}</div>
+          <div class="skill-domain-title">${d.name}</div>
+          <div class="skill-domain-meta">
+            <span class="skill-count">${completed}/${total}</span>
+            <span class="toggle-icon">▶</span>
+          </div>
+        </div>
+        <div class="skill-domain-body">
+          ${skills.map(s => renderSkillItem(s)).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  container.innerHTML = html;
+}
+
+function renderSkillItem(s) {
+  const checked = progressData[s.id] ? 'checked' : '';
+  const completedCls = progressData[s.id] ? 'completed' : '';
+  const tierLabel = { junior: '初级', mid: '中级', senior: '高级' }[s.tier];
+  const overview = OVERVIEWS[s.id];
+  const overviewHtml = overview ? `
+    <button class="skill-overview-toggle" onclick="toggleOverview('${s.id}', event)">
+      <span>📖 知识点概述</span>
+      <span class="arrow">▶</span>
+    </button>
+    <div class="skill-overview-content" id="overview-${s.id}">
+      <div class="skill-summary">${overview.summary}</div>
+      <div class="skill-keypoints-title">⭐ 重点知识</div>
+      ${overview.keyPoints.map(kp => `
+        <div class="skill-keypoint">
+          <span class="skill-keypoint-title">${kp.title}</span><span class="skill-keypoint-detail">${kp.detail}</span>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+  return `
+    <div class="skill-item ${completedCls}" data-tier="${s.tier}" data-status="${progressData[s.id] ? 'done' : 'todo'}" data-skill-id="${s.id}">
+      <div class="skill-item-header">
+        <div class="skill-checkbox ${checked}" onclick="toggleSkill('${s.id}', this)"></div>
+        <div class="skill-item-main">
+          <span class="skill-item-name">${s.name}</span>
+          <span class="tier-badge ${s.tier}">${tierLabel}</span>
+        </div>
+      </div>
+      <div class="skill-item-info">
+        <span class="info-label">能完成</span>
+        <span class="info-content">${s.capable}</span>
+        <span class="info-label">适用场景</span>
+        <span class="info-content">${s.scenario}</span>
+        <span class="info-label">知识要点</span>
+        <span class="info-content">
+          <div class="knowledge-tags">
+            ${s.knowledge.map(k => `<span class="knowledge-tag">${k}</span>`).join('')}
+          </div>
+        </span>
+      </div>
+      <div class="resources">
+        <div class="resource-list">
+          ${s.resources.map(r => {
+            const cls = r.lang === 'en' ? 'en' : (r.lang === 'paid' ? 'paid' : '');
+            const isPlaceholder = r.url === '#';
+            const linkAttrs = isPlaceholder ? '' : `href="${r.url}" target="_blank" rel="noopener"`;
+            return `<a class="resource-link ${cls}" ${linkAttrs}>
+              <span class="resource-type">[${r.type}]</span>
+              <span>${r.name}</span>
+              ${r.lang === 'en' ? '<span style="font-size:10px;">EN</span>' : ''}
+            </a>`;
+          }).join('')}
+        </div>
+      </div>
+      ${overviewHtml}
+    </div>
+  `;
+}
+
+function toggleDomain(headerEl) {
+  headerEl.parentElement.classList.toggle('expanded');
+}
+
+function toggleOverview(id, event) {
+  event.stopPropagation();
+  const content = document.getElementById('overview-' + id);
+  const btn = event.currentTarget;
+  if (content) {
+    content.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+}
+
+function toggleSkill(id, checkbox) {
+  event.stopPropagation();
+  if (progressData[id]) {
+    delete progressData[id];
+    checkbox.classList.remove('checked');
+  } else {
+    progressData[id] = { done: true, ts: Date.now() };
+    checkbox.classList.add('checked');
+  }
+  // 更新行样式
+  const itemEl = checkbox.closest('.skill-item');
+  itemEl.classList.toggle('completed', !!progressData[id]);
+  itemEl.dataset.status = progressData[id] ? 'done' : 'todo';
+  saveProgress();
+  updateDomainCount(itemEl.closest('.skill-domain'));
+  updateStats();
+  renderDomainGrid();
+}
+
+function updateDomainCount(domainEl) {
+  if (!domainEl) return;
+  const domainId = domainEl.dataset.domain;
+  const skills = ALL_SKILLS.filter(s => s.domain === domainId);
+  const completed = skills.filter(s => progressData[s.id]).length;
+  const countEl = domainEl.querySelector('.skill-count');
+  if (countEl) countEl.textContent = `${completed}/${skills.length}`;
+}
+
+// ============ 全局进度更新 ============
+function updateStats() {
+  const total = ALL_SKILLS.length;
+  const completed = Object.keys(progressData).length;
+  const pct = total === 0 ? 0 : Math.round(completed / total * 100);
+  document.getElementById('completedCount').textContent = completed;
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('globalProgressFill').style.width = pct + '%';
+}
+
+// ============ 渲染:学习路径 ============
+function renderPaths() {
+  const container = document.getElementById('pathContainer');
+  const html = PATHS.map(p => `
+    <div class="path-card">
+      <h3><span class="stage-num">${p.stage}</span>${p.title}</h3>
+      <div class="duration">${p.duration}</div>
+      <div class="path-stages">
+        ${p.stages.map(s => `<div class="path-stage-item">${s}</div>`).join('')}
+      </div>
+      <div class="path-goal">${p.goal}</div>
+    </div>
+  `).join('');
+  container.innerHTML = html;
+}
+
+// ============ 筛选与搜索 ============
+let currentFilter = { tier: 'all', status: 'all', search: '' };
+
+function applyFilters() {
+  document.querySelectorAll('.skill-item').forEach(item => {
+    const tier = item.dataset.tier;
+    const status = item.dataset.status;
+    const text = item.textContent.toLowerCase();
+
+    const matchTier = currentFilter.tier === 'all' || currentFilter.tier === tier;
+    const matchStatus = currentFilter.status === 'all' || currentFilter.status === status;
+    const matchSearch = !currentFilter.search || text.includes(currentFilter.search.toLowerCase());
+
+    item.style.display = (matchTier && matchStatus && matchSearch) ? 'block' : 'none';
+  });
+
+  // 隐藏没有可见 item 的能力域
+  document.querySelectorAll('.skill-domain').forEach(domainEl => {
+    const visible = domainEl.querySelectorAll('.skill-item:not([style*="display: none"])').length;
+    domainEl.style.display = visible > 0 ? 'block' : 'none';
+  });
+}
+
+// ============ Tab 切换 ============
+function switchTab(tabName) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === `section-${tabName}`));
+  // 切换到清单 tab 时,默认展开第一个
+  if (tabName === 'checklist') {
+    setTimeout(() => {
+      const first = document.querySelector('.skill-domain');
+      if (first && !first.classList.contains('expanded')) first.classList.add('expanded');
+    }, 100);
+  }
+}
+
+// ============ 初始化 ============
+function init() {
+  renderDomainGrid();
+  renderChecklist();
+  renderPaths();
+  updateStats();
+
+  // Tab 切换
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+
+  // 筛选
+  document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      const value = chip.dataset.value;
+      // 同组互斥
+      chip.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentFilter[filter] = value;
+      applyFilters();
+    });
+  });
+
+  // 搜索
+  const searchInput = document.getElementById('searchInput');
+  let searchTimer;
+  searchInput.addEventListener('input', e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      currentFilter.search = e.target.value.trim();
+      applyFilters();
+    }, 200);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+</script>
+</body>
+</html>
