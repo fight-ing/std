@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中级 → 资深 PM · 晋升行为清单</title>
+<style>
+  :root {
+    --brand-primary: #3370FF;
+    --brand-primary-hover: #5589FF;
+    --brand-primary-bg: #E8F3FF;
+    --brand-primary-border: #94BFFF;
+
+    --text-primary: #1F2329;
+    --text-secondary: #4E5969;
+    --text-tertiary: #86909C;
+    --text-disabled: #C9CDD4;
+
+    --bg-page: #F2F3F5;
+    --bg-card: #FFFFFF;
+    --bg-secondary: #FAFBFC;
+    --bg-hover: #F5F6F7;
+
+    --border-base: #E5E6EB;
+    --border-light: #F2F3F5;
+
+    --success: #00B42A;
+    --success-bg: #E6F7EC;
+    --warning: #FF7D00;
+    --warning-bg: #FFF1E8;
+    --error: #F53F3F;
+    --error-bg: #FFECE8;
+    --gold: #D87A16;
+    --gold-bg: #FFF7E6;
+
+    --shadow-card: 0 1px 4px rgba(0,21,41,0.04);
+
+    --font-zh: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-zh);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-page);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  /* ===== Sticky Progress Bar ===== */
+  .progress-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-light);
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .progress-info {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .progress-title {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .progress-stats {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-stats .total {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    font-weight: 400;
+  }
+
+  .progress-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--border-base);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--font-zh);
+    transition: all 200ms;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+    background: var(--brand-primary-bg);
+  }
+
+  .btn-primary {
+    background: var(--brand-primary);
+    color: #fff;
+    border-color: var(--brand-primary);
+  }
+
+  .btn-primary:hover {
+    background: var(--brand-primary-hover);
+    border-color: var(--brand-primary-hover);
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    border-color: var(--error);
+    color: var(--error);
+    background: var(--error-bg);
+  }
+
+  .progress-bar-wrap {
+    height: 8px;
+    background: var(--bg-hover);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--brand-primary), #5589FF);
+    border-radius: 999px;
+    transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  .progress-meta strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .level-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-left: 8px;
+  }
+
+  .level-junior { background: var(--error-bg); color: var(--error); }
+  .level-mid { background: var(--warning-bg); color: var(--warning); }
+  .level-senior { background: var(--success-bg); color: var(--success); }
+
+  /* ===== Header ===== */
+  .header {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 32px 40px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--brand-primary);
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--brand-primary);
+    background: var(--brand-primary-bg);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .usage-tip {
+    background: var(--brand-primary-bg);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    border-left: 3px solid var(--brand-primary);
+  }
+
+  .usage-tip strong {
+    color: var(--brand-primary);
+    font-weight: 600;
+  }
+
+  /* ===== Dimension Section ===== */
+  .dimension {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .dim-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+
+  .dim-num {
+    width: 36px; height: 36px;
+    background: var(--brand-primary);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .dim-title-group {
+    flex: 1;
+  }
+
+  .dim-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .dim-progress {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    margin-top: 2px;
+  }
+
+  .dim-progress strong {
+    color: var(--brand-primary);
+    font-weight: 600;
+  }
+
+  .dim-mini-bar {
+    width: 100px;
+    height: 6px;
+    background: var(--bg-hover);
+    border-radius: 999px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .dim-mini-fill {
+    height: 100%;
+    background: var(--brand-primary);
+    border-radius: 999px;
+    transition: width 300ms;
+  }
+
+  .dim-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 20px 50px;
+    padding: 10px 14px;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    border-left: 3px solid var(--brand-primary-border);
+    line-height: 1.7;
+  }
+
+  /* ===== Item Group (基础 / 进阶) ===== */
+  .item-group {
+    margin-bottom: 16px;
+  }
+
+  .item-group:last-child { margin-bottom: 0; }
+
+  .group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .group-badge {
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .badge-base { background: var(--warning-bg); color: var(--warning); }
+  .badge-bonus { background: var(--success-bg); color: var(--success); }
+
+  /* ===== Checklist Item ===== */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all 200ms;
+    border: 1px solid transparent;
+  }
+
+  .check-item:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-light);
+  }
+
+  .check-item.checked {
+    background: var(--success-bg);
+    border-color: rgba(0,180,42,0.2);
+  }
+
+  .check-item.checked .check-text {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+  }
+
+  .check-item.checked .check-detail {
+    color: var(--text-disabled);
+  }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-base);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms;
+    background: var(--bg-card);
+  }
+
+  .check-item.checked .check-box {
+    background: var(--success);
+    border-color: var(--success);
+  }
+
+  .check-box svg {
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+
+  .check-item.checked .check-box svg {
+    opacity: 1;
+  }
+
+  .check-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .check-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .check-detail {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .check-meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    background: var(--bg-card);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border-base);
+    font-family: var(--font-mono);
+  }
+
+  /* ===== Summary Card ===== */
+  .summary-card {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, #245BDB 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  .summary-text {
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.95;
+    margin-bottom: 16px;
+  }
+
+  .summary-text strong {
+    font-weight: 700;
+  }
+
+  .summary-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .summary-stat {
+    text-align: center;
+  }
+
+  .summary-stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1.2;
+  }
+
+  .summary-stat-label {
+    font-size: 11px;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 32px 0 0;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .footer-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--brand-primary);
+    margin: 0 auto 20px;
+    border-radius: 2px;
+  }
+
+  /* ===== Toast ===== */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text-primary);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 300ms;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .container { padding: 16px 12px 40px; }
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 20px; }
+    .dimension { padding: 20px 18px; }
+    .dim-desc { margin-left: 0; }
+    .progress-sticky { padding: 16px 20px; }
+    .progress-row { gap: 12px; }
+    .progress-stats { font-size: 20px; }
+    .summary-stats { gap: 20px; }
+    .summary-stat-num { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Sticky Progress -->
+  <div class="progress-sticky">
+    <div class="progress-row">
+      <div class="progress-info">
+        <div class="progress-title">总体完成度</div>
+        <div class="progress-stats">
+          <span id="checkedCount">0</span><span class="total">/<span id="totalCount">0</span></span>
+          <span class="level-tag" id="levelTag">中级 PM</span>
+        </div>
+      </div>
+      <div class="progress-actions">
+        <button class="btn" onclick="exportData()">导出数据</button>
+        <button class="btn btn-danger" onclick="resetAll()">全部重置</button>
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+    </div>
+    <div class="progress-meta">
+      <span>基础门槛 <strong id="baseProgress">0/0</strong></span>
+      <span>距离资深 <strong id="distance">— 项</strong></span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header-tag">PROMOTION CHECKLIST · 中级 → 资深</span>
+    <h1>从中级到资深产品经理 · 行为打勾清单</h1>
+    <p class="header-subtitle">
+      不写空话。每条都是可观察的具体行为，不是抽象目标。<strong>基础项</strong>是必须达到的最低门槛，<strong>加分项</strong>决定你能否真正成为资深 PM 而非"卡级中级"。每月对照一次，能打勾的打勾，不能的就是下个月的目标。
+    </p>
+    <div class="usage-tip">
+      <strong>使用方法 · </strong>
+      点击任意条目即可打勾或取消。数据会自动保存在你的浏览器（不上传任何服务器）。建议每月初打开一次，对照过去 30 天的实际行为做诚实勾选。<strong>不要凭"我应该做到"打勾，要凭"我实际做了"打勾。</strong>
+    </div>
+  </header>
+
+  <!-- Dimensions Container -->
+  <div id="dimensionsContainer"></div>
+
+  <!-- Summary -->
+  <div class="summary-card">
+    <div class="summary-text" id="summaryText">
+      继续保持。每个打勾的行为都在让你离资深 PM 更近一步。
+    </div>
+    <div class="summary-stats">
+      <div class="summary-stat">
+        <div class="summary-stat-num" id="statTotal">0%</div>
+        <div class="summary-stat-label">TOTAL</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-stat-num" id="statBase">0%</div>
+        <div class="summary-stat-label">BASE</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-stat-num" id="statBonus">0%</div>
+        <div class="summary-stat-label">BONUS</div>
+      </div>
+      <div class="summary-stat">
+        <div class="summary-stat-num" id="statStreak">0</div>
+        <div class="summary-stat-label">DAYS</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <p>中级 → 资深 PM 晋升清单 · 基于 SVPG / Reforge 方法论</p>
+    <p>For 朗格 · 中古优品 ERP 重构 · 2026.05</p>
+    <p style="margin-top:12px; font-family:var(--font-mono); font-size:11px; color:var(--text-tertiary); letter-spacing:0.5px;">
+      — DON'T CHECK WHAT YOU SHOULD DO. CHECK WHAT YOU ACTUALLY DID. —
+    </p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ===== Data =====
+  const dimensions = [
+    {
+      id: 'business',
+      title: '商业闭环思维',
+      desc: '能给每个产品决策算账。这是中级和资深 PM 最大的分水岭——中级 PM 关注"做不做得出来"，资深 PM 关注"做出来值不值"。',
+      items: {
+        base: [
+          { id: 'b1', text: '每份 PRD 顶部写"商业价值与成本估算"段落', detail: '至少包含：解决什么业务问题、预期收益（数字）、开发成本（人天）、ROI 估算' },
+          { id: 'b2', text: '能说清公司当前营收结构和成本结构', detail: '收入来自哪几块、占比多少、毛利率多少、最大成本项是什么' },
+          { id: 'b3', text: '每个新功能能回答"不做会怎样"', detail: '区分必须做、应该做、可以做、不应做' },
+          { id: 'b4', text: '能用数据反驳老板/业务方的拍脑袋需求', detail: '"这个功能预估开发成本 30 人天，但目标用户只占 3%，建议改优先级"' },
+          { id: 'b5', text: '看得懂公司财报或经营月报', detail: '理解 GMV、客单价、复购率、毛利率、ROI 等核心指标的计算方式' },
+        ],
+        bonus: [
+          { id: 'bb1', text: '能独立做某个新业务的商业模型测算', detail: '从市场规模 → 渗透率 → 客单价 → 成本结构 → 利润空间，跑通一个完整 sheet' },
+          { id: 'bb2', text: '主动提出过被采纳的"成本优化"或"商业化"建议', detail: '不只想加功能，也想砍成本、提客单价' },
+        ]
+      }
+    },
+    {
+      id: 'insight',
+      title: '用户洞察深度',
+      desc: 'B 端 PM 最容易掉的能力。靠业务方转述的需求是二手信息，真正的洞察必须来自一线 shadow。',
+      items: {
+        base: [
+          { id: 'i1', text: '每月至少 1 次一线 shadow（鉴定师/采购师/销售）', detail: '蹲点半天起，带录音笔，写 shadow 笔记' },
+          { id: 'i2', text: '每个角色画过完整的"典型工作日"', detail: '8 小时干什么、每个动作多少次、痛点在哪、KPI 是什么' },
+          { id: 'i3', text: '做过用户访谈（开放式问题，不诱导）', detail: '一对一 30 分钟以上，问"为什么"而不是"是不是"' },
+          { id: 'i4', text: '建立了用户/业务方常态联系机制', detail: '比如每周固定和某个一线员工聊 30 分钟、加入业务群、参加销售例会' },
+          { id: 'i5', text: '能区分"说出来的需求"和"真实需求"', detail: '用户说"加个搜索"，真实需求可能是"我找不到东西"——后者解法可能不是搜索' },
+        ],
+        bonus: [
+          { id: 'ib1', text: '建立了用户洞察知识库', detail: '把每次访谈/shadow 的关键发现沉淀，可以被团队复用' },
+          { id: 'ib2', text: '主导过一次完整的用户研究项目', detail: '研究问题 → 方法选择 → 招募 → 执行 → 分析 → 输出洞察报告' },
+        ]
+      }
+    },
+    {
+      id: 'strategy',
+      title: '战略思考与决策',
+      desc: '从"做对的事"升级到"做对的下一件事"。资深 PM 的标志是能站在 6-12 个月的尺度上排兵布阵。',
+      items: {
+        base: [
+          { id: 's1', text: '能讲清楚自己产品/模块未来 6 个月的路线图', detail: '不是简单需求池，而是有逻辑的版本规划' },
+          { id: 's2', text: '能讲清楚为什么不做某些事', detail: '战略本质是取舍，能说清"砍了什么"比能说清"做什么"更重要' },
+          { id: 's3', text: '每个版本有明确的核心目标和北极星指标', detail: '不是堆功能，是奔着指标设计版本' },
+          { id: 's4', text: '建立了产品决策日志', detail: '每个重要决策记录依据，3 个月后回看判断对错' },
+          { id: 's5', text: '能识别"伪需求"并说服业务方', detail: '面对老板/销售的拍脑袋需求，能不卑不亢地用逻辑反驳' },
+        ],
+        bonus: [
+          { id: 'sb1', text: '主导过一次产品战略会', detail: '组织业务/技术/设计共识 6-12 个月方向，输出战略文档' },
+          { id: 'sb2', text: '做过白空间分析', detail: '识别行业未被满足的需求或竞品的弱点，提出差异化机会' },
+        ]
+      }
+    },
+    {
+      id: 'leadership',
+      title: '团队杠杆与影响力',
+      desc: '中级 PM 自己干，资深 PM 通过别人干。如果你 80% 时间还在自己产出，永远突破不了天花板。',
+      items: {
+        base: [
+          { id: 'l1', text: '稳定带教过至少 1 个新人 PM', detail: '不是答疑，而是真正帮一个新人独立成长' },
+          { id: 'l2', text: '把至少 1 个完整模块交给别人独立负责', detail: '舍得放手、忍得住不插手' },
+          { id: 'l3', text: '能在没有汇报关系的情况下推动跨部门事情', detail: '不靠职权、不靠上级压力，靠逻辑和影响力' },
+          { id: 'l4', text: '每周 < 50% 时间用于亲自产出 PRD/原型', detail: '把时间留给思考、对齐、复盘、带人' },
+          { id: 'l5', text: '建立过团队级别的 SOP 或规范', detail: '不只解决一次问题，而是让问题不再重复发生' },
+        ],
+        bonus: [
+          { id: 'lb1', text: '参与过 PM 招聘，有自己的人才标准', detail: '能独立面试候选人、有清晰的录用判断标准' },
+          { id: 'lb2', text: '影响过高于自己一级的决策', detail: '说服总监 / VP / CEO 改变某个判断' },
+        ]
+      }
+    },
+    {
+      id: 'ai_skill',
+      title: 'AI 时代核心能力',
+      desc: '2026 的硬门槛。停留在"会发 Prompt"等于刚入门，要能用 AI 重构自己的工作流。',
+      items: {
+        base: [
+          { id: 'a1', text: '会用 AI 把 PRD/原型/文档产出效率提升 3 倍以上', detail: '不只是问问题，而是建立可复用的 prompt 模板和 skill 体系' },
+          { id: 'a2', text: '至少 vibe-code 过一个真实可用的小工具', detail: '用 Cursor / Claude / v0 等工具自己搭原型，体验全流程' },
+          { id: 'a3', text: '能写出稳定输出的复杂 prompt', detail: '掌握 Few-shot、Chain-of-Thought、System Prompt 设计、Eval 验证' },
+          { id: 'a4', text: '理解 AI 产品的概率思维', detail: '不把 AI 当传统软件，知道如何管理不确定性、设计 fallback' },
+          { id: 'a5', text: '能识别自己业务中的 AI 落地机会', detail: '不是赶时髦上 AI，而是清晰判断哪些场景 AI 能创造真实价值' },
+        ],
+        bonus: [
+          { id: 'ab1', text: '主导过至少 1 个 AI 功能从设计到上线', detail: '完整经历过 AI 产品的需求定义、Eval 设计、上线、监控' },
+          { id: 'ab2', text: '设计过 AI 飞轮（数据反哺模型的闭环）', detail: '让用户的每一次使用都在让产品变更聪明' },
+        ]
+      }
+    },
+    {
+      id: 'output',
+      title: '行业输出与个人品牌',
+      desc: '资深 PM 不只在公司内被认可，在行业内也有声音。这一项决定你能不能从"打工"升级到"被看见"。',
+      items: {
+        base: [
+          { id: 'o1', text: '每周写 1 篇产品复盘（内部或私人）', detail: '本周做了什么决策、哪个被打脸、为什么、下次怎么办' },
+          { id: 'o2', text: '能把复杂业务讲清楚给跨部门的人听', detail: '比如 30 分钟把 ERP 全景讲给一个新人听懂' },
+          { id: 'o3', text: '至少在公司内做过 2 次跨部门分享', detail: '不只是组内，而是面向更大范围' },
+          { id: 'o4', text: '建立了自己的方法论库（Skills/规范）', detail: '把经验沉淀成可复用的资产，而不是每次重新做' },
+        ],
+        bonus: [
+          { id: 'ob1', text: '在公开渠道发表过深度文章', detail: '公众号 / 即刻 / 小红书 / 行业媒体，至少 1 篇 2000 字以上深度内容' },
+          { id: 'ob2', text: '在行业活动 / 公开场合做过分享', detail: '产品大会、垂直论坛、播客、社群分享' },
+          { id: 'ob3', text: '有可被检索的个人品牌', detail: '别人搜你的名字 + 关键词能找到你的内容' },
+        ]
+      }
+    }
+  ];
+
+  // ===== Render =====
+  function renderDimensions() {
+    const container = document.getElementById('dimensionsContainer');
+    container.innerHTML = '';
+
+    dimensions.forEach((dim, idx) => {
+      const dimEl = document.createElement('div');
+      dimEl.className = 'dimension';
+      dimEl.id = `dim-${dim.id}`;
+
+      const baseItems = dim.items.base.map(item => renderItem(item, 'base')).join('');
+      const bonusItems = dim.items.bonus.map(item => renderItem(item, 'bonus')).join('');
+
+      dimEl.innerHTML = `
+        <div class="dim-header">
+          <div class="dim-num">${String(idx + 1).padStart(2, '0')}</div>
+          <div class="dim-title-group">
+            <div class="dim-title">${dim.title}</div>
+            <div class="dim-progress">
+              <strong id="dim-${dim.id}-checked">0</strong> / <span id="dim-${dim.id}-total">0</span> 项
+            </div>
+          </div>
+          <div class="dim-mini-bar">
+            <div class="dim-mini-fill" id="dim-${dim.id}-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="dim-desc">${dim.desc}</div>
+
+        <div class="item-group">
+          <div class="group-label">
+            <span class="group-badge badge-base">基础门槛</span>
+            必须做到的最低标准
+          </div>
+          ${baseItems}
+        </div>
+
+        <div class="item-group">
+          <div class="group-label">
+            <span class="group-badge badge-bonus">加分项</span>
+            决定你是否真正成为资深
+          </div>
+          ${bonusItems}
+        </div>
+      `;
+      container.appendChild(dimEl);
+    });
+
+    // Attach click handlers
+    document.querySelectorAll('.check-item').forEach(el => {
+      el.addEventListener('click', () => toggleItem(el.dataset.id));
+    });
+  }
+
+  function renderItem(item, type) {
+    return `
+      <div class="check-item" data-id="${item.id}" data-type="${type}">
+        <div class="check-box">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12L10 17L20 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="check-content">
+          <div class="check-text">${item.text}</div>
+          <div class="check-detail">${item.detail}</div>
+          <div class="check-meta">
+            <span class="meta-tag">${type === 'base' ? 'BASE' : 'BONUS'}</span>
+            <span class="meta-tag">#${item.id.toUpperCase()}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ===== State Management =====
+  const STORAGE_KEY = 'pm_promotion_checklist_v1';
+  const FIRST_OPEN_KEY = 'pm_promotion_first_open';
+  let state = loadState();
+
+  function loadState() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      return data;
+    } catch {
+      return {};
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      console.error('Save failed', e);
+    }
+  }
+
+  function toggleItem(id) {
+    state[id] = !state[id];
+    saveState();
+    updateUI();
+
+    if (state[id]) {
+      showToast('✓ 又近一步');
+    }
+  }
+
+  function updateUI() {
+    let totalChecked = 0;
+    let totalItems = 0;
+    let baseChecked = 0;
+    let baseTotal = 0;
+    let bonusChecked = 0;
+    let bonusTotal = 0;
+
+    dimensions.forEach(dim => {
+      let dimChecked = 0;
+      let dimTotal = 0;
+
+      dim.items.base.forEach(item => {
+        dimTotal++;
+        baseTotal++;
+        totalItems++;
+        if (state[item.id]) {
+          dimChecked++;
+          baseChecked++;
+          totalChecked++;
+        }
+      });
+
+      dim.items.bonus.forEach(item => {
+        dimTotal++;
+        bonusTotal++;
+        totalItems++;
+        if (state[item.id]) {
+          dimChecked++;
+          bonusChecked++;
+          totalChecked++;
+        }
+      });
+
+      // Update each dimension
+      const checkedEl = document.getElementById(`dim-${dim.id}-checked`);
+      const totalEl = document.getElementById(`dim-${dim.id}-total`);
+      const barEl = document.getElementById(`dim-${dim.id}-bar`);
+      if (checkedEl) checkedEl.textContent = dimChecked;
+      if (totalEl) totalEl.textContent = dimTotal;
+      if (barEl) barEl.style.width = `${(dimChecked/dimTotal*100) || 0}%`;
+    });
+
+    // Update item visual states
+    document.querySelectorAll('.check-item').forEach(el => {
+      if (state[el.dataset.id]) {
+        el.classList.add('checked');
+      } else {
+        el.classList.remove('checked');
+      }
+    });
+
+    // Update top progress
+    const totalPct = totalItems ? (totalChecked / totalItems * 100) : 0;
+    const basePct = baseTotal ? (baseChecked / baseTotal * 100) : 0;
+    const bonusPct = bonusTotal ? (bonusChecked / bonusTotal * 100) : 0;
+
+    document.getElementById('checkedCount').textContent = totalChecked;
+    document.getElementById('totalCount').textContent = totalItems;
+    document.getElementById('progressBar').style.width = `${totalPct}%`;
+    document.getElementById('baseProgress').textContent = `${baseChecked}/${baseTotal}`;
+
+    // Distance to senior
+    const baseRemain = baseTotal - baseChecked;
+    const distEl = document.getElementById('distance');
+    if (baseRemain > 0) {
+      distEl.innerHTML = `还差 <strong>${baseRemain}</strong> 项基础`;
+    } else if (bonusChecked < bonusTotal * 0.5) {
+      distEl.innerHTML = `基础已达标，加分项还差 <strong>${Math.ceil(bonusTotal * 0.5) - bonusChecked}</strong> 项`;
+    } else {
+      distEl.innerHTML = `<strong style="color:var(--success);">已达资深门槛</strong>`;
+    }
+
+    // Update level tag
+    const levelTag = document.getElementById('levelTag');
+    if (basePct < 50) {
+      levelTag.textContent = '中级 PM';
+      levelTag.className = 'level-tag level-junior';
+    } else if (basePct < 100 || bonusPct < 30) {
+      levelTag.textContent = '中高级 PM';
+      levelTag.className = 'level-tag level-mid';
+    } else {
+      levelTag.textContent = '资深 PM';
+      levelTag.className = 'level-tag level-senior';
+    }
+
+    // Update summary
+    document.getElementById('statTotal').textContent = `${Math.round(totalPct)}%`;
+    document.getElementById('statBase').textContent = `${Math.round(basePct)}%`;
+    document.getElementById('statBonus').textContent = `${Math.round(bonusPct)}%`;
+    document.getElementById('statStreak').textContent = getDaysSinceFirst();
+
+    // Update summary text
+    const summaryEl = document.getElementById('summaryText');
+    if (totalChecked === 0) {
+      summaryEl.innerHTML = '从第一个打勾开始。<strong>不要凭"应该做"打勾，要凭"实际做了"打勾。</strong>';
+    } else if (basePct < 100) {
+      summaryEl.innerHTML = `基础门槛进度 <strong>${Math.round(basePct)}%</strong>。先把基础项打勾打到满，再去追加分项。`;
+    } else if (bonusPct < 50) {
+      summaryEl.innerHTML = `基础已达标。开始向<strong>加分项</strong>发力——这些是真正区分资深和卡级中级的标志。`;
+    } else {
+      summaryEl.innerHTML = `<strong>你已经摸到资深 PM 的门槛了。</strong>剩下的不是打勾问题，而是稳定持续输出的问题。`;
+    }
+  }
+
+  function getDaysSinceFirst() {
+    let firstOpen = localStorage.getItem(FIRST_OPEN_KEY);
+    if (!firstOpen) {
+      firstOpen = Date.now().toString();
+      localStorage.setItem(FIRST_OPEN_KEY, firstOpen);
+    }
+    const days = Math.floor((Date.now() - parseInt(firstOpen)) / (1000 * 60 * 60 * 24));
+    return days;
+  }
+
+  function resetAll() {
+    if (!confirm('确定要清空所有打勾记录吗？这个操作不可撤销。')) return;
+    state = {};
+    saveState();
+    updateUI();
+    showToast('已重置');
+  }
+
+  function exportData() {
+    const exportObj = {
+      exportedAt: new Date().toISOString(),
+      checklist: {}
+    };
+
+    dimensions.forEach(dim => {
+      exportObj.checklist[dim.title] = {
+        base: dim.items.base.map(i => ({ text: i.text, checked: !!state[i.id] })),
+        bonus: dim.items.bonus.map(i => ({ text: i.text, checked: !!state[i.id] }))
+      };
+    });
+
+    const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pm-checklist-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('已导出 JSON');
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  // ===== Initialize =====
+  renderDimensions();
+  updateUI();
+</script>
+
+</body>
+</html>

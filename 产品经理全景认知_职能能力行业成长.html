@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品经理全景认知 · 职能 · 能力 · 行业 · 成长路径</title>
+<style>
+  :root {
+    --brand-primary: #3370FF;
+    --brand-primary-hover: #5589FF;
+    --brand-primary-bg: #E8F3FF;
+    --brand-primary-border: #94BFFF;
+
+    --text-primary: #1F2329;
+    --text-secondary: #4E5969;
+    --text-tertiary: #86909C;
+    --text-disabled: #C9CDD4;
+
+    --bg-page: #F2F3F5;
+    --bg-card: #FFFFFF;
+    --bg-secondary: #FAFBFC;
+    --bg-hover: #F5F6F7;
+
+    --border-base: #E5E6EB;
+    --border-light: #F2F3F5;
+
+    --success: #00B42A;
+    --success-bg: #E6F7EC;
+    --warning: #FF7D00;
+    --warning-bg: #FFF1E8;
+    --error: #F53F3F;
+    --error-bg: #FFECE8;
+    --gold: #D87A16;
+    --gold-bg: #FFF7E6;
+
+    --shadow-card: 0 1px 4px rgba(0,21,41,0.04);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+
+    --font-zh: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-zh);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-primary);
+    background: var(--bg-page);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 40px 48px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: var(--brand-primary);
+  }
+
+  .header-tag {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--brand-primary);
+    background: var(--brand-primary-bg);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+
+  .toc-item:hover {
+    color: var(--brand-primary);
+  }
+
+  .toc-num {
+    width: 24px; height: 24px;
+    background: var(--brand-primary-bg);
+    color: var(--brand-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ===== Section ===== */
+  .section {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 32px 40px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .section-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--brand-primary);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .section-lead {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 24px 44px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--brand-primary);
+    border-radius: 0 6px 6px 0;
+  }
+
+  /* ===== Sub Section ===== */
+  .sub-section {
+    margin-bottom: 28px;
+  }
+
+  .sub-section:last-child { margin-bottom: 0; }
+
+  .sub-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--brand-primary);
+    line-height: 1.4;
+  }
+
+  .sub-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+
+  /* ===== Definition Box ===== */
+  .definition {
+    background: linear-gradient(180deg, var(--brand-primary-bg) 0%, transparent 100%);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--brand-primary-border);
+  }
+
+  .definition-label {
+    font-size: 11px;
+    color: var(--brand-primary);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .definition-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.8;
+  }
+
+  .definition-text strong {
+    color: var(--brand-primary);
+    font-weight: 600;
+  }
+
+  /* ===== Three Risks Card ===== */
+  .triple-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .triple-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 18px;
+    border: 1px solid var(--border-light);
+    text-align: center;
+  }
+
+  .triple-icon {
+    width: 40px; height: 40px;
+    margin: 0 auto 10px;
+    background: var(--brand-primary-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .triple-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .triple-card-en {
+    font-size: 11px;
+    color: var(--brand-primary);
+    font-family: var(--font-mono);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .triple-card-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  /* ===== Pipeline (Workflow) ===== */
+  .pipeline {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 8px 0 12px;
+  }
+
+  .pipeline-step {
+    flex: 1;
+    min-width: 120px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 14px 12px;
+    border: 1px solid var(--border-light);
+    position: relative;
+  }
+
+  .pipeline-step::after {
+    content: '→';
+    position: absolute;
+    right: -10px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    font-size: 14px;
+    z-index: 1;
+  }
+
+  .pipeline-step:last-child::after { display: none; }
+
+  .pipeline-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--brand-primary);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .pipeline-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .pipeline-detail {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  /* ===== Layer Stack ===== */
+  .layer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .layer {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 16px 20px;
+    border-left: 4px solid var(--brand-primary);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .layer-tag {
+    flex-shrink: 0;
+    width: 56px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--brand-primary);
+    font-weight: 600;
+    background: var(--brand-primary-bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .layer-content {
+    flex: 1;
+  }
+
+  .layer-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .layer-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ===== Capability Matrix ===== */
+  .cap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .cap-card {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 18px 20px;
+    border: 1px solid var(--border-light);
+  }
+
+  .cap-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cap-card-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--brand-primary);
+    background: var(--brand-primary-bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .cap-list {
+    list-style: none;
+  }
+
+  .cap-list li {
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 6px 0;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .cap-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 14px;
+    width: 6px; height: 6px;
+    background: var(--brand-primary);
+    border-radius: 999px;
+  }
+
+  .cap-list li strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ===== Industry Knowledge ===== */
+  .knowledge-domain {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-light);
+  }
+
+  .knowledge-domain:last-child { margin-bottom: 0; }
+
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .domain-badge {
+    font-size: 11px;
+    color: #fff;
+    background: var(--brand-primary);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .domain-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .domain-content {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+
+  .domain-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .domain-tag {
+    font-size: 11px;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-base);
+  }
+
+  /* ===== Path Roadmap ===== */
+  .path-stage {
+    margin-bottom: 24px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+  }
+
+  .path-stage:last-child { margin-bottom: 0; }
+
+  .path-header {
+    background: var(--brand-primary-bg);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--brand-primary-border);
+  }
+
+  .path-stage-num {
+    width: 40px; height: 40px;
+    background: var(--brand-primary);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .path-stage-info {
+    flex: 1;
+  }
+
+  .path-stage-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+
+  .path-stage-time {
+    font-size: 12px;
+    color: var(--brand-primary);
+    font-family: var(--font-mono);
+  }
+
+  .path-body {
+    padding: 20px 24px;
+  }
+
+  .path-section {
+    margin-bottom: 16px;
+  }
+
+  .path-section:last-child { margin-bottom: 0; }
+
+  .path-section-title {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .path-section-content {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .path-list {
+    list-style: none;
+  }
+
+  .path-list li {
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .path-list li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--brand-primary);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* ===== Reading List ===== */
+  .reading-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .reading-item {
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    padding: 12px 14px;
+    border: 1px solid var(--border-light);
+    transition: all 200ms;
+  }
+
+  .reading-item:hover {
+    border-color: var(--brand-primary-border);
+    background: var(--brand-primary-bg);
+  }
+
+  .reading-tag {
+    font-size: 10px;
+    color: var(--brand-primary);
+    background: var(--brand-primary-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .reading-title {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .reading-author {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    font-family: var(--font-mono);
+  }
+
+  /* ===== Closing Box ===== */
+  .closing {
+    background: linear-gradient(135deg, var(--brand-primary) 0%, #245BDB 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 32px 40px;
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  .closing-quote {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .closing-author {
+    font-size: 12px;
+    opacity: 0.85;
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 32px 0 0;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .footer-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--brand-primary);
+    margin: 0 auto 20px;
+    border-radius: 2px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .container { padding: 16px 12px 40px; }
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 22px; }
+    .section { padding: 24px 20px; }
+    .toc { grid-template-columns: 1fr; }
+    .triple-grid { grid-template-columns: 1fr; }
+    .cap-grid { grid-template-columns: 1fr; }
+    .reading-grid { grid-template-columns: 1fr; }
+    .pipeline { flex-direction: column; }
+    .pipeline-step::after {
+      content: '↓';
+      right: 50%; top: auto; bottom: -16px;
+      transform: translateX(50%);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <span class="header-tag">PRODUCT MANAGEMENT · 全景认知</span>
+    <h1>产品经理是什么 · 一份完整的认知地图</h1>
+    <p class="header-subtitle">
+      这份文档回答四个根本问题：产品经理到底干什么（职能与范围）、需要什么样的能力（业务能力体系）、需要懂哪些行业知识（认知范围）、如何持续成长（学习与提升路径）。读完它，你应该能在脑子里形成对"产品"这件事的立体理解，而不是一堆零散的工具和方法论。
+    </p>
+    <div class="toc">
+      <a href="#sec1" class="toc-item"><span class="toc-num">01</span>产品经理的职能与工作范围</a>
+      <a href="#sec2" class="toc-item"><span class="toc-num">02</span>产品经理需要的业务能力</a>
+      <a href="#sec3" class="toc-item"><span class="toc-num">03</span>产品经理需要了解的行业内容</a>
+      <a href="#sec4" class="toc-item"><span class="toc-num">04</span>产品经理的成长与学习路径</a>
+    </div>
+  </header>
+
+  <!-- ========================================
+       Section 1: 产品的职能与工作范围
+       ======================================== -->
+  <section class="section" id="sec1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">产品经理的职能与工作范围</h2>
+    </div>
+    <p class="section-lead">
+      产品经理不是"画原型的"，也不是"写需求文档的"。本质上，产品经理是一个<strong>对产品最终结果负责的角色</strong>——决定做什么、为什么做、做了之后有没有效果。下面分四个维度展开理解。
+    </p>
+
+    <!-- 1.1 本质定义 -->
+    <div class="sub-section">
+      <h3 class="sub-title">1.1 本质定义：产品经理是什么</h3>
+
+      <div class="definition">
+        <div class="definition-label">DEFINITION</div>
+        <div class="definition-text">
+          产品经理是<strong>用户需求、商业目标、技术可行性</strong>三者的连接者，最终对产品的<strong>商业结果</strong>负责。在 Marty Cagan（SVPG）的定义中，产品经理负责的是<strong>「价值风险」</strong>和<strong>「商业可行性风险」</strong>——也就是「这东西用户会用吗」「做出来公司能赚到钱吗」这两件事。设计师负责「易用性风险」，工程师负责「技术可行性风险」。
+        </div>
+      </div>
+
+      <div class="triple-grid">
+        <div class="triple-card">
+          <div class="triple-icon">💎</div>
+          <div class="triple-card-title">价值风险</div>
+          <div class="triple-card-en">VALUE RISK</div>
+          <div class="triple-card-desc">用户会买单吗？能解决真实问题吗？这个功能的价值用户能感知到吗？</div>
+        </div>
+        <div class="triple-card">
+          <div class="triple-icon">📊</div>
+          <div class="triple-card-title">商业可行性</div>
+          <div class="triple-card-en">VIABILITY RISK</div>
+          <div class="triple-card-desc">公司能赚到钱吗？符合战略吗？合规吗？销售卖得动吗？运营撑得住吗？</div>
+        </div>
+        <div class="triple-card">
+          <div class="triple-icon">⚙️</div>
+          <div class="triple-card-title">技术 + 易用性</div>
+          <div class="triple-card-en">FEASIBILITY · USABILITY</div>
+          <div class="triple-card-desc">由工程师和设计师主负责，但产品经理需要理解到能做权衡决策的程度。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.2 工作范围 -->
+    <div class="sub-section">
+      <h3 class="sub-title">1.2 工作范围：从需求到商业结果的全链路</h3>
+      <p class="sub-desc">产品经理的工作范围是一条贯穿整个产品生命周期的链条。下面这 6 个环节都是产品经理的责任范围，环节之间不能断。</p>
+
+      <div class="pipeline">
+        <div class="pipeline-step">
+          <div class="pipeline-num">01</div>
+          <div class="pipeline-title">问题发现</div>
+          <div class="pipeline-detail">业务调研、用户访谈、数据分析、竞品研究</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">02</div>
+          <div class="pipeline-title">机会评估</div>
+          <div class="pipeline-detail">商业价值估算、可行性评估、优先级排序</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">03</div>
+          <div class="pipeline-title">方案设计</div>
+          <div class="pipeline-detail">PRD、原型、流程图、数据模型、状态机</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">04</div>
+          <div class="pipeline-title">交付推进</div>
+          <div class="pipeline-detail">需求评审、开发跟进、测试验收、协调资源</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">05</div>
+          <div class="pipeline-title">上线运营</div>
+          <div class="pipeline-detail">发布对齐、用户培训、灰度策略、问题响应</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">06</div>
+          <div class="pipeline-title">复盘迭代</div>
+          <div class="pipeline-detail">数据复盘、归因分析、决策日志、版本规划</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.3 工作分层 -->
+    <div class="sub-section">
+      <h3 class="sub-title">1.3 工作分层：战略 → 策略 → 执行</h3>
+      <p class="sub-desc">同样是产品经理，工作内容随职级变化呈现明显分层。一个真正成熟的高级产品经理，应该能在三层之间自由切换，而不是只懂某一层。</p>
+
+      <div class="layer-stack">
+        <div class="layer">
+          <div class="layer-tag">战略层</div>
+          <div class="layer-content">
+            <div class="layer-name">定方向 · Vision & Strategy</div>
+            <div class="layer-desc">产品愿景、北极星指标、商业模式、长期路线图、组织架构与角色分工。回答"我们为什么要做这个产品"和"3 年后产品长什么样"。这一层的关键是<strong>取舍</strong>——决定不做什么比决定做什么更重要。</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">策略层</div>
+          <div class="layer-content">
+            <div class="layer-name">定路径 · Strategy & Roadmap</div>
+            <div class="layer-desc">产品架构、模块拆解、能力图谱、版本规划、关键场景定义。回答"按什么顺序做"和"哪些功能组合在一起最有杠杆"。这一层考验的是<strong>系统思考</strong>——能不能看到模块之间的依赖与协同。</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">执行层</div>
+          <div class="layer-content">
+            <div class="layer-name">出方案 · Execution</div>
+            <div class="layer-desc">PRD 撰写、原型设计、流程图、数据模型、需求评审、缺陷跟踪、上线验收。回答"具体怎么实现"和"按什么节奏交付"。这一层考验的是<strong>稳准狠</strong>——细节准确、决策清晰、推进有力。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.4 产品经理的分类 -->
+    <div class="sub-section">
+      <h3 class="sub-title">1.4 产品经理的分类：搞清楚自己在哪个赛道</h3>
+      <p class="sub-desc">"产品经理"是一个统称，实际上分流明显。不同类型的产品经理，能力侧重、工作内容、职业天花板差异很大。</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">C 端</span>面向消费者</div>
+          <ul class="cap-list">
+            <li><strong>用户产品经理</strong> · 抖音、小红书、淘宝这类大众产品</li>
+            <li><strong>增长产品经理</strong> · 拉新留存、转化优化、AB 测试</li>
+            <li>核心能力：用户洞察、人性把握、数据敏感、爆款设计</li>
+            <li>挑战：用户量级大、决策窗口短、竞争激烈</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">B 端</span>面向企业</div>
+          <ul class="cap-list">
+            <li><strong>SaaS 产品经理</strong> · 飞书、钉钉、Salesforce 这类对外产品</li>
+            <li><strong>中后台产品经理</strong> · 内部 ERP、CRM、OMS、WMS（你的位置）</li>
+            <li>核心能力：业务流程拆解、跨角色协调、复杂系统设计</li>
+            <li>挑战：业务复杂度高、决策链路长、用户角色多</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">数据</span>面向决策</div>
+          <ul class="cap-list">
+            <li><strong>数据产品经理</strong> · BI 看板、指标体系、数据中台</li>
+            <li><strong>策略产品经理</strong> · 推荐算法、风控规则、定价策略</li>
+            <li>核心能力：SQL、统计学、模型理解、指标设计</li>
+            <li>挑战：技术门槛高、效果难量化、与算法工程师强协作</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">AI</span>面向智能</div>
+          <ul class="cap-list">
+            <li><strong>AI 应用产品经理</strong> · ChatGPT、Notion AI 这类 AI 原生产品</li>
+            <li><strong>AI 平台产品经理</strong> · MLOps 平台、模型训练工具链</li>
+            <li>核心能力：Prompt 工程、Eval 设计、概率思维、AI 飞轮</li>
+            <li>挑战：技术快速演进、不确定性管理、与算法团队协作</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.5 一天的工作 -->
+    <div class="sub-section">
+      <h3 class="sub-title">1.5 真实一天：B 端产品经理的时间花在哪里</h3>
+      <p class="sub-desc">很多新人对产品经理的工作有美好幻想——以为是「思考产品方向、画原型、改变世界」。实际上，B 端 PM 的一天大概是这样的：</p>
+
+      <div class="layer-stack">
+        <div class="layer">
+          <div class="layer-tag">25%</div>
+          <div class="layer-content">
+            <div class="layer-name">业务调研与需求消化</div>
+            <div class="layer-desc">和业务方开会、跟一线员工 shadow、消化各种渠道来的需求、判断真伪、归类排期</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">25%</div>
+          <div class="layer-content">
+            <div class="layer-name">方案设计与文档输出</div>
+            <div class="layer-desc">画流程图、做原型、写 PRD、设计数据模型、定状态机、考虑异常分支</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">20%</div>
+          <div class="layer-content">
+            <div class="layer-name">跨角色沟通对齐</div>
+            <div class="layer-desc">需求评审、技术答疑、设计评审、方案讨论、向上汇报、横向同步</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">15%</div>
+          <div class="layer-content">
+            <div class="layer-name">项目推进与交付保障</div>
+            <div class="layer-desc">站会、跟开发进度、协调阻塞、验收测试、推动上线、应急响应</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">10%</div>
+          <div class="layer-content">
+            <div class="layer-name">数据复盘与决策</div>
+            <div class="layer-desc">看监控数据、做归因分析、回顾上一个版本效果、调整下一版优先级</div>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="layer-tag">5%</div>
+          <div class="layer-content">
+            <div class="layer-name">学习与战略思考</div>
+            <div class="layer-desc">看竞品、读行业报告、学新技术、独立思考产品方向 —— 最容易被挤压，但决定天花板的部分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================
+       Section 2: 产品所需要的业务能力
+       ======================================== -->
+  <section class="section" id="sec2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">产品经理需要的业务能力</h2>
+    </div>
+    <p class="section-lead">
+      "业务能力"不是技能列表，而是一个金字塔结构：底层是<strong>专业硬技能</strong>，中层是<strong>业务理解力</strong>，上层是<strong>商业与战略思维</strong>，再往上是难以替代的<strong>综合判断力</strong>。下面按从硬到软、从基础到高阶的顺序展开。
+    </p>
+
+    <!-- 2.1 硬技能层 -->
+    <div class="sub-section">
+      <h3 class="sub-title">2.1 第一层 · 专业硬技能（入门门槛）</h3>
+      <p class="sub-desc">这一层是产品经理的"基本功"，没有这些就没法和团队工作。新人 PM 主要在打磨这一层。</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">A</span>需求与文档</div>
+          <ul class="cap-list">
+            <li><strong>PRD 撰写</strong> · 结构化、清晰、可被开发直接实现</li>
+            <li><strong>原型设计</strong> · Figma / Axure / 草图工具</li>
+            <li><strong>流程图与时序图</strong> · 标准 BPMN / Mermaid</li>
+            <li><strong>用户故事</strong> · 用 user story 描述需求</li>
+            <li><strong>验收清单</strong> · 让交付有明确标准</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">B</span>系统设计</div>
+          <ul class="cap-list">
+            <li><strong>信息架构</strong> · 模块、菜单、权限的组织方式</li>
+            <li><strong>数据建模</strong> · 实体关系、状态机、字段设计</li>
+            <li><strong>异常路径</strong> · 不只想 happy path，更要想边界情况</li>
+            <li><strong>权限设计</strong> · RBAC / 数据权限 / 审批流</li>
+            <li><strong>接口理解</strong> · 看得懂 API 文档、知道 RESTful 基础</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">C</span>数据基础</div>
+          <ul class="cap-list">
+            <li><strong>SQL</strong> · 至少能写 SELECT + JOIN + GROUP BY</li>
+            <li><strong>埋点设计</strong> · 知道什么数据该记录、字段怎么定义</li>
+            <li><strong>指标体系</strong> · 北极星指标、过程指标、健康度指标</li>
+            <li><strong>看板设计</strong> · L0/L1/L2 分层、图表选型</li>
+            <li><strong>AB 测试</strong> · 假设、置信度、样本量</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">D</span>项目协作</div>
+          <ul class="cap-list">
+            <li><strong>需求评审主持</strong> · 控场、答疑、达成共识</li>
+            <li><strong>优先级排序</strong> · RICE、价值/效率矩阵、KANO</li>
+            <li><strong>敏捷流程</strong> · Scrum 节奏、Sprint 规划、回顾会</li>
+            <li><strong>风险识别</strong> · 提前发现阻塞、推动解决</li>
+            <li><strong>上下游对接</strong> · 设计、开发、测试、运营、业务</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.2 业务理解层 -->
+    <div class="sub-section">
+      <h3 class="sub-title">2.2 第二层 · 业务理解力（核心竞争力）</h3>
+      <p class="sub-desc">这一层决定一个 PM 能不能从"画图工人"升级到"业务伙伴"。B 端产品经理尤其要在这一层下功夫，因为业务复杂度本身就是壁垒。</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">A</span>业务流程拆解</div>
+          <ul class="cap-list">
+            <li>能从 0 画出公司的业务全景流程图</li>
+            <li>能识别<strong>跨角色的关键交接点</strong></li>
+            <li>能区分<strong>主流程 vs 异常分支</strong>的处理</li>
+            <li>能找出流程中的<strong>断点、效率瓶颈</strong></li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">B</span>角色场景洞察</div>
+          <ul class="cap-list">
+            <li>能为每个用户角色画清楚<strong>典型工作日</strong></li>
+            <li>知道每个角色的<strong>KPI、激励机制、痛点</strong></li>
+            <li>会做一线 shadow（跟班观察）而不是只听描述</li>
+            <li>识别<strong>说出来的需求 vs 真实需求</strong></li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">C</span>行业 know-how</div>
+          <ul class="cap-list">
+            <li>知道行业的<strong>专业术语和规则</strong></li>
+            <li>了解行业<strong>政策、监管、合规要求</strong></li>
+            <li>掌握<strong>行业头部玩家</strong>的产品形态</li>
+            <li>能预判<strong>行业 3-5 年趋势</strong></li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">D</span>跨业务整合力</div>
+          <ul class="cap-list">
+            <li>能看到<strong>不同模块之间的协同</strong></li>
+            <li>能识别<strong>业务间的数据流和事件流</strong></li>
+            <li>能设计<strong>统一抽象的能力中台</strong></li>
+            <li>能在<strong>定制化与标准化之间取舍</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 商业战略层 -->
+    <div class="sub-section">
+      <h3 class="sub-title">2.3 第三层 · 商业与战略思维（资深门槛）</h3>
+      <p class="sub-desc">这一层决定一个 PM 能不能升到产品总监、CPO。区分中级 PM 和高级 PM 最重要的就是这一层。</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">A</span>商业闭环思维</div>
+          <ul class="cap-list">
+            <li>能给每个功能<strong>算账</strong>：投入产出比</li>
+            <li>理解<strong>成本结构</strong>：人力、流量、运营、机会成本</li>
+            <li>理解<strong>收入模型</strong>：客单价、LTV、ARPU、毛利率</li>
+            <li>知道<strong>关键单位经济模型</strong>（Unit Economics）</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">B</span>战略思考力</div>
+          <ul class="cap-list">
+            <li>能从<strong>3 年视角</strong>看产品方向</li>
+            <li>能识别<strong>战略机会窗口</strong></li>
+            <li>能做<strong>差异化定位</strong>（白空间分析）</li>
+            <li>会用<strong>北极星指标</strong>统一团队方向</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">C</span>竞争与定位</div>
+          <ul class="cap-list">
+            <li>会做<strong>系统性竞品分析</strong></li>
+            <li>能识别行业<strong>护城河</strong>来源</li>
+            <li>知道何时<strong>跟随</strong>、何时<strong>差异化</strong></li>
+            <li>理解<strong>网络效应、规模效应、平台效应</strong></li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">D</span>组织与文化</div>
+          <ul class="cap-list">
+            <li>能<strong>建立和带教</strong>产品团队</li>
+            <li>能制定<strong>产品流程和规范</strong></li>
+            <li>能影响<strong>跨部门决策</strong></li>
+            <li>知道何时<strong>推动文化变革</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.4 软实力 -->
+    <div class="sub-section">
+      <h3 class="sub-title">2.4 贯穿三层的软实力（决定最终高度）</h3>
+      <p class="sub-desc">这些能力不属于任何单一层，但渗透在每一层。它们决定一个 PM 能走多远。</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">软</span>沟通与表达</div>
+          <ul class="cap-list">
+            <li>对高管讲<strong>商业 ROI</strong>，对工程师讲<strong>技术语言</strong>，对销售讲<strong>市场影响</strong></li>
+            <li>用<strong>故事 + 数据</strong>而不只是 PPT</li>
+            <li>面对<strong>分歧</strong>不躲闪、能引导对话</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">软</span>影响力与领导力</div>
+          <ul class="cap-list">
+            <li>不靠职权也能<strong>说服别人</strong></li>
+            <li>能<strong>建立跨部门信任</strong></li>
+            <li>遇到冲突<strong>不甩锅、找方案</strong></li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">软</span>批判性思维</div>
+          <ul class="cap-list">
+            <li>对一切声明<strong>问"为什么"</strong></li>
+            <li>区分<strong>事实 vs 观点 vs 假设</strong></li>
+            <li>用<strong>第一性原理</strong>思考问题</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">软</span>持续学习力</div>
+          <ul class="cap-list">
+            <li>每年<strong>学一门新技术</strong>（SQL、Python、AI）</li>
+            <li>每周<strong>读一本书 / 一个深度长文</strong></li>
+            <li>每月<strong>体验 5 个新产品</strong>，写感受</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================
+       Section 3: 产品需要了解的行业内容
+       ======================================== -->
+  <section class="section" id="sec3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">产品经理需要了解的行业内容</h2>
+    </div>
+    <p class="section-lead">
+      "懂行业"分四个圈层：内圈是<strong>所在公司业务</strong>，往外是<strong>所在垂直行业</strong>，再外是<strong>互联网/科技通识</strong>，最外是<strong>商业与社会大势</strong>。圈层越内，越是必须；越外，越决定天花板。
+    </p>
+
+    <!-- 3.1 公司业务 -->
+    <div class="sub-section">
+      <h3 class="sub-title">3.1 第一圈 · 所在公司的业务（必须懂到骨子里）</h3>
+      <p class="sub-desc">这是底线。一个 PM 如果对自己公司的业务都说不清楚，根本不配做决策。判断标准：能不能 30 分钟向新人讲清楚整个业务。</p>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">商业层</span>
+          <span class="domain-title">公司怎么赚钱</span>
+        </div>
+        <div class="domain-content">
+          公司的核心业务模式、收入来源、成本结构、利润水平、增长引擎是什么。每年的营收规模、客户结构、关键合作方、上下游关系。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">商业模式</span>
+          <span class="domain-tag">收入构成</span>
+          <span class="domain-tag">成本结构</span>
+          <span class="domain-tag">客户分层</span>
+          <span class="domain-tag">供应链</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">业务层</span>
+          <span class="domain-title">业务怎么运转</span>
+        </div>
+        <div class="domain-content">
+          完整的业务流程：从客户线索 → 转化 → 交付 → 服务的全链路。每个角色的职责、KPI、激励、痛点。流程中的断点、瓶颈、低效环节。各业务模块之间的协同方式。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">业务全景</span>
+          <span class="domain-tag">角色分工</span>
+          <span class="domain-tag">流程节点</span>
+          <span class="domain-tag">协同接口</span>
+          <span class="domain-tag">异常处理</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">组织层</span>
+          <span class="domain-title">公司怎么决策</span>
+        </div>
+        <div class="domain-content">
+          组织架构、汇报关系、决策链路、关键决策人。哪些事谁拍板、哪些事需要走流程、哪些事可以快速推进。各业务方的诉求和顾虑。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">组织架构</span>
+          <span class="domain-tag">决策机制</span>
+          <span class="domain-tag">关键干系人</span>
+          <span class="domain-tag">部门协同</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.2 行业 -->
+    <div class="sub-section">
+      <h3 class="sub-title">3.2 第二圈 · 所在垂直行业（决定专业度）</h3>
+      <p class="sub-desc">这是专业壁垒的来源。一个 5 年二手奢侈品 PM 比一个 5 年 SaaS PM 在二手奢侈品行业更值钱，原因就是这一层的积累。</p>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">行业格局</span>
+          <span class="domain-title">行业有谁、什么规模、走到哪里</span>
+        </div>
+        <div class="domain-content">
+          行业市场规模、增长率、CR5（前五名集中度）、头部玩家、新兴势力、细分赛道分布。中国 vs 海外格局差异。资本市场对这个行业的态度（融资、IPO、并购）。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">市场规模</span>
+          <span class="domain-tag">头部玩家</span>
+          <span class="domain-tag">细分赛道</span>
+          <span class="domain-tag">资本动向</span>
+          <span class="domain-tag">海外对标</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">专业知识</span>
+          <span class="domain-title">行业的"内行话"</span>
+        </div>
+        <div class="domain-content">
+          行业专业术语、特殊规则、潜规则。专业知识体系（比如二手奢侈品的鉴定方法、品相分级、定价模型、保养知识）。行业上下游生态：货源、加工、流通、回收、二级市场。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">专业术语</span>
+          <span class="domain-tag">行业规则</span>
+          <span class="domain-tag">品类知识</span>
+          <span class="domain-tag">上下游生态</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">监管合规</span>
+          <span class="domain-title">不能踩的红线</span>
+        </div>
+        <div class="domain-content">
+          行业监管政策、合规要求、税务规则、平台规则、消费者权益保护、知识产权要求。海外/跨境业务的特殊合规。所有这些都直接影响产品功能边界。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">监管政策</span>
+          <span class="domain-tag">税务合规</span>
+          <span class="domain-tag">数据安全</span>
+          <span class="domain-tag">消费者保护</span>
+          <span class="domain-tag">知识产权</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">竞品产品</span>
+          <span class="domain-title">行业头部产品长什么样</span>
+        </div>
+        <div class="domain-content">
+          系统性掌握 5-10 个头部竞品的产品形态：核心功能、设计模式、数据结构、商业模式、运营策略。能识别哪些是行业标准做法、哪些是差异化创新。每季度做一次 deep dive。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">竞品全景</span>
+          <span class="domain-tag">功能对比</span>
+          <span class="domain-tag">差异化点</span>
+          <span class="domain-tag">设计借鉴</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.3 互联网科技通识 -->
+    <div class="sub-section">
+      <h3 class="sub-title">3.3 第三圈 · 互联网与科技通识（决定视野）</h3>
+      <p class="sub-desc">这一层是产品经理的"通用底盘"——不管做什么行业，都需要懂。决定你能不能在跨场景中快速迁移。</p>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">技术认知</span>
+          <span class="domain-title">能和工程师对话的基本盘</span>
+        </div>
+        <div class="domain-content">
+          前后端基本架构、数据库（关系型 vs NoSQL）、API 与微服务、缓存、消息队列、CDN、容器化、云原生、DevOps 流程。不需要会写代码，但要听得懂工程师讨论的术语和权衡。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">前后端架构</span>
+          <span class="domain-tag">数据库基础</span>
+          <span class="domain-tag">API 设计</span>
+          <span class="domain-tag">云服务</span>
+          <span class="domain-tag">DevOps</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">AI 通识</span>
+          <span class="domain-title">2026 的必修课</span>
+        </div>
+        <div class="domain-content">
+          大模型基础（Transformer、LLM、Embedding）、RAG、Agent、Prompt 工程、Eval 评估、Fine-tuning、多模态。知道每种技术的适用场景、成本、可靠性边界。能区分"营销话术"和"实际能力"。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">LLM 原理</span>
+          <span class="domain-tag">RAG</span>
+          <span class="domain-tag">Agent</span>
+          <span class="domain-tag">Prompt</span>
+          <span class="domain-tag">Eval</span>
+          <span class="domain-tag">Fine-tuning</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">数据科学</span>
+          <span class="domain-title">数据驱动决策的底层</span>
+        </div>
+        <div class="domain-content">
+          统计学基础（均值、中位数、方差、显著性、置信区间）、AB 测试设计、漏斗分析、留存分析、归因分析、用户分群、机器学习基础概念（分类、回归、聚类、推荐）。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">统计学</span>
+          <span class="domain-tag">AB 测试</span>
+          <span class="domain-tag">分析方法</span>
+          <span class="domain-tag">ML 基础</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">设计与体验</span>
+          <span class="domain-title">和设计师同频</span>
+        </div>
+        <div class="domain-content">
+          设计原则（一致性、对比、留白、视觉层级）、交互模式、信息架构、可访问性、设计系统（Design System）、移动端设计规范、桌面端设计规范、用户体验地图（UX Map）。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">设计原则</span>
+          <span class="domain-tag">交互模式</span>
+          <span class="domain-tag">设计系统</span>
+          <span class="domain-tag">可访问性</span>
+          <span class="domain-tag">体验地图</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.4 商业社会 -->
+    <div class="sub-section">
+      <h3 class="sub-title">3.4 第四圈 · 商业与社会大势（决定天花板）</h3>
+      <p class="sub-desc">这一层是高级 PM 和产品总监级别该具备的视野——能从更大的尺度看产品在商业世界中的位置。</p>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">商业基础</span>
+          <span class="domain-title">商业世界的运行规律</span>
+        </div>
+        <div class="domain-content">
+          财务三张表（资产负债表、利润表、现金流量表）基本理解、关键财务指标（毛利率、净利率、ROE）、商业模式分类（订阅、平台、SaaS、广告、交易抽成）、公司估值方法、融资轮次。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">财务报表</span>
+          <span class="domain-tag">商业模式</span>
+          <span class="domain-tag">估值逻辑</span>
+          <span class="domain-tag">融资体系</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">营销与增长</span>
+          <span class="domain-title">用户从哪里来、怎么留下来</span>
+        </div>
+        <div class="domain-content">
+          AARRR 漏斗模型、品牌定位、定价策略、渠道分发、私域运营、内容营销、KOL 与种草、社区运营、用户生命周期管理。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">增长模型</span>
+          <span class="domain-tag">品牌定位</span>
+          <span class="domain-tag">定价策略</span>
+          <span class="domain-tag">渠道运营</span>
+          <span class="domain-tag">用户运营</span>
+        </div>
+      </div>
+
+      <div class="knowledge-domain">
+        <div class="domain-header">
+          <span class="domain-badge">趋势洞察</span>
+          <span class="domain-title">3-5 年的大势</span>
+        </div>
+        <div class="domain-content">
+          人口结构变化（老龄化、少子化、Z 世代崛起）、消费趋势（性价比、悦己消费、可持续）、技术演进（AI、Web3、机器人）、地缘政治对商业的影响、ESG 与可持续发展。
+        </div>
+        <div class="domain-tags">
+          <span class="domain-tag">人口趋势</span>
+          <span class="domain-tag">消费变化</span>
+          <span class="domain-tag">技术演进</span>
+          <span class="domain-tag">宏观环境</span>
+          <span class="domain-tag">ESG</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================
+       Section 4: 产品提升或者学习的路径
+       ======================================== -->
+  <section class="section" id="sec4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">产品经理的成长与学习路径</h2>
+    </div>
+    <p class="section-lead">
+      产品经理的成长不是线性的，而是<strong>螺旋上升</strong>的——同样的能力（如需求分析），新人和总监做的不是同一件事，而是同一类事的不同深度。下面给出从入门到资深的完整路径，每个阶段配明确的目标、典型任务、能力建设和学习资源。
+    </p>
+
+    <!-- 阶段 1 -->
+    <div class="path-stage">
+      <div class="path-header">
+        <div class="path-stage-num">1</div>
+        <div class="path-stage-info">
+          <div class="path-stage-title">入门期 · 学会基本动作</div>
+          <div class="path-stage-time">0–1 年 · 助理产品经理 / 产品专员</div>
+        </div>
+      </div>
+      <div class="path-body">
+        <div class="path-section">
+          <div class="path-section-title">阶段目标</div>
+          <div class="path-section-content">能独立完成一个小功能模块的全流程：从需求理解 → PRD 写作 → 原型设计 → 跟进开发 → 上线验收。</div>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">典型任务</div>
+          <ul class="path-list">
+            <li>跟着资深 PM 做需求收集和分析</li>
+            <li>独立画原型、写 PRD（小模块）</li>
+            <li>组织小型需求评审会</li>
+            <li>跟开发对接、跟测试对接、做上线验收</li>
+            <li>响应日常 bug、用户反馈</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">能力建设重点</div>
+          <ul class="path-list">
+            <li><strong>工具熟练度</strong>：Figma / Axure、PRD 模板、流程图工具</li>
+            <li><strong>沟通基本功</strong>：能清晰表达、会议纪要、追踪 todo</li>
+            <li><strong>产品基础</strong>：交互模式、信息架构、常见组件</li>
+            <li><strong>行业入门</strong>：了解所在公司的业务、用户、产品形态</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">推荐资源</div>
+          <ul class="path-list">
+            <li>书：《人人都是产品经理》苏杰、《俞军产品方法论》</li>
+            <li>课：人人都是产品经理基础课程、起点课堂入门课</li>
+            <li>实践：每周分析 1 个产品，写一份"如果我是这个 PM"的复盘</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阶段 2 -->
+    <div class="path-stage">
+      <div class="path-header">
+        <div class="path-stage-num">2</div>
+        <div class="path-stage-info">
+          <div class="path-stage-title">初级期 · 独立负责一个模块</div>
+          <div class="path-stage-time">1–3 年 · 产品经理</div>
+        </div>
+      </div>
+      <div class="path-body">
+        <div class="path-section">
+          <div class="path-section-title">阶段目标</div>
+          <div class="path-section-content">独立负责一个完整业务模块。能从问题发现走到上线复盘的全闭环，开始有自己对产品的判断。</div>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">典型任务</div>
+          <ul class="path-list">
+            <li>独立做用户访谈、竞品分析</li>
+            <li>独立设计完整模块（含数据模型、状态机）</li>
+            <li>主持需求评审、推动跨部门协作</li>
+            <li>制定模块的版本路线图</li>
+            <li>看数据看板、做 AB 测试、写复盘报告</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">能力建设重点</div>
+          <ul class="path-list">
+            <li><strong>系统设计</strong>：复杂场景的方案设计能力</li>
+            <li><strong>数据能力</strong>：会写 SQL、会用 BI 工具、能做归因分析</li>
+            <li><strong>用户洞察</strong>：开始做一线 shadow、用户访谈</li>
+            <li><strong>项目管理</strong>：能管多人协作的项目交付</li>
+            <li><strong>行业深度</strong>：在垂直领域有较深认知</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">推荐资源</div>
+          <ul class="path-list">
+            <li>书：《启示录》Marty Cagan、《用户体验要素》、《增长黑客》</li>
+            <li>课：三节课 P2/P3 课程、Reforge 入门课</li>
+            <li>实践：每月做一份用户访谈报告、每季度做一份竞品分析</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阶段 3 -->
+    <div class="path-stage">
+      <div class="path-header">
+        <div class="path-stage-num">3</div>
+        <div class="path-stage-info">
+          <div class="path-stage-title">中级期 · 跨模块整合</div>
+          <div class="path-stage-time">3–5 年 · 高级产品经理（你目前的位置）</div>
+        </div>
+      </div>
+      <div class="path-body">
+        <div class="path-section">
+          <div class="path-section-title">阶段目标</div>
+          <div class="path-section-content">能负责多个模块或一个完整产品线。开始做架构性决策、参与产品战略。能影响业务方和管理层的决策。</div>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">典型任务</div>
+          <ul class="path-list">
+            <li>设计跨模块的产品架构（如 ERP 全域架构）</li>
+            <li>制定产品线的中长期路线图</li>
+            <li>主导从 0 到 1 的新产品 / 新方向</li>
+            <li>做商业价值评估、ROI 测算</li>
+            <li>带教 1-2 个初级 PM</li>
+            <li>面对高管做产品汇报</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">能力建设重点</div>
+          <ul class="path-list">
+            <li><strong>架构能力</strong>：能从全局视角看模块协同</li>
+            <li><strong>商业思维</strong>：每个功能能算账、能讲商业价值</li>
+            <li><strong>战略思考</strong>：3 年视角、白空间分析</li>
+            <li><strong>影响力</strong>：跨部门推动、向上汇报</li>
+            <li><strong>团队建设</strong>：开始带人、做招聘</li>
+            <li><strong>AI 能力</strong>：vibe coding、prompt 工程、AI 飞轮设计</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">推荐资源</div>
+          <ul class="path-list">
+            <li>书：《赋能》Marty Cagan、《Continuous Discovery Habits》Teresa Torres、《Escaping the Build Trap》Melissa Perri</li>
+            <li>音频：Lenny's Podcast（每周必听）、SVPG 播客</li>
+            <li>实践：建立决策日志、每周写产品复盘、每月公开输出 1 篇深度文章</li>
+            <li>行动：vibe-code 一个真实产品 MVP，重塑对开发协作的认知</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阶段 4 -->
+    <div class="path-stage">
+      <div class="path-header">
+        <div class="path-stage-num">4</div>
+        <div class="path-stage-info">
+          <div class="path-stage-title">资深期 · 产品方向负责</div>
+          <div class="path-stage-time">5–8 年 · 产品专家 / 产品负责人</div>
+        </div>
+      </div>
+      <div class="path-body">
+        <div class="path-section">
+          <div class="path-section-title">阶段目标</div>
+          <div class="path-section-content">对一个完整产品方向负责，对商业结果负责。能定战略、带团队、影响组织。</div>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">典型任务</div>
+          <ul class="path-list">
+            <li>制定产品 3 年战略和年度规划</li>
+            <li>带 5-15 人产品团队</li>
+            <li>对核心业务指标（GMV、毛利、留存）负责</li>
+            <li>主导跨部门战略项目</li>
+            <li>建立和迭代产品流程、规范、文化</li>
+            <li>对外有行业影响力（演讲、文章、社群）</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">能力建设重点</div>
+          <ul class="path-list">
+            <li><strong>战略制定</strong>：从市场分析到产品战略的完整能力</li>
+            <li><strong>组织能力</strong>：团队招聘、培养、文化建设</li>
+            <li><strong>商业全局</strong>：财务、运营、营销、销售一体化思考</li>
+            <li><strong>领导力</strong>：影响 CEO、CTO、销售 VP 等同级</li>
+            <li><strong>个人品牌</strong>：在行业内被认知</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">推荐资源</div>
+          <ul class="path-list">
+            <li>书：《Transformed》Marty Cagan、《好战略，坏战略》、《精益创业》</li>
+            <li>课程：Reforge 高阶课、混沌大学、长江商学院</li>
+            <li>实践：建立产品团队、制定团队 OKR、每年至少 1 次行业演讲</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 阶段 5 -->
+    <div class="path-stage">
+      <div class="path-header">
+        <div class="path-stage-num">5</div>
+        <div class="path-stage-info">
+          <div class="path-stage-title">总监 / VP / CPO 期 · 业务负责</div>
+          <div class="path-stage-time">8 年+ · 产品总监 / VP / CPO</div>
+        </div>
+      </div>
+      <div class="path-body">
+        <div class="path-section">
+          <div class="path-section-title">阶段目标</div>
+          <div class="path-section-content">对一个完整业务（甚至公司）的产品体系负责。从产品出发，影响公司战略和商业结果。</div>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">典型任务</div>
+          <ul class="path-list">
+            <li>参与公司战略制定，对 CEO 负责</li>
+            <li>带 30+ 人产品团队</li>
+            <li>对 BU 营收、利润负责</li>
+            <li>决定公司的产品文化、流程、组织形态</li>
+            <li>在董事会层面汇报和影响决策</li>
+            <li>对外代表公司</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">能力建设重点</div>
+          <ul class="path-list">
+            <li><strong>商业领导</strong>：CEO 视角看产品、看业务</li>
+            <li><strong>组织设计</strong>：搭建产品组织、流程、文化</li>
+            <li><strong>资本市场</strong>：估值、融资、IPO、并购</li>
+            <li><strong>行业领袖</strong>：成为行业的"声音"</li>
+          </ul>
+        </div>
+        <div class="path-section">
+          <div class="path-section-title">推荐资源</div>
+          <ul class="path-list">
+            <li>这一层主要靠实战和复盘，书和课的边际效用降低</li>
+            <li>建议：找 1-2 个比你高 10 年的导师，定期请教</li>
+            <li>建议：开始系统性地"反向带教"——通过教别人来精进自己</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4.6 学习方法论 -->
+    <div class="sub-section" style="margin-top: 32px;">
+      <h3 class="sub-title">4.6 通用学习方法论：所有阶段都适用</h3>
+      <p class="sub-desc">不管在哪个阶段，下面这些方法论都能让你的成长效率翻倍。</p>
+
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">输入</span>读、看、听</div>
+          <ul class="cap-list">
+            <li><strong>每周深度阅读</strong>：1 本书 / 1 篇长文，做笔记</li>
+            <li><strong>每天信息输入</strong>：Lenny's Newsletter、SVPG 文章、行业公众号</li>
+            <li><strong>每月体验产品</strong>：5 个新产品，写 500 字感受</li>
+            <li><strong>每季度系统扫描</strong>：竞品 deep dive、行业报告</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">实践</span>做、试、改</div>
+          <ul class="cap-list">
+            <li><strong>主项目作为成长场</strong>：每个 sprint 刻意练习一项能力</li>
+            <li><strong>副项目作为试验田</strong>：业余做点小项目（如你的"决断力"）</li>
+            <li><strong>小步快跑</strong>：先动起来再优化，不要等想清楚</li>
+            <li><strong>主动揽活</strong>：找最难的活干，难的事会逼你成长</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">反思</span>记、复、悟</div>
+          <ul class="cap-list">
+            <li><strong>决策日志</strong>：每个重要决策记录依据，3 个月回看</li>
+            <li><strong>周复盘</strong>：每周写 1 篇复盘，做了什么、错在哪</li>
+            <li><strong>项目复盘</strong>：每个项目结束做 PostMortem</li>
+            <li><strong>年度回顾</strong>：年底回看一年的成长曲线</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <div class="cap-card-title"><span class="cap-card-num">输出</span>讲、写、教</div>
+          <ul class="cap-list">
+            <li><strong>给同事讲</strong>：内部技术分享是最好的复习方式</li>
+            <li><strong>对外写作</strong>：公众号 / 小红书 / 即刻 输出深度内容</li>
+            <li><strong>带新人</strong>：教会一个人比自己学 10 倍更深</li>
+            <li><strong>做公开演讲</strong>：参加行业大会、做主题分享</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4.7 推荐书单 -->
+    <div class="sub-section">
+      <h3 class="sub-title">4.7 完整书单：按主题分类</h3>
+      <p class="sub-desc">不必全读。按你当前阶段挑 3-5 本，深度精读，胜过囫囵吞 30 本。</p>
+
+      <div class="reading-grid">
+        <div class="reading-item">
+          <span class="reading-tag">入门</span>
+          <span class="reading-title">人人都是产品经理</span>
+          <div class="reading-author">苏杰</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">入门</span>
+          <span class="reading-title">俞军产品方法论</span>
+          <div class="reading-author">俞军</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">经典</span>
+          <span class="reading-title">启示录 · INSPIRED</span>
+          <div class="reading-author">Marty Cagan · 中文版已出</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">经典</span>
+          <span class="reading-title">赋能 · EMPOWERED</span>
+          <div class="reading-author">Marty Cagan</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">经典</span>
+          <span class="reading-title">Transformed</span>
+          <div class="reading-author">Marty Cagan · 仅英文版</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">用户洞察</span>
+          <span class="reading-title">Continuous Discovery Habits</span>
+          <div class="reading-author">Teresa Torres</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">商业思维</span>
+          <span class="reading-title">Escaping the Build Trap</span>
+          <div class="reading-author">Melissa Perri</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">用户体验</span>
+          <span class="reading-title">用户体验要素</span>
+          <div class="reading-author">Jesse James Garrett</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">增长</span>
+          <span class="reading-title">增长黑客</span>
+          <div class="reading-author">范冰 · Sean Ellis</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">创业</span>
+          <span class="reading-title">精益创业</span>
+          <div class="reading-author">Eric Ries</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">战略</span>
+          <span class="reading-title">好战略，坏战略</span>
+          <div class="reading-author">Richard Rumelt</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">B 端</span>
+          <span class="reading-title">决胜 B 端</span>
+          <div class="reading-author">杨堃</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">B 端</span>
+          <span class="reading-title">B 端产品经理必修课</span>
+          <div class="reading-author">司马特小队</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">数据</span>
+          <span class="reading-title">数据化管理</span>
+          <div class="reading-author">黄成明</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">数据</span>
+          <span class="reading-title">精益数据分析</span>
+          <div class="reading-author">Alistair Croll</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">思维</span>
+          <span class="reading-title">穷查理宝典</span>
+          <div class="reading-author">Charlie Munger</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">思维</span>
+          <span class="reading-title">思考，快与慢</span>
+          <div class="reading-author">Daniel Kahneman</div>
+        </div>
+        <div class="reading-item">
+          <span class="reading-tag">沟通</span>
+          <span class="reading-title">关键对话</span>
+          <div class="reading-author">Kerry Patterson</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== Closing ===== -->
+  <div class="closing">
+    <div class="closing-quote">
+      "产品经理不是一个职位，而是一种思考方式。<br>
+      它要求你同时拥有商人的算盘、工程师的逻辑、设计师的同理心、和艺术家的直觉。"
+    </div>
+    <div class="closing-author">— A SUMMARY OF WHAT IT REALLY MEANS TO BE A PM</div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer-divider"></div>
+    <p>产品经理全景认知地图 · 职能 · 能力 · 行业 · 成长路径</p>
+    <p>For 朗格 · 中古优品 ERP 重构 · 2026.05</p>
+    <p style="margin-top:12px; font-family:var(--font-mono); font-size:11px; color:var(--text-tertiary); letter-spacing:0.5px;">— THE BEST PRODUCT MANAGERS NEVER STOP LEARNING —</p>
+  </footer>
+
+</div>
+</body>
+</html>
