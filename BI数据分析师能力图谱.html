@@ -1,0 +1,3059 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BI 数据分析师能力图谱与学习清单</title>
+<style>
+:root {
+  --brand-primary: #3370FF;
+  --brand-primary-hover: #5589FF;
+  --brand-primary-active: #245BDB;
+  --brand-primary-bg: #E8F3FF;
+  --brand-primary-border: #94BFFF;
+
+  --text-primary: #1F2329;
+  --text-secondary: #4E5969;
+  --text-tertiary: #86909C;
+  --text-disabled: #C9CDD4;
+  --text-inverse: #FFFFFF;
+  --bg-page: #F2F3F5;
+  --bg-card: #FFFFFF;
+  --bg-secondary: #FAFBFC;
+  --bg-hover: #F5F6F7;
+  --border-base: #E5E6EB;
+  --border-light: #F2F3F5;
+
+  --success: #00B42A;
+  --success-bg: #E8FFEA;
+  --warning: #FF7D00;
+  --warning-bg: #FFF7E8;
+  --danger: #F53F3F;
+  --danger-bg: #FFECE8;
+  --purple: #722ED1;
+  --purple-bg: #F5E8FF;
+  --cyan: #14C9C9;
+  --cyan-bg: #E8FFFB;
+  --gold: #D4A24C;
+  --gold-bg: #FFF7E8;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { font-family: var(--font-sans); color: var(--text-primary); background: var(--bg-page); -webkit-font-smoothing: antialiased; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+a { color: var(--brand-primary); text-decoration: none; }
+a:hover { color: var(--brand-primary-hover); text-decoration: underline; }
+
+/* ============ 顶部导航 ============ */
+.header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-base);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #3370FF 0%, #14C9C9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.brand-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+.brand-subtitle {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+.header-stats {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.stat-value {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--brand-primary);
+  line-height: 1.2;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* ============ Tab 切换 ============ */
+.tabs {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-base);
+  position: sticky;
+  top: 69px;
+  z-index: 99;
+}
+.tabs-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+.tab-btn {
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-btn:hover { color: var(--brand-primary); }
+.tab-btn.active {
+  color: var(--brand-primary);
+  border-bottom-color: var(--brand-primary);
+}
+.tab-btn .count {
+  font-size: 12px;
+  background: var(--border-light);
+  color: var(--text-tertiary);
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+}
+.tab-btn.active .count {
+  background: var(--brand-primary-bg);
+  color: var(--brand-primary);
+}
+
+/* ============ 主体内容 ============ */
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ 能力图谱卡片 ============ */
+.intro-banner {
+  background: linear-gradient(135deg, #E8F3FF 0%, #F5E8FF 100%);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-light);
+}
+.intro-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.intro-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.intro-desc .highlight {
+  color: var(--brand-primary);
+  font-weight: 500;
+}
+.intro-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.intro-tag {
+  font-size: 12px;
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  color: var(--text-secondary);
+}
+
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+.domain-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.domain-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--card-color, var(--brand-primary));
+  transition: width 0.25s ease;
+  pointer-events: none;
+}
+.domain-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--card-color, var(--brand-primary));
+}
+.domain-card:hover::before { width: 100%; opacity: 0.04; }
+
+.domain-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.domain-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg, var(--brand-primary-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.domain-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.domain-name-sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+.domain-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  min-height: 60px;
+}
+.domain-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.chip {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  border-radius: 4px;
+}
+.domain-tiers {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-light);
+}
+.tier-stat {
+  flex: 1;
+  text-align: center;
+}
+.tier-num {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  line-height: 1.2;
+}
+.tier-num.junior { color: var(--success); }
+.tier-num.mid { color: var(--warning); }
+.tier-num.senior { color: var(--danger); }
+.tier-name {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+/* 卡片颜色主题 */
+.theme-foundation { --card-color: #3370FF; --card-bg: #E8F3FF; }
+.theme-business   { --card-color: #722ED1; --card-bg: #F5E8FF; }
+.theme-sql        { --card-color: #14C9C9; --card-bg: #E8FFFB; }
+.theme-excel      { --card-color: #00B42A; --card-bg: #E8FFEA; }
+.theme-python     { --card-color: #165DFF; --card-bg: #E8F3FF; }
+.theme-stats      { --card-color: #F7BA1E; --card-bg: #FFF7E8; }
+.theme-viz        { --card-color: #FF7D00; --card-bg: #FFF7E8; }
+.theme-bi         { --card-color: #D91AD9; --card-bg: #FCE8FC; }
+.theme-warehouse  { --card-color: #4080FF; --card-bg: #E8F3FF; }
+.theme-ml         { --card-color: #F53F3F; --card-bg: #FFECE8; }
+.theme-ai         { --card-color: #00B2A9; --card-bg: #E8FFFB; }
+.theme-soft       { --card-color: #D4A24C; --card-bg: #FFF7E8; }
+
+/* ============ 学习清单 ============ */
+.list-toolbar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.search-box {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 36px;
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--bg-secondary);
+}
+.search-box input:focus {
+  border-color: var(--brand-primary);
+  background: var(--bg-card);
+}
+.search-box::before {
+  content: '🔍';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.5;
+}
+.filter-group {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-page);
+  padding: 4px;
+  border-radius: var(--radius-md);
+}
+.filter-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+.filter-btn:hover { color: var(--brand-primary); }
+.filter-btn.active {
+  background: var(--bg-card);
+  color: var(--brand-primary);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+}
+.progress-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.progress-info .num {
+  color: var(--brand-primary);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.skill-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.section-header {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.section-header:hover { background: var(--bg-hover); }
+.section-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg, var(--brand-primary-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+.section-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  display: flex;
+  gap: 12px;
+}
+.section-meta .progress-bar {
+  width: 80px;
+  height: 6px;
+  background: var(--border-light);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  top: 2px;
+}
+.section-meta .progress-fill {
+  height: 100%;
+  background: var(--card-color, var(--brand-primary));
+  transition: width 0.3s;
+}
+.expand-icon {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  transition: transform 0.2s;
+}
+.skill-section.expanded .expand-icon { transform: rotate(90deg); }
+.section-body {
+  display: none;
+  border-top: 1px solid var(--border-light);
+  padding: 8px 0;
+}
+.skill-section.expanded .section-body { display: block; }
+
+.skill-item {
+  padding: 12px 20px 12px 64px;
+  border-bottom: 1px solid var(--border-light);
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  position: relative;
+}
+.skill-item:last-child { border-bottom: none; }
+.skill-item:hover { background: var(--bg-secondary); }
+.skill-check {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border-base);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.skill-check:hover { border-color: var(--brand-primary); }
+.skill-check.checked {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+.skill-check.checked::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+.skill-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.skill-item.checked .skill-name {
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+.skill-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.6;
+}
+.skill-resources {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.resource-link {
+  font-size: 12px;
+  color: var(--brand-primary);
+  padding: 2px 8px;
+  background: var(--brand-primary-bg);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.resource-link:hover { background: #D6E4FF; text-decoration: none; }
+.resource-link .rtype {
+  font-size: 10px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+.tier-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.tier-badge.junior { background: var(--success-bg); color: var(--success); }
+.tier-badge.mid { background: var(--warning-bg); color: var(--warning); }
+.tier-badge.senior { background: var(--danger-bg); color: var(--danger); }
+
+.must-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  background: #FFECE8;
+  color: #F53F3F;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* ============ 评估标准 Tab ============ */
+.eval-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 900px) {
+  .eval-grid { grid-template-columns: 1fr; }
+}
+.eval-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.eval-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--card-color);
+  pointer-events: none;
+}
+.eval-card.junior { --card-color: #00B42A; --card-bg: #E8FFEA; }
+.eval-card.mid    { --card-color: #FF7D00; --card-bg: #FFF7E8; }
+.eval-card.senior { --card-color: #F53F3F; --card-bg: #FFECE8; }
+.eval-level {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.eval-level-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.eval-level-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.eval-level-en {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+.eval-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+.eval-row:last-of-type { border-bottom: none; }
+.eval-label { color: var(--text-tertiary); }
+.eval-value { color: var(--text-primary); font-weight: 500; }
+.eval-desc {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.eval-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.eval-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.eval-section h3::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background: var(--brand-primary);
+  border-radius: 2px;
+}
+.eval-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.eval-table th, .eval-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+.eval-table th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 12px;
+}
+.eval-table tr:hover td { background: var(--bg-hover); }
+.eval-table td.center { text-align: center; }
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 2px;
+}
+.dot.filled.junior { background: var(--success); }
+.dot.filled.mid { background: var(--warning); }
+.dot.filled.senior { background: var(--danger); }
+.dot.empty { background: var(--border-base); }
+
+/* ============ 面试题库 ============ */
+.interview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.interview-header {
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+  transition: background 0.2s;
+}
+.interview-header:hover { background: var(--bg-hover); }
+.interview-q {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.interview-card.expanded .expand-icon { transform: rotate(90deg); }
+.interview-body {
+  display: none;
+  padding: 0 20px 16px 20px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+}
+.interview-card.expanded .interview-body { display: block; }
+.interview-section {
+  margin-bottom: 12px;
+}
+.interview-section-title {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.interview-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  background: var(--bg-secondary);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--brand-primary);
+}
+.interview-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--brand-primary-bg);
+  color: var(--brand-primary);
+  border-radius: 10px;
+}
+
+/* ============ 路径规划 ============ */
+.path-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .path-container { grid-template-columns: 1fr; }
+}
+.path-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+}
+.path-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+.path-num {
+  width: 28px;
+  height: 28px;
+  background: var(--brand-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.path-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+.path-duration {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+.path-goal {
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.path-items {
+  list-style: none;
+}
+.path-items li {
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  line-height: 1.6;
+}
+.path-items li::before {
+  content: '○';
+  color: var(--brand-primary);
+  flex-shrink: 0;
+}
+
+/* ============ 响应式 ============ */
+@media (max-width: 700px) {
+  .header-inner { padding: 12px 16px; }
+  .tabs-inner { padding: 0 16px; }
+  .main { padding: 16px; }
+  .header-stats { display: none; }
+  .brand-subtitle { display: none; }
+  .domain-grid { grid-template-columns: 1fr; }
+  .skill-item { padding: 12px 16px 12px 44px; }
+  .section-header { padding: 12px 16px; }
+  .tab-btn { padding: 12px 10px; font-size: 13px; }
+  .filter-group { flex-wrap: wrap; }
+  .intro-banner { padding: 16px; }
+  .intro-title { font-size: 16px; }
+  .intro-desc { font-size: 13px; }
+}
+
+/* ============ 滚动条 ============ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #C9CDD4; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #86909C; }
+
+/* ============ 补充样式（与 app.js 输出对齐） ============ */
+
+/* tab 通用顶部说明 */
+.tab-intro {
+  background: linear-gradient(135deg, #F0F5FF 0%, #FFFFFF 100%);
+  border: 1px solid var(--brand-primary-border);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+.tab-intro h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.tab-intro p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.tab-intro b { color: var(--brand-primary); font-weight: 600; }
+
+.section-h3 {
+  margin: 32px 0 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.section-desc {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+}
+
+/* 能力域卡片 - 网格 */
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.domain-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-top: 3px solid var(--card-color, var(--brand-primary));
+  display: flex;
+  flex-direction: column;
+}
+.domain-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--card-color, var(--brand-primary));
+}
+.domain-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.domain-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--card-bg, var(--brand-primary-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.domain-title h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.domain-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+.domain-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.chip {
+  font-size: 12px;
+  padding: 2px 8px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-base);
+}
+.tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-base);
+  margin-bottom: 12px;
+}
+.tier-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 12px;
+}
+.tier-tag {
+  flex-shrink: 0;
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  height: 18px;
+  line-height: 16px;
+}
+.tier-tag.tier-junior { background: var(--success-bg); color: var(--success); }
+.tier-tag.tier-mid { background: var(--warning-bg); color: var(--warning); }
+.tier-tag.tier-senior { background: var(--danger-bg); color: var(--danger); }
+.tier-desc {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.domain-foot {
+  font-size: 12px;
+  color: var(--card-color, var(--brand-primary));
+  font-weight: 500;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+/* tier-badge 统一类名 */
+.tier-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+}
+.tier-badge.tier-junior { background: var(--success-bg); color: var(--success); }
+.tier-badge.tier-mid { background: var(--warning-bg); color: var(--warning); }
+.tier-badge.tier-senior { background: var(--danger-bg); color: var(--danger); }
+
+.must-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid #FBACA3;
+}
+
+/* 学习清单 控件 */
+.list-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--bg-card);
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-base);
+  margin-bottom: 16px;
+}
+.search-input {
+  flex: 1;
+  min-width: 240px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--bg-secondary);
+  font-family: inherit;
+}
+.search-input:focus {
+  border-color: var(--brand-primary);
+  background: var(--bg-card);
+}
+.filter-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.filter-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.must-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+.must-toggle input { cursor: pointer; }
+.ghost-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.ghost-btn:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* 学习清单 section */
+.domain-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.domain-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  cursor: pointer;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid transparent;
+  transition: background 0.2s;
+}
+.domain-section-head:hover { background: var(--bg-hover); }
+.domain-section.expanded .domain-section-head { border-bottom-color: var(--border-base); }
+.dsh-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dsh-icon {
+  font-size: 18px;
+}
+.dsh-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.dsh-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  background: var(--bg-card);
+  padding: 1px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-base);
+}
+.dsh-toggle {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+.domain-section.expanded .dsh-toggle { transform: rotate(180deg); }
+.domain-section-body { display: none; padding: 8px 18px 14px 18px; }
+.domain-section.expanded .domain-section-body { display: block; }
+
+/* 单条 skill item */
+.skill-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--border-light);
+}
+.skill-item:last-child { border-bottom: none; }
+.skill-check {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-base);
+  background: var(--bg-card);
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  margin-top: 2px;
+}
+.skill-check:hover {
+  border-color: var(--brand-primary);
+  background: var(--brand-primary-bg);
+}
+.skill-check svg {
+  width: 14px;
+  height: 14px;
+  color: transparent;
+  transition: color 0.15s;
+}
+.skill-check.checked {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+.skill-check.checked svg { color: #FFFFFF; }
+.skill-check.checked::after { content: none; }
+.skill-body { flex: 1; min-width: 0; }
+.skill-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.skill-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.skill-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+.skill-resources {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+.skill-resources li {
+  font-size: 12px;
+}
+.skill-resources a {
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+.skill-resources a:hover { text-decoration: underline; }
+.skill-resources span {
+  color: var(--text-tertiary);
+}
+
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+}
+
+/* 评估标准 */
+.eval-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.eval-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  border-top: 4px solid var(--card-color, var(--brand-primary));
+}
+.eval-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+.eval-level {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--card-color, var(--brand-primary));
+}
+.eval-salary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--card-bg, var(--brand-primary-bg));
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+}
+.eval-title {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.eval-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border-base);
+}
+.eval-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+.eval-criteria-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.eval-criteria {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.eval-criteria li {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  padding-left: 16px;
+  position: relative;
+}
+.eval-criteria li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--card-color, var(--brand-primary));
+  font-weight: 700;
+}
+
+/* 评估打分表 */
+.rubric-wrap {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-base);
+  overflow-x: auto;
+}
+.rubric-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.rubric-table th {
+  background: var(--bg-secondary);
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 13px;
+  border-bottom: 2px solid var(--border-base);
+  white-space: nowrap;
+}
+.rubric-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.rubric-table tr:last-child td { border-bottom: none; }
+.rubric-table tr:hover { background: var(--bg-hover); }
+.rubric-dim {
+  font-weight: 600;
+  color: var(--text-primary) !important;
+  white-space: nowrap;
+}
+.rubric-weight {
+  color: var(--brand-primary) !important;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: center;
+}
+.rubric-cell { min-width: 140px; }
+.rubric-text { font-size: 12.5px; line-height: 1.6; }
+
+/* 面试题库 */
+.iv-group { margin-bottom: 28px; }
+.iv-group-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-base);
+}
+.iv-group-title span:last-child {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+.interview-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-lg);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.iv-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 14px 18px;
+  cursor: pointer;
+  gap: 12px;
+  transition: background 0.15s;
+}
+.iv-head:hover { background: var(--bg-hover); }
+.iv-q {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+.iv-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-primary);
+  background: var(--brand-primary-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.iv-text {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-weight: 500;
+}
+.iv-tags {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.iv-tag {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  background: var(--bg-secondary);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+.iv-arrow {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  transition: transform 0.2s;
+}
+.interview-card.expanded .iv-arrow { transform: rotate(180deg); }
+.iv-body {
+  display: none;
+  padding: 0 18px 16px 18px;
+  border-top: 1px dashed var(--border-base);
+  padding-top: 14px;
+}
+.interview-card.expanded .iv-body { display: block; }
+.iv-section { margin-bottom: 12px; }
+.iv-section:last-child { margin-bottom: 0; }
+.iv-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.iv-section-content {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  white-space: pre-wrap;
+}
+
+/* 成长路径 */
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+.path-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  border-top: 4px solid var(--card-color, var(--brand-primary));
+}
+.path-head { margin-bottom: 12px; }
+.path-stage {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.path-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+.path-goal {
+  background: var(--card-bg, var(--brand-primary-bg));
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.path-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.path-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-left: 0;
+}
+.path-item-week {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--card-color, var(--brand-primary));
+  background: var(--card-bg, var(--brand-primary-bg));
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  min-width: 60px;
+  text-align: center;
+  margin-top: 2px;
+}
+.path-item-body { flex: 1; }
+.path-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.path-item-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* 移动端 */
+@media (max-width: 700px) {
+  .domain-grid, .eval-grid, .path-grid { grid-template-columns: 1fr; }
+  .list-controls { flex-direction: column; align-items: stretch; }
+  .search-input { min-width: 0; }
+  .iv-head { flex-direction: column; }
+  .iv-tags { justify-content: flex-start; }
+  .tab-intro { padding: 16px; }
+  .tab-intro h2 { font-size: 18px; }
+}
+
+/* ============ 评分表 dots & 评估卡补充 ============ */
+.dot.filled { background: var(--brand-primary); }
+.dots {
+  display: inline-flex;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+.score-num {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.rubric-table .th-junior { color: var(--success); }
+.rubric-table .th-mid { color: var(--warning); }
+.rubric-table .th-senior { color: var(--danger); }
+
+/* eval-card theme by tier */
+.eval-card.theme-junior { border-top-color: var(--success); }
+.eval-card.theme-junior .eval-level { color: var(--success); }
+.eval-card.theme-junior .eval-salary { background: var(--success-bg); color: var(--success); }
+.eval-card.theme-junior .eval-criteria li::before { color: var(--success); }
+
+.eval-card.theme-mid { border-top-color: var(--warning); }
+.eval-card.theme-mid .eval-level { color: var(--warning); }
+.eval-card.theme-mid .eval-salary { background: var(--warning-bg); color: var(--warning); }
+.eval-card.theme-mid .eval-criteria li::before { color: var(--warning); }
+
+.eval-card.theme-senior { border-top-color: var(--danger); }
+.eval-card.theme-senior .eval-level { color: var(--danger); }
+.eval-card.theme-senior .eval-salary { background: var(--danger-bg); color: var(--danger); }
+.eval-card.theme-senior .eval-criteria li::before { color: var(--danger); }
+
+.eval-head-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eval-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+.eval-en {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+.eval-must {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--danger);
+  background: var(--danger-bg);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  margin: 12px 0;
+  display: inline-block;
+}
+.eval-criteria li {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0 6px 18px;
+  border-bottom: 1px dashed var(--border-light);
+}
+.eval-criteria li:last-child { border-bottom: none; }
+.eval-dim {
+  flex-shrink: 0;
+  width: 80px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+.eval-dim-desc {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* path-card theme by tier */
+.path-card.theme-junior { border-top-color: var(--success); }
+.path-card.theme-junior .path-stage { color: var(--success); }
+.path-card.theme-junior .path-goal { background: var(--success-bg); border-left: 3px solid var(--success); }
+.path-card.theme-junior .path-item-num { background: var(--success); color: #fff; }
+
+.path-card.theme-mid { border-top-color: var(--warning); }
+.path-card.theme-mid .path-stage { color: var(--warning); }
+.path-card.theme-mid .path-goal { background: var(--warning-bg); border-left: 3px solid var(--warning); }
+.path-card.theme-mid .path-item-num { background: var(--warning); color: #fff; }
+
+.path-card.theme-senior { border-top-color: var(--danger); }
+.path-card.theme-senior .path-stage { color: var(--danger); }
+.path-card.theme-senior .path-goal { background: var(--danger-bg); border-left: 3px solid var(--danger); }
+.path-card.theme-senior .path-item-num { background: var(--danger); color: #fff; }
+
+.path-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.path-stage {
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+.path-duration {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+.path-goal {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+.path-goal b { color: inherit; }
+.path-items-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.path-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.path-items li::before { content: none; }
+.path-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding-left: 0 !important;
+}
+.path-item-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.path-item-text {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* 面试题 group title 补充 */
+.iv-group-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.iv-group-count {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+  margin-left: auto;
+}
+
+/* domain meta 中的英文标签 */
+.en-tag {
+  color: var(--text-tertiary);
+  font-style: italic;
+  font-size: 11px;
+}
+
+/* skill 资源类型前缀 */
+.res-type {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+.res-text {
+  color: var(--text-secondary);
+}
+
+/* 学习清单 domain-section 按主题 left-border */
+.domain-section.theme-foundation { border-left: 3px solid #3370FF; }
+.domain-section.theme-business { border-left: 3px solid #F53F3F; }
+.domain-section.theme-sql { border-left: 3px solid #14C9C9; }
+.domain-section.theme-excel { border-left: 3px solid #00B42A; }
+.domain-section.theme-python { border-left: 3px solid #FFC53D; }
+.domain-section.theme-stats { border-left: 3px solid #722ED1; }
+.domain-section.theme-viz { border-left: 3px solid #FF7D00; }
+.domain-section.theme-bi { border-left: 3px solid #2DCEAA; }
+.domain-section.theme-warehouse { border-left: 3px solid #4E5969; }
+.domain-section.theme-ml { border-left: 3px solid #B71DE8; }
+.domain-section.theme-ai { border-left: 3px solid #D4A24C; }
+.domain-section.theme-soft { border-left: 3px solid #57A9FB; }
+
+/* domain-card 按 theme 着色 */
+.domain-card.theme-foundation { border-top-color: #3370FF; }
+.domain-card.theme-foundation .domain-icon { background: #E8F3FF; }
+.domain-card.theme-foundation .domain-foot { color: #3370FF; }
+.domain-card.theme-business { border-top-color: #F53F3F; }
+.domain-card.theme-business .domain-icon { background: #FFECE8; }
+.domain-card.theme-business .domain-foot { color: #F53F3F; }
+.domain-card.theme-sql { border-top-color: #14C9C9; }
+.domain-card.theme-sql .domain-icon { background: #E8FFFB; }
+.domain-card.theme-sql .domain-foot { color: #14C9C9; }
+.domain-card.theme-excel { border-top-color: #00B42A; }
+.domain-card.theme-excel .domain-icon { background: #E8FFEA; }
+.domain-card.theme-excel .domain-foot { color: #00B42A; }
+.domain-card.theme-python { border-top-color: #FFC53D; }
+.domain-card.theme-python .domain-icon { background: #FFFBE8; }
+.domain-card.theme-python .domain-foot { color: #D4A24C; }
+.domain-card.theme-stats { border-top-color: #722ED1; }
+.domain-card.theme-stats .domain-icon { background: #F5E8FF; }
+.domain-card.theme-stats .domain-foot { color: #722ED1; }
+.domain-card.theme-viz { border-top-color: #FF7D00; }
+.domain-card.theme-viz .domain-icon { background: #FFF7E8; }
+.domain-card.theme-viz .domain-foot { color: #FF7D00; }
+.domain-card.theme-bi { border-top-color: #2DCEAA; }
+.domain-card.theme-bi .domain-icon { background: #DEFBF1; }
+.domain-card.theme-bi .domain-foot { color: #2DCEAA; }
+.domain-card.theme-warehouse { border-top-color: #4E5969; }
+.domain-card.theme-warehouse .domain-icon { background: #F2F3F5; }
+.domain-card.theme-warehouse .domain-foot { color: #4E5969; }
+.domain-card.theme-ml { border-top-color: #B71DE8; }
+.domain-card.theme-ml .domain-icon { background: #F9E8FE; }
+.domain-card.theme-ml .domain-foot { color: #B71DE8; }
+.domain-card.theme-ai { border-top-color: #D4A24C; }
+.domain-card.theme-ai .domain-icon { background: linear-gradient(135deg, #FFF7E8 0%, #FFE8C5 100%); }
+.domain-card.theme-ai .domain-foot { color: #D4A24C; }
+.domain-card.theme-soft { border-top-color: #57A9FB; }
+.domain-card.theme-soft .domain-icon { background: #E8F3FF; }
+.domain-card.theme-soft .domain-foot { color: #57A9FB; }
+
+/* ============ 能力图谱卡片详情展开 ============ */
+.map-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: flex-end;
+}
+
+.domain-card {
+  /* 让卡片本身不再 cursor:pointer 整块，改由按钮触发 */
+  cursor: default;
+}
+
+.domain-detail {
+  display: none;
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-base);
+  animation: detailFade 0.25s ease;
+}
+.domain-card.detail-open .domain-detail { display: block; }
+@keyframes detailFade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-section {
+  margin-bottom: 12px;
+}
+.detail-section:last-child { margin-bottom: 0; }
+.detail-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.detail-content {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  padding: 8px 10px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border-left: 2px solid var(--border-base);
+}
+
+/* 不同主题色给 detail-content 左边框上色 */
+.domain-card.theme-foundation .detail-content { border-left-color: #3370FF; }
+.domain-card.theme-business .detail-content { border-left-color: #F53F3F; }
+.domain-card.theme-sql .detail-content { border-left-color: #14C9C9; }
+.domain-card.theme-excel .detail-content { border-left-color: #00B42A; }
+.domain-card.theme-python .detail-content { border-left-color: #FFC53D; }
+.domain-card.theme-stats .detail-content { border-left-color: #722ED1; }
+.domain-card.theme-viz .detail-content { border-left-color: #FF7D00; }
+.domain-card.theme-bi .detail-content { border-left-color: #2DCEAA; }
+.domain-card.theme-warehouse .detail-content { border-left-color: #4E5969; }
+.domain-card.theme-ml .detail-content { border-left-color: #B71DE8; }
+.domain-card.theme-ai .detail-content { border-left-color: #D4A24C; }
+.domain-card.theme-soft .detail-content { border-left-color: #57A9FB; }
+
+.domain-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-base);
+}
+.domain-btn {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-base);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  font-weight: 500;
+}
+.domain-btn:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  background: var(--brand-primary-bg);
+}
+.domain-btn-detail {
+  /* 默认样式即可 */
+}
+.domain-btn-skills {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+}
+.domain-btn-skills:hover {
+  background: var(--brand-primary-hover);
+  border-color: var(--brand-primary-hover);
+  color: #fff;
+}
+
+/* 卡片展开时高亮一下边框 */
+.domain-card.detail-open {
+  box-shadow: var(--shadow-md);
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon">📊</div>
+      <div>
+        <div class="brand-title">BI 数据分析师能力图谱</div>
+        <div class="brand-subtitle">中古优品 · 二手奢侈品 ERP · 招聘与培养指南 v1.4</div>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="stat">
+        <div class="stat-value" id="stat-total">—</div>
+        <div class="stat-label">技能点</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-checked">0</div>
+        <div class="stat-label">已掌握</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-percent">0%</div>
+        <div class="stat-label">完成度</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner">
+    <button class="tab-btn active" data-tab="map">🗺️ 能力图谱 <span class="count">12</span></button>
+    <button class="tab-btn" data-tab="list">📋 学习清单 <span class="count" id="cnt-list">—</span></button>
+    <button class="tab-btn" data-tab="eval">⚖️ 评估标准 <span class="count">3</span></button>
+    <button class="tab-btn" data-tab="interview">🎯 面试题库 <span class="count" id="cnt-iv">—</span></button>
+    <button class="tab-btn" data-tab="path">🛤️ 成长路径 <span class="count">3</span></button>
+  </div>
+</nav>
+
+<main class="main">
+  <section class="tab-content active" id="tab-map"></section>
+  <section class="tab-content" id="tab-list"></section>
+  <section class="tab-content" id="tab-eval"></section>
+  <section class="tab-content" id="tab-interview"></section>
+  <section class="tab-content" id="tab-path"></section>
+</main>
+
+<script>
+// ========== 12 个能力域 ==========
+const DOMAINS = [
+  { id:'foundation', name:'数据思维与方法论', en:'Data Thinking', icon:'🧭', theme:'foundation',
+    desc:'数据分析师的根基。理解 What→Why→How 的分析框架，能把业务问题翻译为可量化的数据问题。',
+    chips:['MECE', '5W1H', '假设验证', '业务对齐'],
+    overview:'用结构化方式拆解模糊问题。从"为什么 GMV 下降"这种宽泛问题，拆到"哪个品类、哪个渠道、哪个时段、什么客群"四个不重不漏的维度去验证，得出可执行的结论。',
+    focus:'① 业务问题→数据问题翻译；② MECE 拆解（横拆维度/纵拆链路）；③ 假设驱动（先猜结论再验证，而不是把所有数据都看一遍）；④ 数据敏感度（看到 30% 就警觉异常）。',
+    scenarios:'• 老板提出"为什么这个月毛利率降了 3 个点"，30 分钟内拿出归因结论；• 业务方说"想看一下销售数据"，能反问出真实需求；• 周月报上能从"数据呈现"升级为"洞察+建议"。' },
+  { id:'business', name:'业务理解与领域知识', en:'Business & Domain', icon:'🎯', theme:'business',
+    desc:'是优秀和合格分析师的最大分水岭。懂业务的分析师能看到数据背后的故事，不懂的只会取数。',
+    chips:['行业洞察', '业务流程', '指标体系', '北极星指标'],
+    overview:'对所在行业和公司的全链路业务有深度认知。二手奢侈品行业要懂回收→鉴定→定价→入库→销售→财务的完整链路，懂寄售/自营/调货三种业务模式的差异，懂指标口径和业务规则的边界。',
+    focus:'① 二手奢侈品全链路（C2B 回收 + B2C 销售）；② 寄售/自营/调拨三种业务模式的财务核算差异；③ 核心指标定义和口径（GMV/回收额/毛利率/库存周转/复购率）；④ 北极星指标的拆解逻辑。',
+    scenarios:'• 业务方说"数据和我自己拉的对不上"，能快速对齐口径找到差异；• 设计销售/回收/寄售看板时，知道哪些指标是结果指标、哪些是过程指标；• 看到一个数据异常，能直觉判断是数据问题还是业务问题。' },
+  { id:'sql', name:'SQL 与数据查询', en:'SQL & Query', icon:'💾', theme:'sql',
+    desc:'数据分析师的底线能力。从基础查询到窗口函数、CTE、性能调优，是日常 80% 工作的工具。',
+    chips:['JOIN', 'GROUP BY', '窗口函数', 'CTE', '调优'],
+    overview:'从数据库直接取出和加工分析所需数据的能力。是数据分析师每天打开次数最高、占用时间最长的技能，写不出 SQL 等于失去取数自主权，只能依赖工程师排期。',
+    focus:'① 基础：JOIN/GROUP BY/子查询（必须 10 秒出代码）；② 进阶：窗口函数（ROW_NUMBER/LAG/LEAD/SUM OVER）、CTE、CASE WHEN；③ 高阶：执行计划阅读、慢查询调优、分布式 SQL（Hive/Spark）；④ 复杂场景：留存率、漏斗、连续 N 天行为分析的固定套路。',
+    scenarios:'• "查每个用户最近一次下单金额"——窗口函数 ROW_NUMBER 一行搞定；• "查回收 30 天内未上架的商品"——日期函数+子查询；• "鉴定通过率按品类按月统计"——多表 JOIN + GROUP BY 双维度。' },
+  { id:'excel', name:'Excel 与电子表格', en:'Excel', icon:'📑', theme:'excel',
+    desc:'看似入门实则深奥。透视表、Power Query、VBA 仍是中小数据量分析最快的工具。',
+    chips:['透视表', 'VLOOKUP', 'Power Query', '数组公式'],
+    overview:'10 万行以内数据量最快的分析工具，也是和业务方/财务/老板"同一种语言"的载体。BI 看板交付物之外，临时性的明细分析、对账核对、轻量建模都靠 Excel。',
+    focus:'① 透视表+切片器+计算字段（80% 的临时分析够用）；② 函数：VLOOKUP/XLOOKUP/INDEX-MATCH/SUMIFS/IFERROR；③ Power Query（ETL 利器，比写脚本快）；④ 条件格式 + 图表 + 仪表盘做法。',
+    scenarios:'• 财务对账：把 ERP 导出的销售明细和回收明细做 VLOOKUP 核对差异；• 月度复盘：拿到 5 万行订单数据，10 分钟用透视表出"品类×渠道×月份"三维分析；• 给老板的临时报告：一个工作簿包含数据源 Sheet + 透视表 Sheet + 图表 Sheet。' },
+  { id:'python', name:'Python 与数据处理', en:'Python', icon:'🐍', theme:'python',
+    desc:'Pandas+Numpy 是处理百万级数据的瑞士军刀。脚本化让重复任务自动化、复杂分析可复用。',
+    chips:['Pandas', 'NumPy', 'Matplotlib', 'Jupyter'],
+    overview:'当数据量超过 Excel 上限（百万行+），或者分析逻辑过于复杂、需要复用/定时跑、需要画自定义图表时的主力工具。也是连接机器学习、AI Agent 的桥梁。',
+    focus:'① Pandas 数据清洗（merge/groupby/pivot/apply）必须熟练；② Numpy 向量运算（处理大数据集时性能差几十倍）；③ Matplotlib/Seaborn 画分析图（不要求美观，要求快）；④ Jupyter 写分析报告 + 脚本化日报。',
+    scenarios:'• 多个 Excel 源数据合并清洗（业务库导出 + 财务系统导出 + 手工填报），用 Pandas 几十行搞定；• 每日自动生成销售日报 + 自动发送邮件/飞书；• 同环比/Cohort 这种 SQL 写起来繁琐的分析，用 Pandas 几行代码出结果。' },
+  { id:'stats', name:'统计学与分析方法', en:'Statistics', icon:'📐', theme:'stats',
+    desc:'描述统计、推断统计、AB 实验、归因分析、漏斗、Cohort —— 让分析有方法论支撑。',
+    chips:['描述统计', 'AB 测试', '漏斗', '归因', 'Cohort'],
+    overview:'让"看数据下结论"这件事有方法论支撑、避免拍脑袋。区分初级"取数"和中级"分析"最关键的差距 —— 看到数据差异时是直接下结论，还是知道要做显著性检验。',
+    focus:'① 描述统计（均值/中位数/分位数/标准差）；② 假设检验（Z 检验/T 检验/卡方）；③ AB 实验设计与显著性判定；④ 漏斗分析、Cohort 分析、归因分析（多触点归因模型）；⑤ 辛普森悖论、幸存者偏差等常见陷阱。',
+    scenarios:'• AB 实验：销售流程改造前后转化率对比，5.2% vs 5.5%，是否真的更好？；• 归因：复购率从 30% 降到 25%，是新客占比上升导致的辛普森悖论还是真下降？；• 漏斗：回收 → 鉴定 → 入库 → 上架 → 售出 每个环节的转化和损失。' },
+  { id:'viz', name:'数据可视化与讲故事', en:'Visualization', icon:'📈', theme:'viz',
+    desc:'图表选型、视觉编码、报告撰写 —— 让数据真正影响决策。"会算"是基础，"讲清楚"才是价值。',
+    chips:['图表选型', '配色', '叙事结构', 'PPT 汇报'],
+    overview:'分析的最后一公里：把结论变成决策者能 30 秒看懂的图表和报告。绝大多数分析师卡在"算对了但讲不清楚"——再好的分析没有被决策者接收和理解，等于没做。',
+    focus:'① 图表选型（对比用柱/趋势用折线/占比用堆叠/分布用箱线，不要乱用饼图）；② 视觉编码（颜色用得克制、数据墨水比、对比强化）；③ 叙事结构（金字塔原理：结论先行 → 拆解论据 → 数据支撑）；④ PPT/飞书文档汇报的版式规范。',
+    scenarios:'• 月度经营会：用 1 张总图 + 3 张分析图讲清楚"这个月 GMV 为什么涨"；• 给老板的 5 分钟汇报：结论 1 句话 + 数据 3 张图 + 建议 2 条；• BI 看板的页面布局：核心指标在最上方，钻取信息在下方。' },
+  { id:'bi', name:'BI 工具与自助分析', en:'BI Tools', icon:'🛠️', theme:'bi',
+    desc:'FineBI / Tableau / Power BI / 帆软是企业级看板交付主力。掌握 1 主力 + 1 备用是基本要求。',
+    chips:['FineBI', 'Tableau', 'Power BI', '帆软'],
+    overview:'交付企业级看板的工业化工具。BI 工具是"业务自助分析"的核心载体——让业务方自己能拖拽探索数据，分析师从"取数机"变成"指标设计者"。',
+    focus:'① 至少精通 1 个主力工具（FineBI/Tableau/Power BI/帆软）；② 数据源连接、数据集设计、计算字段；③ 看板设计（不只是把图表堆上去，要有信息架构）；④ 行级权限和角色管理；⑤ 性能优化（看板打开慢的 90% 原因是数据集没做聚合）。',
+    scenarios:'• 给 CEO 做经营驾驶舱：GMV/毛利/库存/回收四象限；• 给销售总监做销售业绩看板：人均 GMV + 团队对比 + 钻取到订单明细；• 给业务方开放自助分析：搭好数据集后，业务方拖拽即出报表。' },
+  { id:'warehouse', name:'数据仓库与建模', en:'Data Warehouse', icon:'🏛️', theme:'warehouse',
+    desc:'维度建模、ODS/DWD/DWS 分层、星型/雪花模型 —— 决定数据资产的天花板，BI 工程师的核心能力。',
+    chips:['维度建模', '事实/维度表', '分层架构', '指标管理'],
+    overview:'让数据从"凌乱"变"有序"的底层架构。数仓建得好，分析师写 SQL 又快又准；建不好，每个需求都要重新清洗一遍数据。是从分析师晋升到 BI 工程师/数据架构师的分水岭。',
+    focus:'① 维度建模理论（Kimball 总线矩阵）；② 数仓分层架构（ODS→DWD→DWS→ADS）；③ 事实表/维度表的拆分、SCD（缓慢变化维）处理；④ 主题域划分（用户域/商品域/订单域/财务域）；⑤ 指标管理体系（公司级指标字典）。',
+    scenarios:'• 二手奢侈品 ERP 数仓从 0 建：定 7 个主题域 + 总线矩阵 + 分层规范；• 业务库 binlog 接入 ODS 层 → 清洗到 DWD → 聚合到 DWS → 暴露给 BI 工具；• 指标口径治理：建立公司级指标字典，避免"销售额"在 5 个看板里有 5 种算法。' },
+  { id:'ml', name:'机器学习与高阶分析', en:'Machine Learning', icon:'🧠', theme:'ml',
+    desc:'聚类、分类、预测、推荐 —— 让分析从"复盘"走向"预测"。中高级分析师的进阶项。',
+    chips:['回归', '分类', '聚类', '时间序列'],
+    overview:'让分析从"解释过去"升级到"预测未来"。中级以下分析师不强求，但中级以上能在合适场景用机器学习解决业务问题，会显著拉开和同行的差距。',
+    focus:'① 回归（线性/多元/逻辑回归）—— 解释驱动因素、预测连续值；② 分类（决策树/随机森林/XGBoost）—— 流失预警、商品分级；③ 聚类（K-Means/层次聚类）—— 用户分群；④ 时间序列预测（ARIMA/Prophet）—— 销量预测、库存预测；⑤ 模型评估（AUC/RMSE/混淆矩阵）。',
+    scenarios:'• 流失预警：基于用户历史行为预测 30 天内是否会流失，给运营定向召回；• 商品定价：用回归模型预测一只 LV 二手包合理回收价；• 用户分群：K-Means 分出"高频低额/低频高额/沉睡"等客群，运营差异化触达；• 销量预测：预测下月某品类销量，指导回收和铺货策略。' },
+  { id:'ai', name:'AI 工具与效率提升', en:'AI Augmentation', icon:'✨', theme:'ai',
+    desc:'2026 年的分水岭。用 AI 写 SQL、生成图表、自动洞察 —— 不会用 AI 的分析师正在被淘汰。',
+    chips:['Prompt 工程', 'AI 取数', 'AI 洞察', 'Agent'],
+    overview:'2026 年数据分析师必备的效率倍增器。同等经验的分析师，用 AI 工具的产出是不用的 3-5 倍。这一域不只是"会问 ChatGPT"，更是把 AI 嵌入分析全流程的工程能力。',
+    focus:'① Prompt 工程（结构化输入、角色设定、Few-Shot）；② AI 辅助 SQL（让 AI 写、解释、优化 SQL）；③ AI 辅助分析（让 AI 看数据出洞察、撰写报告初稿）；④ Agent 工作流（自然语言取数 → 自动出图 → 自动发送）；⑤ RAG（构建公司指标字典/业务知识库，让 AI 知道"我们公司的数据"）。',
+    scenarios:'• 用 Claude 把业务方的口语化需求一键转成 SQL；• 拿到 50 列的数据表，让 AI 列出 10 个分析角度；• Agent 自动跑日报：取数→画图→生成洞察→飞书推送；• 用 RAG 构建"内部指标问答机器人"，业务方问"GMV 怎么算"直接得到口径。' },
+  { id:'soft', name:'沟通协作与商业敏感', en:'Soft Skills', icon:'🤝', theme:'soft',
+    desc:'与产品、运营、财务、管理层对话的能力。能把分析结果翻译成业务语言，并推动落地。',
+    chips:['需求澄清', '汇报', '推动落地', 'Owner 意识'],
+    overview:'分析价值兑现的最后一道关卡。技术再强，如果需求接错、报告业务方看不懂、结论无法推动业务调整，等于价值为 0。这一域是高级分析师能继续往上走的天花板技能。',
+    focus:'① 需求澄清能力（业务方说"看一下销售数据"，能反问出 5 个关键问题）；② 向上汇报（金字塔结构、抓主要矛盾、给建议而非只给数据）；③ 跨部门协作（懂财务的核算逻辑、懂运营的考核口径、懂产品的 PRD 思维）；④ 推动落地（分析结论 → 行动方案 → 跟踪验证）；⑤ Owner 意识（不只是"完成需求"，更是"对业务结果负责"）。',
+    scenarios:'• 业务方提需求时识别真实诉求，避免做完返工；• 给 CEO 汇报：5 分钟讲清"问题→原因→建议→预期效果"；• 推动业务调整：分析得出"某品类毛利率低"后，主动联系采购调整定价策略；• 跨部门协作：和财务对齐毛利口径、和运营对齐 GMV 口径、和产品对齐转化漏斗定义。' }
+];
+
+// ========== 完整技能清单 ==========
+const ALL_SKILLS = [
+  // ===== 一、数据思维与方法论 =====
+  { id:'f01', domain:'foundation', name:'业务问题→数据问题的翻译', tier:'junior', must:true,
+    desc:'听到"GMV 为什么下降"，能拆出"哪些品类下降、是流量还是转化、与去年同期对比如何"——分析师最底层能力。',
+    resources:[{type:'文章', name:'数据分析师能力图谱', url:'https://zhuanlan.zhihu.com/p/419309639'}] },
+  { id:'f02', domain:'foundation', name:'MECE 原则与结构化思考', tier:'junior', must:true,
+    desc:'相互独立、完全穷尽。把大问题拆成不重不漏的子问题，是麦肯锡式咨询的核心方法。',
+    resources:[{type:'书籍', name:'《金字塔原理》-巴巴拉·明托', url:'https://book.douban.com/subject/4001317/'}] },
+  { id:'f03', domain:'foundation', name:'5W1H / 5Why 分析框架', tier:'junior',
+    desc:'When/Where/Who/What/Why/How 全面定位问题；连问 5 个 Why 找根因——丰田生产体系的经典工具。',
+    resources:[{type:'文章', name:'5W1H 实战', url:'https://www.woshipm.com/data-analysis/'}] },
+  { id:'f04', domain:'foundation', name:'PEST / SWOT / 波特五力', tier:'mid',
+    desc:'宏观分析框架。做行业研究、竞品分析、战略汇报必备。中级分析师要能调用合适的框架。',
+    resources:[{type:'文章', name:'战略分析框架合集', url:'https://www.woshipm.com/data-analysis/'}] },
+  { id:'f05', domain:'foundation', name:'假设驱动分析', tier:'mid', must:true,
+    desc:'先提假设、再用数据验证。避免"数据捞海"——盲目跑数得不到结论是初级分析师最常见陷阱。',
+    resources:[{type:'文章', name:'Hypothesis-Driven Analysis', url:'https://hbr.org/'}] },
+  { id:'f06', domain:'foundation', name:'第一性原理与本质思考', tier:'senior',
+    desc:'回到本质。看到一个指标能问"它是怎么算出来的、为什么这么算、还有没有别的算法"。',
+    resources:[{type:'书籍', name:'《思考的快与慢》', url:'https://book.douban.com/subject/26159968/'}] },
+  { id:'f07', domain:'foundation', name:'数据驱动 vs 数据辅助决策', tier:'senior',
+    desc:'高级分析师要懂：数据不是万能的。什么时候该用数据、什么时候该用业务经验，是一种判断力。',
+    resources:[{type:'书籍', name:'《精益数据分析》', url:'https://book.douban.com/subject/26278639/'}] },
+
+  // ===== 二、业务理解与领域知识 =====
+  { id:'b01', domain:'business', name:'二手奢侈品行业全链路', tier:'junior', must:true,
+    desc:'回收→鉴定→入仓→定价→销售→寄卖→财务结算。不懂这条主线，做不出有价值的分析。',
+    resources:[{type:'报告', name:'艾瑞二手奢侈品行业报告', url:'https://www.iresearch.com.cn/'}] },
+  { id:'b02', domain:'business', name:'核心业务指标体系', tier:'junior', must:true,
+    desc:'GMV、回收额、毛利率、库存周转、复购率、客单价、转化率——能复述定义、计算公式、业务含义。',
+    resources:[{type:'内部', name:'data-analytics Skill 指标库', url:'#'}] },
+  { id:'b03', domain:'business', name:'C2B 回收域指标', tier:'junior',
+    desc:'报价响应时长、报价转化率、平均回收价、鉴定通过率、渠道分布——回收域命门指标。',
+    resources:[{type:'内部', name:'回收域指标定义', url:'#'}] },
+  { id:'b04', domain:'business', name:'B2C 销售域指标', tier:'junior',
+    desc:'销售转化率、客单价、上架到首次成交天数、退货率、寄售成交率——销售域健康度仪表盘。',
+    resources:[{type:'内部', name:'销售域指标定义', url:'#'}] },
+  { id:'b05', domain:'business', name:'仓储/财务域指标', tier:'mid',
+    desc:'库龄分布、调拨时效、应收周转、资金占用成本、寄售结算周期——容易被忽视但关键的指标。',
+    resources:[{type:'内部', name:'仓储财务指标', url:'#'}] },
+  { id:'b06', domain:'business', name:'指标体系搭建（OSM/UJM）', tier:'mid', must:true,
+    desc:'Object→Strategy→Measurement，从业务目标到拆解到可执行指标——指标体系不是堆砌指标。',
+    resources:[{type:'文章', name:'OSM 模型实战', url:'https://www.woshipm.com/data-analysis/'}] },
+  { id:'b07', domain:'business', name:'北极星指标拆解', tier:'mid', must:true,
+    desc:'用 1 个 North Star 锚定所有部门动作；从一级到三级指标的工程化拆解方法。',
+    resources:[{type:'文章', name:'北极星指标体系', url:'https://www.woshipm.com/data-analysis/'}] },
+  { id:'b08', domain:'business', name:'用户分层与 RFM 模型', tier:'mid',
+    desc:'Recency/Frequency/Monetary 三维划分客户。奢侈品高净值客户精细化运营核心方法。',
+    resources:[{type:'文章', name:'RFM 模型应用', url:'https://www.woshipm.com/'}] },
+  { id:'b09', domain:'business', name:'商品全生命周期分析', tier:'senior',
+    desc:'从入库到售罄/退仓，每个状态的停留时长、转化、流失——支撑选品、定价、补货决策。',
+    resources:[{type:'内部', name:'商品分析专题', url:'#'}] },
+  { id:'b10', domain:'business', name:'跨域归因分析（GMV 拆解）', tier:'senior', must:true,
+    desc:'GMV = 流量 × 转化率 × 客单价；拆到每个维度对总指标变化的贡献度——高级分析师必修。',
+    resources:[{type:'文章', name:'多维归因方法论', url:'https://zhuanlan.zhihu.com/'}] },
+
+  // ===== 三、SQL 与数据查询 =====
+  { id:'s01', domain:'sql', name:'SELECT / WHERE / GROUP BY / ORDER BY', tier:'junior', must:true,
+    desc:'基础查询。会写、能调通、理解执行顺序（FROM→WHERE→GROUP→HAVING→SELECT→ORDER→LIMIT）。',
+    resources:[
+      {type:'教程', name:'SQLZOO 互动教程', url:'https://sqlzoo.net/'},
+      {type:'练习', name:'LeetCode 数据库', url:'https://leetcode.cn/problemset/database/'}] },
+  { id:'s02', domain:'sql', name:'多表 JOIN（INNER/LEFT/RIGHT/FULL）', tier:'junior', must:true,
+    desc:'80% 业务查询都涉及多表关联。理解四种 JOIN 差别，避免笛卡尔积。',
+    resources:[{type:'教程', name:'SQL JOIN 可视化', url:'https://joins.spathon.com/'}] },
+  { id:'s03', domain:'sql', name:'聚合函数与 HAVING', tier:'junior', must:true,
+    desc:'COUNT/SUM/AVG/MAX/MIN/DISTINCT，HAVING 与 WHERE 的差别——日常报表核心语法。',
+    resources:[{type:'教程', name:'MySQL 官方教程', url:'https://dev.mysql.com/doc/refman/8.0/en/tutorial.html'}] },
+  { id:'s04', domain:'sql', name:'子查询与 IN/EXISTS', tier:'junior',
+    desc:'嵌套查询、相关子查询、IN vs EXISTS 性能差异——读懂复杂业务 SQL 的基本功。',
+    resources:[{type:'教程', name:'PostgreSQL 子查询', url:'https://www.postgresql.org/docs/current/'}] },
+  { id:'s05', domain:'sql', name:'日期函数与时间序列', tier:'junior', must:true,
+    desc:'DATE_FORMAT / DATEDIFF / DATE_TRUNC / 同比环比计算——做趋势报表的必备。',
+    resources:[{type:'文章', name:'SQL 时间函数', url:'https://www.mysqltutorial.org/mysql-date-functions/'}] },
+  { id:'s06', domain:'sql', name:'CASE WHEN 与条件聚合', tier:'mid', must:true,
+    desc:'行转列、分桶统计、复杂条件计数——SQL 灵活性的核心，几乎所有业务报表都用得到。',
+    resources:[{type:'文章', name:'CASE WHEN 实战', url:'https://www.cnblogs.com/'}] },
+  { id:'s07', domain:'sql', name:'窗口函数（ROW_NUMBER/RANK/LAG）', tier:'mid', must:true,
+    desc:'排名、去重、留存、累计、环比——窗口函数是中级与初级的分水岭，必须熟练。',
+    resources:[
+      {type:'教程', name:'PostgreSQL 窗口函数', url:'https://www.postgresql.org/docs/current/tutorial-window.html'},
+      {type:'文章', name:'8 大窗口函数详解', url:'https://zhuanlan.zhihu.com/p/465088046'}] },
+  { id:'s08', domain:'sql', name:'CTE（WITH 子句）与递归查询', tier:'mid',
+    desc:'分步骤构建复杂查询，可读性远胜嵌套子查询。递归 CTE 处理层级数据（分类树、组织架构）。',
+    resources:[{type:'文章', name:'CTE 最佳实践', url:'https://modern-sql.com/feature/with'}] },
+  { id:'s09', domain:'sql', name:'EXPLAIN 执行计划与索引', tier:'mid',
+    desc:'看懂执行计划，识别全表扫描、文件排序；理解索引最左前缀、覆盖索引——慢查询调优基础。',
+    resources:[{type:'文章', name:'MySQL EXPLAIN 详解', url:'https://dev.mysql.com/doc/refman/8.0/en/explain-output.html'}] },
+  { id:'s10', domain:'sql', name:'OLAP 函数与多维分析', tier:'senior',
+    desc:'GROUPING SETS / CUBE / ROLLUP，一次查询出多维度汇总——大数据量报表的性能利器。',
+    resources:[{type:'文章', name:'OLAP 函数实战', url:'https://www.cnblogs.com/'}] },
+  { id:'s11', domain:'sql', name:'存储过程/视图/物化视图', tier:'senior',
+    desc:'封装复杂业务逻辑、定时刷新报表数据——准 ETL 能力，让取数分析师向数据工程师迈进。',
+    resources:[{type:'文档', name:'PostgreSQL 物化视图', url:'https://www.postgresql.org/docs/current/rules-materializedviews.html'}] },
+  { id:'s12', domain:'sql', name:'分布式 SQL（Hive/Spark/Presto）', tier:'senior',
+    desc:'TB 级数据上的 SQL 引擎差异、分区分桶、Map Join、数据倾斜处理——大数据场景必备。',
+    resources:[{type:'文档', name:'Hive 官方文档', url:'https://hive.apache.org/'}] },
+
+  // ===== 四、Excel 与电子表格 =====
+  { id:'e01', domain:'excel', name:'基础函数（VLOOKUP/IF/SUMIF）', tier:'junior', must:true,
+    desc:'VLOOKUP 已被 XLOOKUP 部分取代但仍是面试必考。IF 嵌套、SUMIFS/COUNTIFS 是日常基本功。',
+    resources:[{type:'教程', name:'Excel 函数大全（B站）', url:'https://www.bilibili.com/video/BV1Ya4y1S78d/'}] },
+  { id:'e02', domain:'excel', name:'数据透视表（Pivot Table）', tier:'junior', must:true,
+    desc:'Excel 最强大的分析工具，10 万行以内的数据透视、切片、钻取——比写 SQL 还快。',
+    resources:[{type:'文章', name:'透视表 7 大技巧', url:'https://support.microsoft.com/zh-cn/excel'}] },
+  { id:'e03', domain:'excel', name:'图表制作与美化', tier:'junior',
+    desc:'柱图/折线/饼图/组合图。数据标签、配色、坐标轴格式化——汇报材料的 80% 看图表质量。',
+    resources:[{type:'教程', name:'刘万祥 Excel 图表', url:'https://www.bilibili.com/'}] },
+  { id:'e04', domain:'excel', name:'XLOOKUP / INDEX+MATCH', tier:'mid',
+    desc:'XLOOKUP 是 VLOOKUP 的现代版（左右查找、错误处理）。INDEX+MATCH 是经典万能组合。',
+    resources:[{type:'文章', name:'XLOOKUP 全攻略', url:'https://support.microsoft.com/zh-cn/office/xlookup'}] },
+  { id:'e05', domain:'excel', name:'Power Query 数据清洗', tier:'mid', must:true,
+    desc:'Excel 内置 ETL。多表合并、行列转置、文本拆分、错误处理——告别复制粘贴的救星。',
+    resources:[
+      {type:'书籍', name:'《PQ 神技：让 Excel 飞》', url:'https://book.douban.com/'},
+      {type:'B站', name:'Power Query 入门', url:'https://www.bilibili.com/'}] },
+  { id:'e06', domain:'excel', name:'数组公式与动态数组', tier:'mid',
+    desc:'365 版本的 FILTER/SORT/UNIQUE/SEQUENCE 让 Excel 接近真正的数据处理工具。',
+    resources:[{type:'文章', name:'动态数组函数详解', url:'https://support.microsoft.com/zh-cn/office/'}] },
+  { id:'e07', domain:'excel', name:'Power Pivot 与 DAX', tier:'senior',
+    desc:'Excel 内置的多维分析引擎。CALCULATE/FILTER/SUMX——本质是 Power BI 的核心语言。',
+    resources:[{type:'书籍', name:'《DAX 权威指南》', url:'https://book.douban.com/'}] },
+  { id:'e08', domain:'excel', name:'VBA 自动化', tier:'senior',
+    desc:'重复任务脚本化。当 Python 不可用时（财务环境受限场景），VBA 仍是首选。',
+    resources:[{type:'教程', name:'VBA 实战手册', url:'https://www.excelhome.net/'}] },
+
+  // ===== 五、Python 与数据处理 =====
+  { id:'p01', domain:'python', name:'Python 基础语法', tier:'junior', must:true,
+    desc:'变量、函数、流程控制、列表/字典/集合。30 小时入门，省下未来 3000 小时的重复劳动。',
+    resources:[
+      {type:'教程', name:'廖雪峰 Python 教程', url:'https://www.liaoxuefeng.com/wiki/1016959663602400'},
+      {type:'练习', name:'Codewars Python', url:'https://www.codewars.com/'}] },
+  { id:'p02', domain:'python', name:'Pandas 数据操作', tier:'junior', must:true,
+    desc:'DataFrame 创建/读写/筛选/聚合/合并。Excel 干不动的 10 万行以上数据，Pandas 优雅处理。',
+    resources:[
+      {type:'文档', name:'Pandas 中文文档', url:'https://www.pypandas.cn/'},
+      {type:'书籍', name:'《利用 Python 进行数据分析》', url:'https://book.douban.com/subject/35001619/'}] },
+  { id:'p03', domain:'python', name:'NumPy 数值计算', tier:'junior',
+    desc:'数组、广播、线性代数。Pandas 的底层依赖；机器学习的基础。',
+    resources:[{type:'文档', name:'NumPy 官方文档', url:'https://numpy.org/doc/'}] },
+  { id:'p04', domain:'python', name:'数据清洗与缺失值处理', tier:'mid', must:true,
+    desc:'fillna/dropna/insert、重复值、异常值、类型转换、时间格式标准化——分析师 60% 时间花在这。',
+    resources:[{type:'文章', name:'Pandas 数据清洗 10 招', url:'https://zhuanlan.zhihu.com/p/175349997'}] },
+  { id:'p05', domain:'python', name:'Matplotlib / Seaborn 可视化', tier:'mid',
+    desc:'静态图表的工业标准。Seaborn 是 Matplotlib 的高层封装，3 行代码出统计图。',
+    resources:[{type:'文档', name:'Seaborn 官方文档', url:'https://seaborn.pydata.org/'}] },
+  { id:'p06', domain:'python', name:'Jupyter Notebook 工作流', tier:'mid', must:true,
+    desc:'分析、注释、可视化一体的工作环境。代码 + 文档 + 结果，让分析过程可追溯、可分享。',
+    resources:[{type:'文档', name:'JupyterLab 文档', url:'https://jupyterlab.readthedocs.io/'}] },
+  { id:'p07', domain:'python', name:'数据库连接（SQLAlchemy/pymysql）', tier:'mid',
+    desc:'从 MySQL/PostgreSQL/ClickHouse 直接读数到 DataFrame，自动化日报/周报的关键链路。',
+    resources:[{type:'文档', name:'SQLAlchemy 文档', url:'https://www.sqlalchemy.org/'}] },
+  { id:'p08', domain:'python', name:'Plotly 交互式可视化', tier:'mid',
+    desc:'交互式图表、HTML 嵌入、Dashboard。汇报时一份 Plotly HTML 比一堆静态图打动人。',
+    resources:[{type:'文档', name:'Plotly Python', url:'https://plotly.com/python/'}] },
+  { id:'p09', domain:'python', name:'爬虫与外部数据获取', tier:'senior',
+    desc:'requests/BeautifulSoup/Selenium。竞品数据、行业数据补充内部数据的常用手段。',
+    resources:[{type:'书籍', name:'《Python 网络爬虫权威指南》', url:'https://book.douban.com/subject/30295097/'}] },
+  { id:'p10', domain:'python', name:'数据分析项目工程化', tier:'senior',
+    desc:'函数封装、模块化、配置管理、Git 版本控制——让分析项目可复用、可交接。',
+    resources:[{type:'文章', name:'Cookiecutter Data Science', url:'https://drivendata.github.io/cookiecutter-data-science/'}] },
+
+  // ===== 六、统计学与分析方法 =====
+  { id:'t01', domain:'stats', name:'描述统计（均值/中位数/方差）', tier:'junior', must:true,
+    desc:'集中趋势、离散程度、分布形状。看一组数据先看分布，再看异常——避免被平均数误导。',
+    resources:[{type:'书籍', name:'《深入浅出统计学》', url:'https://book.douban.com/subject/7056708/'}] },
+  { id:'t02', domain:'stats', name:'同比 / 环比 / 定基比', tier:'junior', must:true,
+    desc:'YoY/MoM/同基期。二手奢侈品要特别注意：节假日、展会、品牌大秀对环比的影响。',
+    resources:[{type:'文章', name:'同环比计算误区', url:'https://www.woshipm.com/data-analysis/'}] },
+  { id:'t03', domain:'stats', name:'漏斗分析', tier:'junior', must:true,
+    desc:'回收漏斗（咨询→报价→鉴定→成交）、销售漏斗（浏览→加购→下单→支付）——电商场景必备。',
+    resources:[{type:'内部', name:'data-analytics Skill', url:'#'}] },
+  { id:'t04', domain:'stats', name:'相关分析与回归基础', tier:'mid',
+    desc:'相关 ≠ 因果！皮尔逊/斯皮尔曼相关；一元/多元线性回归——找变量间关系的基础工具。',
+    resources:[{type:'课程', name:'可汗学院统计学', url:'https://www.khanacademy.org/math/statistics-probability'}] },
+  { id:'t05', domain:'stats', name:'AB 测试设计与分析', tier:'mid', must:true,
+    desc:'样本量计算、显著性检验、辛普森悖论、新奇效应——互联网决策的金标准。',
+    resources:[{type:'文章', name:'AB 测试实战指南', url:'https://zhuanlan.zhihu.com/p/161476466'}] },
+  { id:'t06', domain:'stats', name:'归因分析方法论', tier:'mid', must:true,
+    desc:'多维拆解、贡献度计算、辛普森悖论防坑。"GMV 下降归因到品类/渠道/客群"——高频任务。',
+    resources:[{type:'文章', name:'数据下跌归因分析', url:'https://zhuanlan.zhihu.com/p/394127554'}] },
+  { id:'t07', domain:'stats', name:'Cohort 分析（同期群）', tier:'mid',
+    desc:'按用户首次行为分组，追踪后续表现。留存率、复购率、LTV 计算——SaaS 和电商核心方法。',
+    resources:[{type:'文章', name:'Cohort 分析实战', url:'https://www.woshipm.com/data-analysis/'}] },
+  { id:'t08', domain:'stats', name:'假设检验（t/卡方/F检验）', tier:'mid',
+    desc:'判断"差异是否显著"。中级分析师必须能区分"看起来不同"和"统计意义上不同"。',
+    resources:[{type:'文章', name:'假设检验通俗解释', url:'https://zhuanlan.zhihu.com/p/86178674'}] },
+  { id:'t09', domain:'stats', name:'抽样方法与置信区间', tier:'senior',
+    desc:'分层抽样、置信区间计算。客户调研、抽检方案、AB 实验的科学性保障。',
+    resources:[{type:'书籍', name:'《抽样调查》—孙山泽', url:'https://book.douban.com/subject/1455844/'}] },
+  { id:'t10', domain:'stats', name:'时间序列分解与预测', tier:'senior',
+    desc:'趋势/季节性/残差分解；移动平均/指数平滑/ARIMA。销量预测、库存计划的基本盘。',
+    resources:[{type:'书籍', name:'《时间序列分析》—Hyndman', url:'https://otexts.com/fpp3/'}] },
+
+  // ===== 七、数据可视化与讲故事 =====
+  { id:'v01', domain:'viz', name:'图表选型规则', tier:'junior', must:true,
+    desc:'比较用柱图、趋势用折线、占比用饼图（少用）、分布用直方图、关联用散点——基础但常被搞错。',
+    resources:[{type:'网站', name:'From Data to Viz', url:'https://www.data-to-viz.com/'}] },
+  { id:'v02', domain:'viz', name:'颜色与视觉编码原则', tier:'junior',
+    desc:'类别色/序数色/发散色的区分；色盲友好；红绿色对盈亏的语义——细节决定专业度。',
+    resources:[{type:'工具', name:'ColorBrewer', url:'https://colorbrewer2.org/'}] },
+  { id:'v03', domain:'viz', name:'仪表板（Dashboard）设计', tier:'mid', must:true,
+    desc:'信息层次（上→中→下）、F 型/Z 型阅读路径、卡片排版、筛选器位置——让用户 5 秒抓住重点。',
+    resources:[{type:'书籍', name:'《数据可视化设计指南》', url:'https://book.douban.com/'}] },
+  { id:'v04', domain:'viz', name:'报告撰写与数据叙事', tier:'mid', must:true,
+    desc:'背景→分析→结论→建议的结构化输出。一份好报告 = 30% 数据 + 70% 故事。',
+    resources:[
+      {type:'书籍', name:'《用图表说话》—Zelazny', url:'https://book.douban.com/subject/26677005/'},
+      {type:'书籍', name:'《Storytelling with Data》', url:'https://book.douban.com/subject/26794502/'}] },
+  { id:'v05', domain:'viz', name:'PPT 数据汇报', tier:'mid',
+    desc:'结论先行、一页一观点、图表配关键发现——给老板的汇报和给同事的不同。',
+    resources:[{type:'B站', name:'秋叶 PPT 教程', url:'https://www.bilibili.com/'}] },
+  { id:'v06', domain:'viz', name:'ECharts / D3 自定义可视化', tier:'senior',
+    desc:'BI 工具做不出的特殊图表（桑基图、网络图、地理热力）——前端配合做定制看板。',
+    resources:[{type:'文档', name:'ECharts 官方', url:'https://echarts.apache.org/'}] },
+  { id:'v07', domain:'viz', name:'数据新闻与信息图', tier:'senior',
+    desc:'对外输出的高阶能力。年度报告、行业洞察、品牌传播——分析师的"出圈"作品。',
+    resources:[{type:'网站', name:'信息图灵感库', url:'https://informationisbeautiful.net/'}] },
+
+  // ===== 八、BI 工具与自助分析 =====
+  { id:'bi01', domain:'bi', name:'FineBI 自助分析', tier:'junior', must:true,
+    desc:'国产 BI 第一梯队。拖拽建模、自助报表、移动端适配——国内 ToB 项目高频选择。',
+    resources:[
+      {type:'教程', name:'FineBI 官方学习中心', url:'https://help.fanruan.com/finebi/'},
+      {type:'B站', name:'帆软认证课程', url:'https://www.bilibili.com/'}] },
+  { id:'bi02', domain:'bi', name:'Tableau 数据可视化', tier:'mid',
+    desc:'国际市场标杆。LOD 表达式、参数控制、Story Points——交互式分析的天花板。',
+    resources:[
+      {type:'文档', name:'Tableau 官方培训', url:'https://www.tableau.com/learn/training'},
+      {type:'书籍', name:'《Tableau 数据可视化实战》', url:'https://book.douban.com/'}] },
+  { id:'bi03', domain:'bi', name:'Power BI 商业智能', tier:'mid',
+    desc:'微软生态首选。DAX 公式、Power Query 集成、Office 互通——Excel 用户的延伸。',
+    resources:[{type:'认证', name:'Microsoft PL-300 认证', url:'https://learn.microsoft.com/zh-cn/credentials/certifications/data-analyst-associate/'}] },
+  { id:'bi04', domain:'bi', name:'帆软 FineReport 复杂报表', tier:'mid',
+    desc:'中国式报表（多行表头、合并单元格、嵌套子表）的处理王者，传统企业报表必备。',
+    resources:[{type:'教程', name:'帆软学习中心', url:'https://help.fanruan.com/finereport/'}] },
+  { id:'bi05', domain:'bi', name:'BI 工具选型与对比', tier:'senior',
+    desc:'根据团队、预算、数据规模、技术栈推荐合适工具——避免买了 Tableau 没人会用的坑。',
+    resources:[{type:'文章', name:'2026 BI 工具对比', url:'https://www.gartner.com/reviews/market/analytics-business-intelligence-platforms'}] },
+  { id:'bi06', domain:'bi', name:'数据看板需求拆解', tier:'senior', must:true,
+    desc:'从模糊"做个大盘"到清晰的字段/指标/维度/筛选/交互——BI 分析师的核心交付能力。',
+    resources:[{type:'内部', name:'data-analytics Skill §6', url:'#'}] },
+
+  // ===== 九、数据仓库与建模 =====
+  { id:'w01', domain:'warehouse', name:'OLTP vs OLAP 区别', tier:'junior', must:true,
+    desc:'业务库（事务）和分析库（分析）的根本差异。理解了才不会用业务库跑慢查询拖垮系统。',
+    resources:[{type:'文章', name:'OLTP 与 OLAP 详解', url:'https://zhuanlan.zhihu.com/p/465830676'}] },
+  { id:'w02', domain:'warehouse', name:'维度建模基础概念', tier:'junior',
+    desc:'事实表、维度表、粒度、星型/雪花模型——Kimball 维度建模的核心。',
+    resources:[
+      {type:'书籍', name:'《数据仓库工具箱》—Kimball', url:'https://book.douban.com/subject/26649191/'},
+      {type:'文章', name:'维度建模入门', url:'https://zhuanlan.zhihu.com/p/27426819'}] },
+  { id:'w03', domain:'warehouse', name:'数仓分层（ODS/DWD/DWS/ADS）', tier:'mid', must:true,
+    desc:'数据从原始到应用的四层流转。每层职责清晰，问题可追溯——大厂数仓的标准范式。',
+    resources:[{type:'文章', name:'数仓分层架构', url:'https://cloud.tencent.com/developer/article/1853182'}] },
+  { id:'w04', domain:'warehouse', name:'事实表设计（三种类型）', tier:'mid',
+    desc:'事务事实表、周期快照、累积快照——选错事实表类型会导致一辈子的查询性能问题。',
+    resources:[{type:'文章', name:'事实表三种类型', url:'https://www.cnblogs.com/ohtang/p/17237782.html'}] },
+  { id:'w05', domain:'warehouse', name:'缓慢变化维（SCD）', tier:'mid',
+    desc:'SCD Type 1/2/3：维度数据变了怎么办？历史信息是否保留？决定了历史回溯能力。',
+    resources:[{type:'文章', name:'SCD 详解', url:'https://www.dtstack.com/bbs/article/1103'}] },
+  { id:'w06', domain:'warehouse', name:'指标管理与数据字典', tier:'mid', must:true,
+    desc:'原子指标 → 派生指标 → 复合指标的拆解；指标定义、口径、负责人——避免"一个指标多个数"。',
+    resources:[{type:'文章', name:'指标体系建设', url:'https://www.cnblogs.com/ohtang/p/17237782.html'}] },
+  { id:'w07', domain:'warehouse', name:'ETL/ELT 流程设计', tier:'senior',
+    desc:'数据抽取、转换、加载的工程化。DataX/Kettle/dbt——分析师向工程靠拢的关键能力。',
+    resources:[{type:'文档', name:'dbt 官方文档', url:'https://docs.getdbt.com/'}] },
+  { id:'w08', domain:'warehouse', name:'数据质量与监控', tier:'senior',
+    desc:'完整性、准确性、一致性、及时性——数据出错时怎么报警、怎么追溯、怎么修复。',
+    resources:[{type:'文章', name:'数据质量保障体系', url:'https://www.aliyun.com/'}] },
+  { id:'w09', domain:'warehouse', name:'数据中台与主题域设计', tier:'senior',
+    desc:'根据业务域抽象主题（用户/商品/订单/财务）；总线矩阵设计——架构师级思考。',
+    resources:[{type:'书籍', name:'《大数据之路》—阿里', url:'https://book.douban.com/subject/27075681/'}] },
+
+  // ===== 十、机器学习与高阶分析 =====
+  { id:'m01', domain:'ml', name:'监督学习概念', tier:'mid',
+    desc:'分类 vs 回归；训练集/验证集/测试集；过拟合/欠拟合——ML 的入门基础。',
+    resources:[{type:'课程', name:'吴恩达机器学习课程', url:'https://www.coursera.org/learn/machine-learning'}] },
+  { id:'m02', domain:'ml', name:'回归模型（线性/逻辑）', tier:'mid',
+    desc:'线性回归预测连续值，逻辑回归预测概率（流失/复购）——可解释性强，业务首选。',
+    resources:[{type:'书籍', name:'《统计学习方法》—李航', url:'https://book.douban.com/subject/33437381/'}] },
+  { id:'m03', domain:'ml', name:'分类模型（树/森林/XGBoost）', tier:'mid',
+    desc:'决策树、随机森林、XGBoost——结构化数据的分类王者，Kaggle 竞赛常胜方案。',
+    resources:[{type:'文档', name:'XGBoost 官方', url:'https://xgboost.readthedocs.io/'}] },
+  { id:'m04', domain:'ml', name:'聚类（K-means/层次/DBSCAN）', tier:'mid',
+    desc:'无监督分群。用户画像、商品分类、客户细分——无标签数据的分析利器。',
+    resources:[{type:'文档', name:'scikit-learn 聚类', url:'https://scikit-learn.org/stable/modules/clustering.html'}] },
+  { id:'m05', domain:'ml', name:'特征工程', tier:'senior', must:true,
+    desc:'特征 = 80% 模型效果。编码、归一化、衍生特征、特征选择——比换模型更有效的优化方向。',
+    resources:[{type:'书籍', name:'《特征工程入门与实践》', url:'https://book.douban.com/subject/33459163/'}] },
+  { id:'m06', domain:'ml', name:'时间序列预测（Prophet/LSTM）', tier:'senior',
+    desc:'Facebook Prophet 易用、效果好，LSTM 处理复杂模式——销量、库存、价格预测主力。',
+    resources:[{type:'文档', name:'Prophet 官方', url:'https://facebook.github.io/prophet/'}] },
+  { id:'m07', domain:'ml', name:'推荐系统基础', tier:'senior',
+    desc:'协同过滤、内容推荐、混合推荐——电商商品推荐、相似商品发现的核心算法。',
+    resources:[{type:'书籍', name:'《推荐系统实践》—项亮', url:'https://book.douban.com/subject/10769749/'}] },
+
+  // ===== 十一、AI 工具与效率提升 =====
+  { id:'a01', domain:'ai', name:'用 AI 写 SQL / Pandas', tier:'junior', must:true,
+    desc:'ChatGPT/Claude/通义千问。把"分析需求→可执行代码"的时间从 30 分钟压到 3 分钟。',
+    resources:[
+      {type:'工具', name:'Claude', url:'https://claude.ai'},
+      {type:'文章', name:'AI 写 SQL 实战', url:'https://zhuanlan.zhihu.com/'}] },
+  { id:'a02', domain:'ai', name:'Prompt 工程与上下文管理', tier:'junior', must:true,
+    desc:'结构化提示词（角色+任务+约束+输出格式）；分析任务的提示模板沉淀——AI 效率核心。',
+    resources:[{type:'指南', name:'Anthropic Prompt Engineering', url:'https://docs.anthropic.com/zh-CN/docs/build-with-claude/prompt-engineering/overview'}] },
+  { id:'a03', domain:'ai', name:'AI 辅助数据清洗与探索', tier:'mid',
+    desc:'用 LLM 处理脏数据（地址标准化、文本分类、情感分析）——以前要 ML 模型，现在调 API。',
+    resources:[{type:'文章', name:'LLM 在数据清洗中的应用', url:'https://www.36kr.com/'}] },
+  { id:'a04', domain:'ai', name:'AI Agent 与自动分析', tier:'mid',
+    desc:'Code Interpreter / 数据 Agent。给数据集 + 业务问题，AI 自动跑分析、出图、写报告。',
+    resources:[
+      {type:'工具', name:'ChatGPT 数据分析', url:'https://chat.openai.com'},
+      {type:'文档', name:'Claude Code', url:'https://docs.claude.com/zh-CN/docs/claude-code/overview'}] },
+  { id:'a05', domain:'ai', name:'BI 工具中的 AI 能力', tier:'mid',
+    desc:'FineBI/Tableau/Power BI 内置 AI 问答、自动洞察、智能图表推荐——拥抱工具升级红利。',
+    resources:[{type:'文档', name:'FineBI AI 助手', url:'https://help.fanruan.com/'}] },
+  { id:'a06', domain:'ai', name:'RAG 与企业数据问答', tier:'senior',
+    desc:'让 AI 基于企业内部数据回答问题。结合数据字典、指标库做"自然语言取数"。',
+    resources:[{type:'文章', name:'RAG 架构详解', url:'https://www.anthropic.com/news/contextual-retrieval'}] },
+  { id:'a07', domain:'ai', name:'Agent 编排与工作流自动化', tier:'senior',
+    desc:'用 Dify/n8n/Coze 编排"取数→分析→报告→分发"全流程——分析师向"AI 产品经理"转型。',
+    resources:[{type:'文档', name:'Dify 官方', url:'https://dify.ai/zh'}] },
+
+  // ===== 十二、沟通协作与商业敏感 =====
+  { id:'so01', domain:'soft', name:'需求澄清与反问能力', tier:'junior', must:true,
+    desc:'业务说"做个销售报表"，能反问出"看什么周期、给谁看、做什么决策"——避免做完被推翻。',
+    resources:[{type:'文章', name:'需求澄清 5 问', url:'https://www.woshipm.com/'}] },
+  { id:'so02', domain:'soft', name:'结论先行（金字塔原理）', tier:'junior', must:true,
+    desc:'结论 → 理由 → 数据。老板时间宝贵，先说结论再展开论据，是基础职业素养。',
+    resources:[{type:'书籍', name:'《金字塔原理》', url:'https://book.douban.com/subject/4001317/'}] },
+  { id:'so03', domain:'soft', name:'跨部门协作', tier:'mid',
+    desc:'懂业务的语言、产品的取舍、技术的实现成本——分析师天然站在交叉口。',
+    resources:[{type:'书籍', name:'《非暴力沟通》', url:'https://book.douban.com/subject/3533221/'}] },
+  { id:'so04', domain:'soft', name:'数据汇报与影响管理层', tier:'mid', must:true,
+    desc:'对管理层 5 分钟讲清楚一个分析。会议提案、邮件、PPT 都要训练。',
+    resources:[{type:'书籍', name:'《麦肯锡教我的写作武器》', url:'https://book.douban.com/subject/4744347/'}] },
+  { id:'so05', domain:'soft', name:'推动分析结论落地', tier:'senior', must:true,
+    desc:'高级分析师不止"出报告"，而是推动业务采取行动。Owner 意识、跟踪结果、闭环验证。',
+    resources:[{type:'文章', name:'让数据分析驱动业务', url:'https://zhuanlan.zhihu.com/'}] },
+  { id:'so06', domain:'soft', name:'商业敏感度', tier:'senior',
+    desc:'看到一个数字能联想到背后的业务动作、市场变化、竞争态势——长期业务浸泡的结果。',
+    resources:[{type:'书籍', name:'《商业洞察》—刘润', url:'https://book.douban.com/'}] },
+  { id:'so07', domain:'soft', name:'团队带教与方法论沉淀', tier:'senior',
+    desc:'把个人经验变成团队规范（指标库、分析模板、SOP）——Lead 必备能力。',
+    resources:[{type:'内部', name:'product-collab-rules Skill', url:'#'}] }
+];
+
+// ========== 学习路径 ==========
+const PATHS = [
+  { num:1, title:'数据分析新人 0→1', duration:'第 1 - 3 个月', tier:'junior',
+    goal:'入门期。能独立完成"取数 + 简单分析 + 出报表"的闭环，承接业务方的基础需求。',
+    items:[
+      'SQL：会写多表 JOIN、聚合、子查询、CASE WHEN',
+      'Excel：透视表 + 常用函数 + Power Query 基础',
+      'Python：能用 Pandas 读写、筛选、聚合 DataFrame（可选）',
+      '业务：吃透二手奢侈品的回收→鉴定→销售→财务全链路',
+      '指标：能复述 GMV / 回收额 / 毛利率 / 库存周转的定义和口径',
+      '汇报：用"结论先行"+图表给一线业务做周报、月报',
+      'AI：能用 Claude/通义写 SQL、用 ChatGPT 出分析初稿'
+    ] },
+  { num:2, title:'中级分析师 1→3', duration:'第 4 - 12 个月', tier:'mid',
+    goal:'独立期。能主导一个业务域的数据分析，搭建指标体系，做归因分析。BI 看板自主交付。',
+    items:[
+      'SQL：熟练窗口函数、CTE、看懂 EXPLAIN',
+      'Python：完整数据清洗 + 可视化 + 自动化日报',
+      '统计：AB 测试设计 + 漏斗分析 + Cohort 分析 + 假设检验',
+      '建模：理解事实/维度表、数仓分层、SCD',
+      '业务：独立搭建一个业务域的指标体系（如销售域 OSM）',
+      'BI：精通 1 个主力工具（FineBI / Tableau / Power BI）',
+      '可视化：仪表板设计 + 数据故事叙述',
+      'AI：能编排 AI Agent 完成"取数→分析→洞察"自动化',
+      '协作：能给业务负责人做 30 分钟的深度分析汇报'
+    ] },
+  { num:3, title:'高级分析师 / BI 架构师 3+', duration:'第 13 个月起', tier:'senior',
+    goal:'影响期。设计公司级数据中台、推动数据文化、主导战略级分析项目，培养下属。',
+    items:[
+      'SQL：OLAP 函数、存储过程、分布式 SQL（Hive/Spark）',
+      '建模：主导主题域设计、维度建模、指标管理体系',
+      '统计：归因模型 + 时间序列预测 + 用户分群算法',
+      '机器学习：回归/分类/聚类应用于业务（流失预警、客单价预测）',
+      '工程：dbt/Airflow 数据工程化能力',
+      'AI：RAG 自然语言取数、Agent 工作流编排',
+      '业务：跨域归因（GMV 拆解到品类×渠道×客群×时间）',
+      '影响：推动一个项目从分析→决策→落地→效果验证的完整闭环',
+      '带教：沉淀指标库、分析模板，培养 1-2 个初级'
+    ] }
+];
+
+// ========== 评估级别 ==========
+const EVAL_LEVELS = [
+  { tier:'junior', name:'初级 / Junior', en:'L1 - L2', icon:'🌱',
+    yearExp:'应届 - 1 年', salary:'¥8K - 15K', mustCount:'12 项必备',
+    desc:'有数据感觉，能在指导下完成具体取数和报表任务。SQL 和 Excel 是底线，业务理解处于学习期。',
+    detail:{
+      'SQL': '多表 JOIN、聚合、CASE WHEN；能调通复杂查询',
+      'Excel': '透视表 + 常用函数 + 基础 Power Query',
+      'Python': '能用 Pandas 做基础数据处理（可选）',
+      '业务理解': '复述行业流程；理解核心指标定义和口径',
+      '分析': '趋势对比、漏斗、同环比；按指导做归因',
+      'BI 工具': '熟练 1 个 BI 工具的拖拽报表',
+      '沟通': '周报月报；汇报有结构'
+    } },
+  { tier:'mid', name:'中级 / Mid-Level', en:'L3 - L4', icon:'🌿',
+    yearExp:'2 - 4 年', salary:'¥15K - 30K', mustCount:'20 项必备',
+    desc:'独立承接业务域分析。能搭建指标体系、设计看板、用统计方法做归因。AI 工具效率提升能体现。',
+    detail:{
+      'SQL': '窗口函数、CTE；优化慢查询；独立完成业务复杂 SQL',
+      'Python': '完整数据清洗+可视化+自动化日报；可复用脚本',
+      '建模': '事实/维度表、数仓分层；能用维度建模思路设计中间表',
+      '业务理解': '深度理解 1 个业务域；能搭建该域指标体系',
+      '分析': 'AB 实验、归因分析、Cohort；提出可执行建议',
+      'BI 工具': '精通 1 主 1 备 BI 工具；能设计看板',
+      'AI': '用 AI Agent 提升 50% 取数+报告效率',
+      '沟通': '给业务负责人做深度汇报；推动结论落地'
+    } },
+  { tier:'senior', name:'高级 / Senior', en:'L5+', icon:'🌳',
+    yearExp:'4 - 8+ 年', salary:'¥30K - 60K+', mustCount:'25+ 项必备',
+    desc:'影响公司级数据架构和文化。主导战略级分析、设计数据中台、建立指标管理体系，能培养下属。',
+    detail:{
+      'SQL': 'OLAP 函数、存储过程、分布式 SQL；调优能力',
+      '建模': '主导主题域设计、维度建模、指标管理体系',
+      'ML': '机器学习应用于业务（流失预警、客单价预测、推荐）',
+      '工程': 'ETL 工程化能力（dbt / Airflow）',
+      'AI': 'RAG 和 Agent 实现自然语言取数+自动洞察',
+      '业务理解': '跨域思考；从战略层面看数据资产',
+      '影响': '推动从分析→决策→落地→验证的完整闭环',
+      '带教': '沉淀方法论、培养下属、建团队规范'
+    } }
+];
+
+// ========== 评估打分表 ==========
+const EVAL_RUBRIC = [
+  { domain:'数据思维', junior:2, mid:4, senior:5, weight:'15%' },
+  { domain:'业务理解', junior:2, mid:4, senior:5, weight:'20%' },
+  { domain:'SQL', junior:3, mid:5, senior:5, weight:'15%' },
+  { domain:'Excel', junior:4, mid:4, senior:3, weight:'5%' },
+  { domain:'Python', junior:1, mid:3, senior:4, weight:'8%' },
+  { domain:'统计/分析方法', junior:2, mid:4, senior:5, weight:'10%' },
+  { domain:'可视化/讲故事', junior:2, mid:4, senior:5, weight:'8%' },
+  { domain:'BI 工具', junior:2, mid:4, senior:4, weight:'5%' },
+  { domain:'数仓建模', junior:1, mid:3, senior:5, weight:'5%' },
+  { domain:'机器学习', junior:0, mid:2, senior:3, weight:'3%' },
+  { domain:'AI 工具', junior:2, mid:4, senior:4, weight:'3%' },
+  { domain:'沟通协作', junior:3, mid:4, senior:5, weight:'3%' }
+];
+
+// ========== 面试题库 ==========
+const INTERVIEW_QUESTIONS = [
+  { tier:'junior', tag:'SQL', q:'有一张订单表 orders(id, user_id, amount, created_at)，写 SQL 查出每个用户的下单次数和总金额，按总金额降序。',
+    考察:'基础聚合 + GROUP BY + ORDER BY。10 秒能写出来才算合格。',
+    参考:`SELECT user_id, COUNT(*) AS order_cnt, SUM(amount) AS total_amount
+FROM orders
+GROUP BY user_id
+ORDER BY total_amount DESC;` },
+  { tier:'junior', tag:'SQL', q:'订单表 orders 和用户表 users 通过 user_id 关联。查出每个用户的下单次数，包括没下单的用户（次数为 0）。',
+    考察:'LEFT JOIN 方向 + COUNT 对 NULL 的处理（COUNT(o.id) 而不是 COUNT(*)）。',
+    参考:`SELECT u.user_id, u.name, COUNT(o.id) AS order_cnt
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.user_id
+GROUP BY u.user_id, u.name;` },
+  { tier:'junior', tag:'业务', q:'昨天 GMV 环比下降 20%，你会怎么定位原因？',
+    考察:'结构化思维 + 业务理解。看候选人会不会拆维度（品类/渠道/时段/客群），会不会想到外部因素。',
+    参考:'好答案的结构：① 先排除数据问题（数据延迟、口径变化）② 拆维度归因（哪个品类/渠道/门店贡献最大降幅）③ 看流量×转化率×客单价拆解 ④ 对比同比（是否是节假日效应）⑤ 询问业务方有无活动调整。' },
+  { tier:'junior', tag:'Excel', q:'有 5 万行销售数据，怎么用 Excel 快速看出"销量 Top 10 的商品"？',
+    考察:'透视表 + 排序的基本功。直接写公式的不及格。',
+    参考:'选数据→插入透视表→把商品拖到行、把数量拖到值（求和）→对值列降序排序→显示前 10。' },
+  { tier:'junior', tag:'指标', q:'什么是毛利率？我们公司的毛利率怎么算？',
+    考察:'对核心指标的理解。会算公式是基础，能讲清"成本"和"销售收入"的边界才是合格。',
+    参考:'毛利率 = (销售收入 - 商品成本) / 销售收入。要追问：① 销售收入是含税还是不含税 ② 成本是否包含仓储/物流 ③ 寄售业务怎么算（寄售收入不是全部成本）④ 退款是否扣减 ⑤ 时间口径（按订单日还是确认收货日）。' },
+
+  { tier:'mid', tag:'SQL', q:'用 SQL 算出每个用户最近一次下单的金额（用户最后一单）。',
+    考察:'窗口函数（ROW_NUMBER）的应用。如果用 MAX(created_at) 子查询解，说明窗口函数掌握不够。',
+    参考:`SELECT user_id, amount, created_at FROM (
+  SELECT user_id, amount, created_at,
+         ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at DESC) AS rn
+  FROM orders
+) t WHERE rn = 1;` },
+  { tier:'mid', tag:'统计', q:'你们做了一次 AB 实验，A 组转化率 5.2%，B 组转化率 5.5%，B 组样本量 2 万。能否说 B 组更好？',
+    考察:'对显著性的理解。直接说"B 更好"的是初级；说"要做卡方检验/Z 检验、要算 p 值"的是中级。',
+    参考:'不能直接结论。需做两比例 Z 检验，给定 α=0.05 计算 p 值。0.3 个百分点的差异在万级样本下可能不显著。另外要看：实验时长够不够、新奇效应是否消退、是否有 SRM（样本比例不均）等问题。' },
+  { tier:'mid', tag:'业务', q:'让你设计一个"销售人员业绩看板"，你会包含哪些指标？',
+    考察:'指标体系搭建能力。不要只回答"GMV、订单数"，要分层（结果指标/过程指标/质量指标）。',
+    参考:`结果层：人均 GMV、人均订单数、人均毛利
+过程层：跟进客户数、报价次数、商品讲解数、试穿率
+质量层：客单价、复购率、客户满意度、退货率
+对标：本人 vs 团队均值 vs TOP 10%
+时间：日/周/月/季度切换 + 同环比
+钻取：点击人名→看该销售的详细订单和客户` },
+  { tier:'mid', tag:'分析方法', q:'用户复购率从 30% 降到 25%，怎么归因？',
+    考察:'归因思路。看候选人会不会做 Cohort 分群，区分"新客构成变化"和"老客活跃度变化"。',
+    参考:'① 做 Cohort 分析（按首单月分群看复购率），区分新客差还是老客差 ② 拆品类、渠道、客群看哪一类下降 ③ 看时间段（是某个特定时点开始下降）④ 看竞品/价格/活动等外因 ⑤ 验证是否是新客占比上升导致的辛普森悖论。' },
+  { tier:'mid', tag:'BI', q:'BI 看板出来后，业务方说"这个数和我自己拉的对不上"，怎么处理？',
+    考察:'问题定位能力 + 口径意识。看候选人有没有"指标口径管理"意识。',
+    参考:'① 第一步对齐口径：时间范围、维度筛选、数据源 ② 第二步对齐计算逻辑：去重规则、是否含退款、状态筛选 ③ 第三步对齐数据源：业务库 vs 数仓、是否实时 ④ 找到差异点后，沉淀到指标字典 ⑤ 长期方案：建立公司级指标管理平台，避免每次重复扯皮。' },
+
+  { tier:'senior', tag:'架构', q:'让你从 0 设计一个二手奢侈品 ERP 的数据仓库，怎么分主题域？怎么分层？',
+    考察:'数仓架构能力。看候选人是否懂维度建模、分层架构、主题域抽象。',
+    参考:`分层（ODS→DWD→DWS→ADS）：
+- ODS：业务库 binlog 接入，按天分区
+- DWD：明细事实表（订单/回收/鉴定/调拨/财务...）+ 维度表（用户/商品/门店/品牌...）
+- DWS：按主题轻度汇总（用户主题宽表、商品主题宽表）
+- ADS：面向应用（销售看板、回收看板、寄售看板）
+
+主题域：
+- 用户域、商品域、订单域、回收域、鉴定域、库存域、财务域
+- 跨域宽表：商品全生命周期、用户全生命周期
+
+总线矩阵：横轴业务过程，纵轴一致性维度，明确每个事实表关联的维度。` },
+  { tier:'senior', tag:'方法论', q:'公司经营会上 CEO 问"为什么这个月毛利率掉了 3 个点"，你 30 分钟后要给答案。怎么做？',
+    考察:'快速归因 + 优先级判断。看候选人能不能先抓主要矛盾。',
+    参考:`第 1 步（5 分钟）：拉毛利率公式 = (销售额 - 成本) / 销售额
+第 2 步（10 分钟）：拆维度
+- 按品类拆：哪个品类毛利率掉了？是单价降了还是成本涨了？
+- 按渠道拆：寄售占比是否变化（寄售毛利低）？
+- 按门店拆：是否某门店异常？
+第 3 步（10 分钟）：找驱动因素
+- 价格策略变化？促销活动？回收成本涨？
+第 4 步（5 分钟）：结论 + 数据 + 建议
+- 一句话结论 + 1 张拆解图 + 2 条建议` },
+  { tier:'senior', tag:'AI', q:'AI 工具能写 SQL、能出报告，未来数据分析师的价值在哪？',
+    考察:'职业认知 + 战略思维。听他对自己角色的理解，是不是只会"取数"。',
+    参考:`好答案应包含：
+1. 问题定义能力：AI 不会主动发现"应该分析什么"
+2. 业务理解深度：AI 取数会，但取错数也会，需要懂业务的人把关
+3. 结论可信度判断：AI 跑出来的相关 ≠ 因果，需要人判断
+4. 推动落地：分析报告变成业务行动，AI 没有人脉和影响力
+5. 数据治理与战略：构建公司级数据资产是 AI 替代不了的架构工作
+
+最差的回答：列举一堆 AI 工具，证明自己"会用"。这只是基础。` },
+  { tier:'senior', tag:'管理', q:'团队来了一个新入职的初级分析师，第一个月你怎么带？',
+    考察:'带教能力 + 培养体系。看候选人有没有思考过下属成长路径。',
+    参考:`第 1 周：环境 & 业务
+- 业务架构、ERP 系统、业务流程 walkthrough
+- 数仓表结构、指标字典 walkthrough
+- 让其做一个简单的取数任务，熟悉链路
+第 2 周：影子跟单
+- 跟我一起处理 1-2 个真实业务需求，看我怎么澄清、设计、交付
+- 自己尝试做一份简单的周报
+第 3-4 周：独立交付
+- 分配 1 个小型业务域的报表/分析任务
+- 每周 1v1 复盘，关键节点 code review
+3 个月目标：独立承接 1 个业务域的数据需求` }
+];
+
+</script>
+<script>
+/* ============================================================
+ *  BI 数据分析师能力图谱 — 交互逻辑（兼容性强化版）
+ * ============================================================ */
+
+var STORAGE_KEY = 'bi_skill_map_checked_v1';
+
+var $  = function(sel, root) { return (root || document).querySelector(sel); };
+var $$ = function(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+var esc = function(s) {
+  if (s === null || s === undefined) s = '';
+  return String(s).replace(/[&<>"']/g, function(c) {
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+};
+
+function loadChecked() {
+  try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? new Set(JSON.parse(raw)) : new Set(); }
+  catch (e) { return new Set(); }
+}
+function saveChecked(set) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify([].concat([...set]))); } catch (e) {}
+}
+var CHECKED = loadChecked();
+
+var SKILLS_BY_DOMAIN = (function() {
+  var m = {};
+  DOMAINS.forEach(function(d) { m[d.id] = []; });
+  ALL_SKILLS.forEach(function(s) { if (m[s.domain]) m[s.domain].push(s); });
+  return m;
+})();
+
+const TIER_LABEL = { junior:'初级', mid:'中级', senior:'高级' };
+const TIER_CLASS = { junior:'tier-junior', mid:'tier-mid', senior:'tier-senior' };
+const MUST_TOTAL = ALL_SKILLS.filter(s => s.must).length;
+
+function updateStats() {
+  const total = ALL_SKILLS.length;
+  const checked = ALL_SKILLS.filter(s => CHECKED.has(s.id)).length;
+  const pct = total ? Math.round(checked / total * 100) : 0;
+  $('#stat-total').textContent = total;
+  $('#stat-checked').textContent = checked;
+  $('#stat-percent').textContent = pct + '%';
+  const bar = $('#progress-bar-fill'); if (bar) bar.style.width = pct + '%';
+  $('#cnt-list').textContent = total;
+  $('#cnt-iv').textContent = INTERVIEW_QUESTIONS.length;
+}
+
+function initTabs() {
+  $$('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      $$('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+      $$('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + tab));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ============ 能力图谱 ============ */
+function renderMap() {
+  const root = $('#tab-map');
+
+  // 渲染所有卡片
+  const cardsHtml = DOMAINS.map(d => {
+    const skills = SKILLS_BY_DOMAIN[d.id] || [];
+    const mustCount = skills.filter(s => s.must).length;
+    const chipsHtml = (d.chips || []).map(c => `<span class="chip">${esc(c)}</span>`).join('');
+
+    const detailHtml = [
+      d.overview && { icon:'📖', label:'核心要点', text:d.overview },
+      d.focus    && { icon:'🎯', label:'重点掌握', text:d.focus },
+      d.scenarios&& { icon:'💼', label:'适用场景', text:d.scenarios }
+    ].filter(Boolean).map(s => `
+      <div class="detail-section">
+        <div class="detail-title">${s.icon} ${esc(s.label)}</div>
+        <div class="detail-content">${esc(s.text)}</div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="domain-card theme-${d.theme}" data-domain="${esc(d.id)}" id="domain-card-${esc(d.id)}">
+        <div class="domain-head">
+          <div class="domain-icon">${d.icon}</div>
+          <div class="domain-title">
+            <h3>${esc(d.name)}</h3>
+            <div class="domain-meta"><span class="en-tag">${esc(d.en)}</span> · ${skills.length} 项技能 · ${mustCount} 项必备</div>
+          </div>
+        </div>
+        <div class="domain-desc">${esc(d.desc)}</div>
+        ${chipsHtml ? `<div class="chips">${chipsHtml}</div>` : ''}
+        <div class="domain-detail">${detailHtml}</div>
+        <div class="domain-actions">
+          <button type="button" class="domain-btn domain-btn-detail" onclick="toggleDomainDetail('${esc(d.id)}')">📖 查看详情</button>
+          <button type="button" class="domain-btn domain-btn-skills" onclick="gotoDomainSkills('${esc(d.id)}')">查看技能点 →</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  root.innerHTML = `
+    <div class="tab-intro">
+      <h2>BI 数据分析师 · 12 大能力域</h2>
+      <p>覆盖从 <b>数据思维</b> 到 <b>AI 工具</b> 的完整能力体系，共 <b>${ALL_SKILLS.length}</b> 个技能点，其中 <b>${MUST_TOTAL}</b> 项为必备。每张卡片包含「核心要点 / 重点掌握 / 适用场景」三段说明，点击「查看详情」展开，点击「查看技能点 →」跳转到学习清单。</p>
+    </div>
+    <div class="map-toolbar">
+      <button type="button" class="ghost-btn" onclick="expandAllDomains()">📂 全部展开</button>
+      <button type="button" class="ghost-btn" onclick="collapseAllDomains()">📁 全部收起</button>
+    </div>
+    <div class="domain-grid">${cardsHtml}</div>
+  `;
+}
+
+// 全局函数（挂在 window 上供 inline onclick 调用）
+window.toggleDomainDetail = function(domainId) {
+  var card = document.getElementById('domain-card-' + domainId);
+  if (!card) return;
+  var btn = card.querySelector('.domain-btn-detail');
+  var open = card.classList.toggle('detail-open');
+  if (btn) btn.textContent = open ? '📕 收起详情' : '📖 查看详情';
+};
+
+window.gotoDomainSkills = function(domainId) {
+  jumpToList(domainId);
+};
+
+window.expandAllDomains = function() {
+  var cards = document.querySelectorAll('.domain-card');
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].classList.add('detail-open');
+    var btn = cards[i].querySelector('.domain-btn-detail');
+    if (btn) btn.textContent = '📕 收起详情';
+  }
+};
+
+window.collapseAllDomains = function() {
+  var cards = document.querySelectorAll('.domain-card');
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].classList.remove('detail-open');
+    var btn = cards[i].querySelector('.domain-btn-detail');
+    if (btn) btn.textContent = '📖 查看详情';
+  }
+};
+
+function jumpToList(domainId) {
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < tabBtns.length; i++) {
+    if (tabBtns[i].getAttribute('data-tab') === 'list') tabBtns[i].classList.add('active');
+    else tabBtns[i].classList.remove('active');
+  }
+  var contents = document.querySelectorAll('.tab-content');
+  for (var j = 0; j < contents.length; j++) {
+    if (contents[j].id === 'tab-list') contents[j].classList.add('active');
+    else contents[j].classList.remove('active');
+  }
+  var section = document.getElementById('domain-section-' + domainId);
+  if (section) {
+    section.classList.add('expanded');
+    setTimeout(function() { section.scrollIntoView({ behavior:'smooth', block:'start' }); }, 50);
+  }
+}
+
+/* ============ 学习清单 ============ */
+let listFilters = { tier:'all', must:false, keyword:'' };
+
+function renderList() {
+  const root = $('#tab-list');
+  root.innerHTML = `
+    <div class="tab-intro">
+      <h2>学习清单 · 按能力域分组</h2>
+      <p>勾选已掌握的技能，进度自动保存到浏览器本地。可按等级过滤、关键词搜索、或只看必备项。建议先把 <b>${MUST_TOTAL} 项必备</b> 全部勾完再补齐其余。</p>
+    </div>
+    <div class="list-controls">
+      <input id="list-search" class="search-input" type="text" placeholder="🔍 搜索技能名称、描述、资源…" />
+      <div class="filter-group">
+        <span class="filter-label">等级：</span>
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="junior">初级</button>
+        <button class="filter-btn" data-filter="mid">中级</button>
+        <button class="filter-btn" data-filter="senior">高级</button>
+      </div>
+      <label class="must-toggle">
+        <input type="checkbox" id="must-only" /> 只看必备
+      </label>
+      <button class="ghost-btn" id="reset-progress">重置进度</button>
+    </div>
+    <div id="list-container"></div>
+  `;
+
+  $('#list-search').addEventListener('input', e => {
+    listFilters.keyword = e.target.value.trim().toLowerCase();
+    renderListContainer();
+  });
+  $$('.filter-btn', root).forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('.filter-btn', root).forEach(b => b.classList.toggle('active', b === btn));
+      listFilters.tier = btn.dataset.filter;
+      renderListContainer();
+    });
+  });
+  $('#must-only').addEventListener('change', e => {
+    listFilters.must = e.target.checked;
+    renderListContainer();
+  });
+  $('#reset-progress').addEventListener('click', () => {
+    if (confirm('确定要清空所有勾选进度吗？此操作不可撤销。')) {
+      CHECKED.clear(); saveChecked(CHECKED);
+      renderListContainer(); updateStats();
+    }
+  });
+  renderListContainer();
+}
+
+function renderListContainer() {
+  const container = $('#list-container');
+  const kw = listFilters.keyword;
+
+  const html = DOMAINS.map(d => {
+    const skills = (SKILLS_BY_DOMAIN[d.id] || []).filter(s => {
+      if (listFilters.tier !== 'all' && s.tier !== listFilters.tier) return false;
+      if (listFilters.must && !s.must) return false;
+      if (kw) {
+        const hay = [s.name, s.desc, ...(s.resources||[]).map(r=>r.name)].join(' ').toLowerCase();
+        if (!hay.includes(kw)) return false;
+      }
+      return true;
+    });
+    if (!skills.length) return '';
+    const checkedInDomain = skills.filter(s => CHECKED.has(s.id)).length;
+    const skillsHtml = skills.map(s => skillItemHtml(s)).join('');
+
+    return `
+      <div class="domain-section expanded theme-${d.theme}" id="domain-section-${d.id}">
+        <div class="domain-section-head">
+          <div class="dsh-left">
+            <span class="dsh-icon">${d.icon}</span>
+            <span class="dsh-title">${esc(d.name)}</span>
+            <span class="dsh-count">${checkedInDomain}/${skills.length}</span>
+          </div>
+          <span class="dsh-toggle">▼</span>
+        </div>
+        <div class="domain-section-body">${skillsHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = html || `<div class="empty">😴 没有匹配的技能点，试试调整过滤条件</div>`;
+
+  $$('.domain-section-head', container).forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('expanded'));
+  });
+  $$('.skill-check', container).forEach(box => {
+    box.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = box.dataset.id;
+      if (CHECKED.has(id)) { CHECKED.delete(id); box.classList.remove('checked'); }
+      else { CHECKED.add(id); box.classList.add('checked'); }
+      saveChecked(CHECKED);
+      const section = box.closest('.domain-section');
+      const head = $('.dsh-count', section);
+      const all = $$('.skill-check', section);
+      const checked = all.filter(b => b.classList.contains('checked')).length;
+      head.textContent = `${checked}/${all.length}`;
+      updateStats();
+    });
+  });
+}
+
+function skillItemHtml(s) {
+  const isChecked = CHECKED.has(s.id);
+  const tierBadge = `<span class="tier-badge ${TIER_CLASS[s.tier]}">${TIER_LABEL[s.tier]}</span>`;
+  const mustBadge = s.must ? `<span class="must-badge">必备</span>` : '';
+  const typeIcon = { '书籍':'📖','课程':'🎓','文档':'📄','工具':'🛠️',
+                     '文章':'📝','视频':'🎬','实战':'💪','社区':'🌐' };
+  const resources = (s.resources || []).map(r => {
+    const ico = typeIcon[r.type] || '🔗';
+    const inner = `${ico} ${esc(r.name)}`;
+    const link = r.url
+      ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${inner}</a>`
+      : `<span class="res-text">${inner}</span>`;
+    return `<li><span class="res-type">[${esc(r.type)}]</span> ${link}</li>`;
+  }).join('');
+  return `
+    <div class="skill-item">
+      <div class="skill-check ${isChecked ? 'checked' : ''}" data-id="${esc(s.id)}" title="点击勾选">
+        <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="skill-body">
+        <div class="skill-head">
+          <span class="skill-name">${esc(s.name)}</span>
+          ${tierBadge}
+          ${mustBadge}
+        </div>
+        ${s.desc ? `<div class="skill-desc">${esc(s.desc)}</div>` : ''}
+        ${resources ? `<ul class="skill-resources">${resources}</ul>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+/* ============ 评估标准 ============ */
+function renderEval() {
+  const root = $('#tab-eval');
+
+  const cardsHtml = EVAL_LEVELS.map(lv => {
+    const dimHtml = Object.entries(lv.detail || {}).map(([dim, desc]) => `
+      <li>
+        <span class="eval-dim">${esc(dim)}</span>
+        <span class="eval-dim-desc">${esc(desc)}</span>
+      </li>
+    `).join('');
+    return `
+      <div class="eval-card theme-${lv.tier}">
+        <div class="eval-head">
+          <div class="eval-head-left">
+            <span class="eval-icon">${lv.icon}</span>
+            <div>
+              <div class="eval-level">${esc(lv.name)}</div>
+              <div class="eval-en">${esc(lv.en)} · ${esc(lv.yearExp)}</div>
+            </div>
+          </div>
+          <span class="eval-salary">${esc(lv.salary)}</span>
+        </div>
+        <div class="eval-must">📌 ${esc(lv.mustCount)}</div>
+        <div class="eval-desc">${esc(lv.desc)}</div>
+        <div class="eval-criteria-title">核心能力标准</div>
+        <ul class="eval-criteria">${dimHtml}</ul>
+      </div>
+    `;
+  }).join('');
+
+  const rubricRows = EVAL_RUBRIC.map(r => {
+    const dotCell = (lvl) => {
+      const score = r[lvl] || 0;
+      let dots = '';
+      for (let i = 1; i <= 5; i++) {
+        dots += `<span class="dot ${i <= score ? 'filled' : 'empty'}"></span>`;
+      }
+      return `<td><div class="rubric-cell"><div class="dots">${dots}</div><div class="score-num">${score}/5</div></div></td>`;
+    };
+    return `
+      <tr>
+        <td class="rubric-dim">${esc(r.domain)}</td>
+        <td class="rubric-weight">${esc(r.weight)}</td>
+        ${dotCell('junior')}
+        ${dotCell('mid')}
+        ${dotCell('senior')}
+      </tr>
+    `;
+  }).join('');
+
+  root.innerHTML = `
+    <div class="tab-intro">
+      <h2>BI 数据分析师能力评估标准</h2>
+      <p>三级能力梯度参考二手奢侈品 ERP 团队场景制定，薪资为一线/新一线城市市场均值。下方<b>评估维度表</b>可作为面试评分卡、定级评审表和试用期考核标准使用。</p>
+    </div>
+    <div class="eval-grid">${cardsHtml}</div>
+
+    <h3 class="section-h3">📊 评估维度 × 等级评分表（权重制）</h3>
+    <p class="section-desc">12 个评估维度按权重打分，每项 0-5 分。建议总分 = Σ(维度得分 × 权重 × 20)。<b>≥ 80 分</b>视为该等级合格。本表可直接复制到面试评分卡作为打分依据。</p>
+    <div class="rubric-wrap">
+      <table class="rubric-table">
+        <thead>
+          <tr>
+            <th>评估维度</th>
+            <th>权重</th>
+            <th class="th-junior">初级达标</th>
+            <th class="th-mid">中级达标</th>
+            <th class="th-senior">高级达标</th>
+          </tr>
+        </thead>
+        <tbody>${rubricRows}</tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* ============ 面试题库 ============ */
+function renderInterview() {
+  const root = $('#tab-interview');
+  const groups = { junior:[], mid:[], senior:[] };
+  INTERVIEW_QUESTIONS.forEach(q => { if (groups[q.tier]) groups[q.tier].push(q); });
+
+  const groupHtml = (tier, title) => {
+    const list = groups[tier];
+    if (!list.length) return '';
+    return `
+      <div class="iv-group">
+        <h3 class="iv-group-title">
+          <span class="tier-badge ${TIER_CLASS[tier]}">${TIER_LABEL[tier]}</span>
+          <span class="iv-group-name">${esc(title)}</span>
+          <span class="iv-group-count">共 ${list.length} 题</span>
+        </h3>
+        ${list.map((q, i) => `
+          <div class="interview-card">
+            <div class="iv-head">
+              <div class="iv-q">
+                <span class="iv-num">Q${i+1}</span>
+                <span class="iv-text">${esc(q.q)}</span>
+              </div>
+              <div class="iv-tags">
+                <span class="iv-tag">${esc(q.tag || '')}</span>
+                <span class="iv-arrow">▼</span>
+              </div>
+            </div>
+            <div class="iv-body">
+              ${q.考察 ? `<div class="iv-section"><div class="iv-section-title">🎯 考察点</div><div class="iv-section-content">${esc(q.考察)}</div></div>` : ''}
+              ${q.参考 ? `<div class="iv-section"><div class="iv-section-title">💡 参考答案</div><div class="iv-section-content">${esc(q.参考)}</div></div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  };
+
+  root.innerHTML = `
+    <div class="tab-intro">
+      <h2>BI 数据分析师面试题库</h2>
+      <p>按等级分层的 <b>${INTERVIEW_QUESTIONS.length} 道题</b>，覆盖 SQL、统计、业务、可视化、数仓、AI 工具与团队管理。点击题目可展开「考察点」与「参考答案」。建议初级问 5 题 SQL+业务，中级问 5 题归因+实验，高级问 4 题架构+管理。</p>
+    </div>
+    ${groupHtml('junior', '初级面试题')}
+    ${groupHtml('mid', '中级面试题')}
+    ${groupHtml('senior', '高级面试题')}
+  `;
+
+  $$('.iv-head', root).forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('expanded'));
+  });
+}
+
+/* ============ 成长路径 ============ */
+function renderPath() {
+  const root = $('#tab-path');
+  const cardsHtml = PATHS.map(p => {
+    const itemsHtml = p.items.map((it, idx) => `
+      <li class="path-item">
+        <span class="path-item-num">${idx + 1}</span>
+        <span class="path-item-text">${esc(it)}</span>
+      </li>
+    `).join('');
+    return `
+      <div class="path-card theme-${p.tier}">
+        <div class="path-head">
+          <div class="path-stage">阶段 ${p.num}</div>
+          <span class="tier-badge ${TIER_CLASS[p.tier]}">${TIER_LABEL[p.tier]}</span>
+        </div>
+        <div class="path-title">${esc(p.title)}</div>
+        <div class="path-duration">📅 ${esc(p.duration)}</div>
+        <div class="path-goal"><b>🎯 阶段目标：</b>${esc(p.goal)}</div>
+        <div class="path-items-title">关键里程碑（共 ${p.items.length} 项）</div>
+        <ul class="path-items">${itemsHtml}</ul>
+      </div>
+    `;
+  }).join('');
+
+  root.innerHTML = `
+    <div class="tab-intro">
+      <h2>BI 数据分析师成长路径</h2>
+      <p>三段式成长路径，配合<b>学习清单</b>同步推进。每阶段都有明确目标和关键里程碑。建议把学习清单当作打卡表，每完成一项就勾选一次，跟着路径走完整 12-18 个月，可成长为独立的中级分析师。</p>
+    </div>
+    <div class="path-grid">${cardsHtml}</div>
+  `;
+}
+
+/* ============ 初始化 ============ */
+function init() {
+  try {
+    initTabs();
+    renderMap();
+    renderList();
+    renderEval();
+    renderInterview();
+    renderPath();
+    updateStats();
+  } catch (e) {
+    // 把错误显示到页面，便于排查
+    var box = document.createElement('div');
+    box.style.cssText = 'position:fixed;top:10px;left:10px;right:10px;padding:16px;background:#FFECE8;color:#F53F3F;border:1px solid #F53F3F;border-radius:8px;z-index:99999;font-family:monospace;font-size:13px;white-space:pre-wrap;';
+    box.textContent = '❌ 页面初始化失败：\n' + (e && e.message ? e.message : e) + '\n\n' + (e && e.stack ? e.stack : '');
+    document.body.appendChild(box);
+    throw e;
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+
+</script>
+
+</body>
+</html>
